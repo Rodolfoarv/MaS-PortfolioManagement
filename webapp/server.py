@@ -11,6 +11,11 @@ def index():
 def logIn_SignIn():
     return render_template('login.html')
 
+@app.route("/q1", methods=["POST"])
+def showStockData():
+    data = request.data
+    print data
+    return render_template('login.html')
 
 if __name__ == "__main__":
     app.run()
