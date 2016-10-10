@@ -23,10 +23,10 @@ USE `PortafolioInversiones` ;
 CREATE TABLE IF NOT EXISTS `PortafolioInversiones`.`Usuario` (
   `Correo` VARCHAR(255) NOT NULL,
   `Nombre` VARCHAR(50) NULL,
-  `Apellido Paterno` VARCHAR(50) NULL,
-  `Apellido Materno` VARCHAR(50) NULL,
+  `ApellidoPaterno` VARCHAR(50) NULL,
+  `ApellidoMaterno` VARCHAR(50) NULL,
   `FechaNacimiento` DATE NULL,
-  `Password` VARCHAR(50) NOT NULL,
+  `Passwrd` VARCHAR(50) NOT NULL,
   `Capital` DECIMAL(65) NOT NULL,
   PRIMARY KEY (`Correo`))
 ENGINE = InnoDB;
