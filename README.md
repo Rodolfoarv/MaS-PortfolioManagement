@@ -14,15 +14,24 @@
     cd /src/SPADE-2.2.1
     python runspade.py
 
+    # Setup the database
+    cd /src/db
+    mysql -u root -p < seed.sql
+
+
     #Execute in another terminal the agents
 
     python <agent>.py
 
+## Diagrams
+
+![](https://github.com/Rodolfoarv/MaS-PortfolioManagement/blob/master/doc/img/PortafolioInversiones.png)
+
 ## Authors
 
 - Rodolfo Andrés Ramírez Valenzuela
-- Iván Díaz Sánchez
 - Roberto Pliego Torres
+- Iván Díaz Sánchez
 - Steeven Muñoz
 
 
