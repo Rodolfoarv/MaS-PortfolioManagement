@@ -18,7 +18,13 @@ def logIn_SignIn():
     return render_template('login.html')
 
 @app.route("/q1", methods=["POST"])
-def showStockData():
+def showAllStockData():
+    data = request.data
+    print data
+    return render_template('login.html')
+
+@app.route("/q2, methods=["POST"])
+def showAllStockData():
     data = request.data
     print data
     return render_template('login.html')

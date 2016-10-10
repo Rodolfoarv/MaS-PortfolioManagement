@@ -9,7 +9,7 @@ import time
 import unittest
 import spade
 
-host = "127.0.0.1"
+HOST = "127.0.0.1"
 
 class Coordinator(spade.Agent.Agent):
 
@@ -25,37 +25,69 @@ class Coordinator(spade.Agent.Agent):
     	self.addBehaviour(self.TechnicalAnalysis(), mt)
     	print "Sender started!"
 
+        #Add Behaviour for results
+        template.setConversationId("result")
+        mt = spade.Behaviour.MessageTemplate(template)
+        self.addBehaviour(self.Result(),mt)
+
+
+
     class TechnicalAnalysis(spade.Behaviour.OneShotBehaviour):
+
+        def onEnd(self):
+            print "Closing agent.."
+            self.myAgent._kill()
 
         #Query all share’s quotation on the current day
         def q1(self):
             msg = spade.ACLMessage.ACLMessage()
             msg.setPerformative("request")
-            msg.addReceiver(spade.AID.aid("technical_analysis@"+host,["xmpp://technical_analysis@"+host]))
+            msg.addReceiver(spade.AID.aid("technical_analysis@"+HOST,["xmpp://technical_analysis@"+HOST]))
             msg.setContent("SHARE ALL")
             self.myAgent.send(msg)
-            print "Message has been sent"
 
         #Query all share’s quotation on the current day
         def q2(self):
             msg = spade.ACLMessage.ACLMessage()
             msg.setPerformative("request")
-            msg.addReceiver(spade.AID.aid("technical_analysis@"+host,["xmpp://technical_analysis@"+host]))
+            msg.addReceiver(spade.AID.aid("technical_analysis@"+HOST,["xmpp://technical_analysis@"+HOST]))
             msg.setContent("SHARE ALL")
             self.myAgent.send(msg)
 
+        # Query a given share’s real-time trading chart
+        def q3(self):
+            pass
+
+        # Query a given share’s history price chart over a period
+        def q4(self):
+            pass
+
+        # Query a given share's price and technical indicator chart over a period
+        def q5(self):
+            pass
+
+        # Query a given share’s fundamental analysis data
+        def q6(self):
+            pass
+
+        # Query the market statistic information over a period
+        def q7(self):
+            pass
+
         def _process(self):
             self.q1()
+
+    class Result(spade.Behaviour.OneShotBehaviour):
+        def _process(self):
             #Wait until the technical_analysis responds to us
             print "Waiting for response"
-            self.agent.setSender(spade.AID.aid("technical_analysis@"+host,["xmpp://technical_analysis@"+host]))
-            msg = self._receive(block=True)
-            print "Stuck"
+            self.msg = self._receive(True,10)
             print self.msg
 
 
+
 if __name__ == "__main__":
-	coordinator = Coordinator("coordinator@"+host,"secret")
+	coordinator = Coordinator("coordinator@"+HOST,"secret")
 	coordinator.start()
 
         alive = True
