@@ -1,24 +1,16 @@
-##################################
-#   SEND AND RECEIVE             #
-##################################
 '''
-This is the most simple example about how
-to send a message between 2 agents
+Coordinator Agent description, send messages to their agents
 '''
 
 import os
 import sys
 import time
 import unittest
-
-sys.path.append('../..')
-
 import spade
 
 host = "127.0.0.1"
 
-
-class Sender(spade.Agent.Agent):
+class Coordinator(spade.Agent.Agent):
 
     def _setup(self):
 		self.addBehaviour(self.SendMsgBehav())
@@ -29,22 +21,23 @@ class Sender(spade.Agent.Agent):
         def _process(self):
             msg = spade.ACLMessage.ACLMessage()
             msg.setPerformative("inform")
-            msg.addReceiver(spade.AID.aid("b@"+host,["xmpp://b@"+host]))
+            msg.addReceiver(spade.AID.aid("technical_analysis@"+host,["xmpp://technical_analysis@"+host]))
             msg.setContent("testSendMsg")
 
             self.myAgent.send(msg)
 
-            print "a has sent a message:"
+            print "coordinator has sent coordinator message:"
             print str(msg)
 
+
 if __name__ == "__main__":
-	a = Sender("a@"+host,"secret")
-	a.start()
+	coordinator = Coordinator("coordinator@"+host,"secret")
+	coordinator.start()
         alive = True
         while alive:
             try:
                 time.sleep(1)
             except KeyboardInterrupt:
                 alive=False
-        a.stop()
+        coordinator.stop()
         sys.exit(0)
