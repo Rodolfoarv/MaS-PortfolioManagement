@@ -9,6 +9,15 @@
 
     pip install -r requirements.txt
 
+    #Execute spade server
+
+    cd /src/SPADE-2.2.1
+    python runspade.py
+
+    #Execute in another terminal the agents
+
+    python <agent>.py
+
 ## Authors
 
 - Rodolfo Andrés Ramírez Valenzuela
