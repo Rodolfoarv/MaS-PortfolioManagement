@@ -5,7 +5,6 @@ Coordinator Agent description, receiver to their agents
 import spade
 import sys
 import time
-from queries import query1
 
 HOST = "127.0.0.1"
 
@@ -34,7 +33,7 @@ class TechnicalAnalysis(spade.Agent.Agent):
                                    addresses=["xmpp://coordinator@"+HOST])
          msg.addReceiver( receiver )
          print msg
-         self.send(msg)
+         self._sendTo(msg, "coordinator@"+HOST)
          print "done"
 
         def onEnd(self):
