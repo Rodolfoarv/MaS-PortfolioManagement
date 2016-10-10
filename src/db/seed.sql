@@ -36,7 +36,7 @@ ENGINE = InnoDB;
 -- Table `PortafolioInversiones`.`Giro`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `PortafolioInversiones`.`Giro` (
-  `ID_Giro` INT NOT NULL AUTO_INCREMENT,
+  `ID_Giro` INT(50) NOT NULL AUTO_INCREMENT,
   `Nombre` VARCHAR(50) NOT NULL,
   PRIMARY KEY (`ID_Giro`))
 ENGINE = InnoDB;
@@ -49,7 +49,7 @@ CREATE TABLE IF NOT EXISTS `PortafolioInversiones`.`Empresa` (
   `ID_Empresa` INT(50) NOT NULL AUTO_INCREMENT,
   `Nombre` VARCHAR(50) NOT NULL,
   `FechaFundacion` DATE NULL,
-  `ID_Giro` INT NOT NULL,
+  `ID_Giro` INT(50) NOT NULL,
   PRIMARY KEY (`ID_Empresa`),
   CONSTRAINT `fk_Empresa_Giro`
     FOREIGN KEY (`ID_Giro`)
@@ -111,7 +111,7 @@ CREATE TABLE IF NOT EXISTS `PortafolioInversiones`.`Accion` (
   `Depresión` DECIMAL(65) NULL,
   `Volumen` INT(50) NULL,
   PRIMARY KEY (`Fecha`, `ID_Empresa`),
-  CONSTRAINT `fk_AccionEmpresa`
+  CONSTRAINT `fk_Accion_Empresa`
     FOREIGN KEY (`ID_Empresa`)
     REFERENCES `PortafolioInversiones`.`Empresa` (`ID_Empresa`)
     ON DELETE NO ACTION
