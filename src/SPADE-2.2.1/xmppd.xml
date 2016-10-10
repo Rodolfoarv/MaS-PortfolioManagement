@@ -1,0 +1,17 @@
+
+<server>
+    <servernames>
+        <name>Rodolfo-n53sv</name>
+    </servernames>
+    <certificate file="xmppd.pem"/>
+    <plugins>
+        <MUC jid="muc.Rodolfo-n53sv" name="SPADE MUC Component"/>
+        <WQ jid="wq.Rodolfo-n53sv" name="SPADE Workgroup Queues"/>
+    </plugins>
+    <components>
+        <AMS jid="ams.Rodolfo-n53sv" name="AMS" username="ams" password="wlKzkmfs"/>
+        <DF jid="df.Rodolfo-n53sv" name="DF" username="df" password="nNRqZXia"/>
+        <ACC jid="acc.Rodolfo-n53sv" name="ACC" username="acc" password="tUlaHrXH"/>
+    </components>
+</server>
+        

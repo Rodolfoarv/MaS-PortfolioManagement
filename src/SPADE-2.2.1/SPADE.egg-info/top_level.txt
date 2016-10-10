@@ -1,0 +1,4 @@
+tlslite
+xmpp
+xmppd
+spade
