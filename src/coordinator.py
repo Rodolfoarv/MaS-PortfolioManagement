@@ -33,13 +33,14 @@ class Coordinator(spade.Agent.Agent):
 
 
     class TechnicalAnalysis(spade.Behaviour.OneShotBehaviour):
-
-        def onEnd(self):
-            print "Closing agent.."
-            self.myAgent._kill()
+        #
+        # def onEnd(self):
+        #     print "Closing agent.."
+        #     self.myAgent._kill()
 
         #Query all share’s quotation on the current day
         def q1(self):
+            print db.query1()
             msg = spade.ACLMessage.ACLMessage()
             msg.setPerformative("request")
             msg.addReceiver(spade.AID.aid("technical_analysis@"+HOST,["xmpp://technical_analysis@"+HOST]))

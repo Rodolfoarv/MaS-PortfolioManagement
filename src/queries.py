@@ -3,7 +3,7 @@ import MySQLdb
 import json
 import collections
 
-def q1():
+def query1():
 	#Datos de la conexion.
 	db_host = '127.0.0.1'
 	db_port = 3306

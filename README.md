@@ -17,6 +17,7 @@
     # Setup the database
     cd /src/db
     mysql -u root -p < seed.sql
+    mysql -u root -p < dummyData.sql
 
 
     #Execute in another terminal the agents
