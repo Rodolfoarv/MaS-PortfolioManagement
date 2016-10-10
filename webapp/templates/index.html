@@ -7,21 +7,26 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Gentallela Alela! | </title>
+    <title>Dashboard</title>
 
     <!-- Bootstrap -->
-    <link href="../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='vendors/bootstrap/dist/css/bootstrap.min.css') }}">
     <!-- Font Awesome -->
-    <link href="../vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='vendors/font-awesome/css/font-awesome.min.css') }}">
     <!-- iCheck -->
-    <link href="../vendors/iCheck/skins/flat/green.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='vendors/iCheck/skins/flat/green.css') }}">
     <!-- bootstrap-progressbar -->
-    <link href="../vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css') }}">
     <!-- jVectorMap -->
-    <link href="css/maps/jquery-jvectormap-2.0.3.css" rel="stylesheet"/>
+    <!--<link href="css/maps/jquery-jvectormap-2.0.3.css" rel="stylesheet"/>-->
+    <!-- Ion.RangeSlider -->
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='vendors/normalize-css/normalize.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='vendors/ion.rangeSlider/css/ion.rangeSlider.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='vendors/ion.rangeSlider/css/ion.rangeSlider.skinFlat.css') }}">
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 
     <!-- Custom Theme Style -->
-    <link href="../build/css/custom.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='build/css/custom.min.css') }}">
   </head>
 
   <body class="nav-md">
@@ -38,7 +43,7 @@
             <!-- menu profile quick info -->
             <div class="profile">
               <div class="profile_pic">
-                <img src="images/img.png" alt="..." class="img-circle profile_img">
+                <img src="../static/images/img.png" alt="..." class="img-circle profile_img">
               </div>
               <div class="profile_info">
                 <span>Welcome,</span>
@@ -183,7 +188,7 @@
               <ul class="nav navbar-nav navbar-right">
                 <li class="">
                   <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                    <img src="images/img.png" alt="">John Doe
+                    <img src="../static/images/img.png" alt="">John Doe
                     <span class=" fa fa-angle-down"></span>
                   </a>
                   <ul class="dropdown-menu dropdown-usermenu pull-right">
@@ -207,7 +212,7 @@
                   <ul id="menu1" class="dropdown-menu list-unstyled msg_list" role="menu">
                     <li>
                       <a>
-                        <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
+                        <span class="image"><img src="../static/images/img.png" alt="Profile Image" /></span>
                         <span>
                           <span>John Smith</span>
                           <span class="time">3 mins ago</span>
@@ -219,7 +224,7 @@
                     </li>
                     <li>
                       <a>
-                        <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
+                        <span class="image"><img src="../static/images/img.png" alt="Profile Image" /></span>
                         <span>
                           <span>John Smith</span>
                           <span class="time">3 mins ago</span>
@@ -231,7 +236,7 @@
                     </li>
                     <li>
                       <a>
-                        <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
+                        <span class="image"><img src="../static/images/img.png" alt="Profile Image" /></span>
                         <span>
                           <span>John Smith</span>
                           <span class="time">3 mins ago</span>
@@ -243,7 +248,7 @@
                     </li>
                     <li>
                       <a>
-                        <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
+                        <span class="image"><img src="../static/images/img.png" alt="Profile Image" /></span>
                         <span>
                           <span>John Smith</span>
                           <span class="time">3 mins ago</span>
@@ -271,8 +276,31 @@
 
         <!-- page content -->
         <div class="right_col" role="main">
-          <!-- top tiles -->
-          
+          <div class="">
+            <div class="row">
+              <div class="col-md-6 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                  <div class="x_title">
+                    <h3>Shares</h3>
+                  </div>  
+                  <div id="myDiv">
+                  <script>
+                    var data = [{
+                      values: [22, 16, 20, 24, 18],
+                      labels: ['Netflix', 'Apple', 'Google', 'Amazon', 'Unilever'],
+                      type: 'pie'
+                    }];
+                    var layout = {
+                      height: 500,
+                      width: 600
+                    };
+                    Plotly.newPlot('myDiv', data, layout);
+                  </script>
+                  </div>
+                </div>  
+              </div>    
+            </div>
+          </div>
         </div>
         <!-- /page content -->
 
@@ -288,41 +316,43 @@
     </div>
 
     <!-- jQuery -->
-    <script src="../vendors/jquery/dist/jquery.min.js"></script>
+    <script src="{{ url_for('static', filename='vendors/jquery/dist/jquery.min.js') }}"></script>
     <!-- Bootstrap -->
-    <script src="../vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="{{ url_for('static', filename='vendors/bootstrap/dist/js/bootstrap.min.js') }}"></script>
     <!-- FastClick -->
-    <script src="../vendors/fastclick/lib/fastclick.js"></script>
+    <script src="{{ url_for('static', filename='vendors/fastclick/lib/fastclick.js') }}"></script>
     <!-- NProgress -->
-    <script src="../vendors/nprogress/nprogress.js"></script>
+    <script src="{{ url_for('static', filename='vendors/nprogress/nprogress.js') }}"></script>
     <!-- Chart.js -->
-    <script src="../vendors/Chart.js/dist/Chart.min.js"></script>
+    <script src="{{ url_for('static', filename='vendors/Chart.js/dist/Chart.min.js') }}"></script>
     <!-- gauge.js -->
-    <script src="../vendors/bernii/gauge.js/dist/gauge.min.js"></script>
+    <script src="{{ url_for('static', filename='vendors/bernii/gauge.js/dist/gauge.min.js') }}"></script>
     <!-- bootstrap-progressbar -->
-    <script src="../vendors/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
+    <script src="{{ url_for('static', filename='vendors/bootstrap-progressbar/bootstrap-progressbar.min.js') }}"></script>
     <!-- iCheck -->
-    <script src="../vendors/iCheck/icheck.min.js"></script>
+    <script src="{{ url_for('static', filename='vendors/bootstrap-progressbar/vendors/iCheck/icheck.min.js') }}"></script>
     <!-- Skycons -->
-    <script src="../vendors/skycons/skycons.js"></script>
+    <script src="{{ url_for('static', filename='vendors/skycons/skycons.js') }}"></script>
+
     <!-- Flot -->
-    <script src="../vendors/Flot/jquery.flot.js"></script>
+    <!--<script src="../vendors/Flot/jquery.flot.js"></script>
     <script src="../vendors/Flot/jquery.flot.pie.js"></script>
     <script src="../vendors/Flot/jquery.flot.time.js"></script>
     <script src="../vendors/Flot/jquery.flot.stack.js"></script>
-    <script src="../vendors/Flot/jquery.flot.resize.js"></script>
+    <script src="../vendors/Flot/jquery.flot.resize.js"></script>-->
     <!-- Flot plugins -->
-    <script src="js/flot/jquery.flot.orderBars.js"></script>
+    <!--<script src="js/flot/jquery.flot.orderBars.js"></script>
     <script src="js/flot/date.js"></script>
     <script src="js/flot/jquery.flot.spline.js"></script>
-    <script src="js/flot/curvedLines.js"></script>
+    <script src="js/flot/curvedLines.js"></script>-->
     <!-- jVectorMap -->
-    <script src="js/maps/jquery-jvectormap-2.0.3.min.js"></script>
+    <!--<script src="js/maps/jquery-jvectormap-2.0.3.min.js"></script>-->
+    
     <!-- bootstrap-daterangepicker -->
-    <script src="js/moment/moment.min.js"></script>
-    <script src="js/datepicker/daterangepicker.js"></script>
+    <script src="{{ url_for('static', filename='js/moment/moment.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/datepicker/daterangepicker.js') }}"></script>
 
     <!-- Custom Theme Scripts -->
-    <script src="../build/js/custom.min.js"></script>
+    <script src="{{ url_for('static', filename='build/js/custom.min.js') }}"></script>
   </body>
 </html>

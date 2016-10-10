@@ -23,11 +23,11 @@ def showAllStockData():
     print data
     return render_template('login.html')
 
-@app.route("/q2, methods=["POST"])
-def showAllStockData():
-    data = request.data
-    print data
-    return render_template('login.html')
+# @app.route("/q2", methods=["POST"])
+# def showAllStockData():
+#     data = request.data
+#     print data
+#     return render_template('login.html')
 
 if __name__ == "__main__":
     app.run()
