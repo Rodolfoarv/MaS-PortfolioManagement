@@ -1,11 +1,17 @@
 from flask import Flask, request, session, g, redirect, url_for, abort, \
      render_template, flash
 
+import sys
+sys.path.append('../')
+from src.coordinator import Coordinator
+
 app = Flask(__name__)
 
 @app.route("/")
 def index():
-    return render_template('index.html')
+    	coordinator = Coordinator("coordinator@"+"127.0.0.1","secret")
+    	coordinator.start()
+        return render_template('index.html')
 
 @app.route("/login")
 def logIn_SignIn():

@@ -3,7 +3,6 @@ MANIFEST.in
 README
 configure.py
 runspade.py
-setup.cfg
 setup.py
 SPADE.egg-info/PKG-INFO
 SPADE.egg-info/SOURCES.txt

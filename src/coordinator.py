@@ -48,7 +48,7 @@ class Coordinator(spade.Agent.Agent):
             self.q1()
             #Wait until the technical_analysis responds to us
             print "Waiting for response"
-            self.agent.setSender(spade.AID.aid("technical_analysis@"+HOST,["xmpp://technical_analysis@"+HOST]))
+            self.agent.setSender(spade.AID.aid("technical_analysis@"+host,["xmpp://technical_analysis@"+host]))
             msg = self._receive(block=True)
             print "Stuck"
             print self.msg

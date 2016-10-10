@@ -1,14 +1,14 @@
 
 <spade>
     <platform>
-        <hostname>Rodolfo-n53sv</hostname>
+        <hostname>127.0.0.1</hostname>
         <port>5222</port>
         <adminpasswd>secret</adminpasswd>
     </platform>
 
     <acc>
-        <hostname>acc.Rodolfo-n53sv</hostname>
-        <password>tUlaHrXH</password>
+        <hostname>acc.127.0.0.1</hostname>
+        <password>vOXRYqkX</password>
         <port>5222</port>
 
         <mtp name="http">
@@ -17,14 +17,14 @@
         </mtp>
     </acc>
     <ams>
-        <hostname>ams.Rodolfo-n53sv</hostname>
-        <password>wlKzkmfs</password>
+        <hostname>ams.127.0.0.1</hostname>
+        <password>IsaFohky</password>
         <port>5222</port>
     </ams>
 
     <df>
-        <hostname>df.Rodolfo-n53sv</hostname>
-        <password>nNRqZXia</password>
+        <hostname>df.127.0.0.1</hostname>
+        <password>EgNrryqr</password>
         <port>5222</port>
     </df>
 </spade>
