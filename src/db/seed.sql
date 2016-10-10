@@ -108,7 +108,7 @@ CREATE TABLE IF NOT EXISTS `PortafolioInversiones`.`Accion` (
   `PrecioApertura` DECIMAL(65) NULL,
   `PrecioClausura` DECIMAL(65) NULL,
   `Pico` DECIMAL(65) NULL,
-  `Depresión` DECIMAL(65) NULL,
+  `Depresion` DECIMAL(65) NULL,
   `Volumen` INT(50) NULL,
   PRIMARY KEY (`Fecha`, `ID_Empresa`),
   CONSTRAINT `fk_Accion_Empresa`
