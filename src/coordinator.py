@@ -43,8 +43,9 @@ class Coordinator(spade.Agent.Agent):
             msg = spade.ACLMessage.ACLMessage()
             msg.setPerformative("request")
             msg.addReceiver(spade.AID.aid("technical_analysis@"+HOST,["xmpp://technical_analysis@"+HOST]))
-            msg.setContent("SHARE ALL")
+            msg.setContent("Apple, Alphabet, IBM, Microsoft")
             self.myAgent.send(msg)
+            print msg
 
         #Query all share’s quotation on the current day
         def q2(self):
