@@ -29,16 +29,15 @@ class Coordinator(spade.Agent.Agent):
 
         #Query all share’s quotation on the current day
         def q1(self):
-            print "test"
             msg = spade.ACLMessage.ACLMessage()
             msg.setPerformative("request")
             msg.addReceiver(spade.AID.aid("technical_analysis@"+host,["xmpp://technical_analysis@"+host]))
             msg.setContent("SHARE ALL")
             self.myAgent.send(msg)
+            print "Message has been sent"
 
         #Query all share’s quotation on the current day
         def q2(self):
-            print "test"
             msg = spade.ACLMessage.ACLMessage()
             msg.setPerformative("request")
             msg.addReceiver(spade.AID.aid("technical_analysis@"+host,["xmpp://technical_analysis@"+host]))
@@ -48,7 +47,11 @@ class Coordinator(spade.Agent.Agent):
         def _process(self):
             self.q1()
             #Wait until the technical_analysis responds to us
-            self.msg = self.receive(True)
+            print "Waiting for response"
+            self.agent.setSender(spade.AID.aid("technical_analysis@"+HOST,["xmpp://technical_analysis@"+HOST]))
+            msg = self._receive(block=True)
+            print "Stuck"
+            print self.msg
 
 
 if __name__ == "__main__":
@@ -61,5 +64,6 @@ if __name__ == "__main__":
                 time.sleep(1)
             except KeyboardInterrupt:
                 alive=False
+        print "Coordinator stopped"
         coordinator.stop()
         sys.exit(0)

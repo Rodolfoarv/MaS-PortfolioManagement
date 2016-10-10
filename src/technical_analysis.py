@@ -8,21 +8,34 @@ import sys
 HOST = "127.0.0.1"
 
 class TechnicalAnalysis(spade.Agent.Agent):
-
-    class RecvMsgBehav(spade.Behaviour.OneShotBehaviour):
-
-        def _process(self):
-            msg = self._receive(block=True,timeout=10)
-            print "technical_analysis has received a message:"
-            print str(msg)
-
     def _setup(self):
-
         template = spade.Behaviour.ACLTemplate()
         template.setSender(spade.AID.aid("coordinator@"+HOST,["xmpp://coordinator@"+HOST]))
         t = spade.Behaviour.MessageTemplate(template)
         self.addBehaviour(self.RecvMsgBehav(),t)
-	print "TechnicalAnalysis started!"
+        print "TechnicalAnalysis started!"
+
+    class RecvMsgBehav(spade.Behaviour.OneShotBehaviour):
+        def q1(self):
+            print "Sending message back to coordinator:"
+            msg = spade.ACLMessage.ACLMessage()
+            msg.setPerformative("inform")
+            msg.addReceiver(spade.AID.aid("coordinator@"+HOST,["xmpp://coordinator@"+HOST]))
+            msg.setContent("10,20,30")
+            print msg
+            self.myAgent.send(msg)
+
+
+        def q2(self):
+            return ""
+
+
+        def _process(self):
+            msg = self._receive(block=True)
+            print "technical_analysis has received a message:"
+            print str(msg.getContent())
+            self.q1()
+
 
 
 
