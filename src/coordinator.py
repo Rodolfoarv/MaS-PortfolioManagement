@@ -13,16 +13,42 @@ host = "127.0.0.1"
 class Coordinator(spade.Agent.Agent):
 
     def _setup(self):
-		self.addBehaviour(self.SendMsgBehav())
+        #Set the template for QueryAllShares
+        templateQ1 = spade.Behaviour.ACLTemplate()
+        template.setOntology("MaS")
+        template.setPerformative("request")
+        template.setConversationId("q1")
+        mt = spade.Behaviour.MessageTemplate(template)
+
+        #Add Behaviour for Query 1 - Query all share’s quotation on the current day
+		self.addBehaviour(self.QueryAllShares(), mt)
+
+        #Add Behaviour for Query 2 - Query a given share’s quotation on the current day
+        template.setPerformative("request")
+        template.setConversationId("q2")
+
+        self.addBehaviour(self.QueryGivenShare())
 		print "Sender started!"
 
-    class SendMsgBehav(spade.Behaviour.OneShotBehaviour):
+    class QueryAllShares(spade.Behaviour.OneShotBehaviour):
 
         def _process(self):
             msg = spade.ACLMessage.ACLMessage()
-            msg.setPerformative("inform")
+            msg.setPerformative("request")
             msg.addReceiver(spade.AID.aid("technical_analysis@"+host,["xmpp://technical_analysis@"+host]))
-            msg.setContent("testSendMsg")
+            msg.setContent("SHARE ALL")
+            self.myAgent.send(msg)
+
+            print "coordinator has sent coordinator message:"
+            print str(msg)
+
+    class QueryGivenShare(spade.Behaviour.OneShotBehaviour):
+
+        def _process(self):
+            msg = spade.ACLMessage.ACLMessage()
+            msg.setPerformative("request")
+            msg.addReceiver(spade.AID.aid("technical_analysis@"+host,["xmpp://technical_analysis@"+host]))
+            msg.setContent("SHARE ONE")
 
             self.myAgent.send(msg)
 
