@@ -27,7 +27,7 @@ CREATE TABLE IF NOT EXISTS `PortafolioInversiones`.`Usuario` (
   `Apellido Materno` VARCHAR(50) NULL,
   `FechaNacimiento` DATE NULL,
   `Password` VARCHAR(50) NOT NULL,
-  `Capital` DECIMAL(100) NOT NULL,
+  `Capital` DECIMAL(65) NOT NULL,
   PRIMARY KEY (`Correo`))
 ENGINE = InnoDB;
 
@@ -51,7 +51,6 @@ CREATE TABLE IF NOT EXISTS `PortafolioInversiones`.`Empresa` (
   `FechaFundacion` DATE NULL,
   `ID_Giro` INT NOT NULL,
   PRIMARY KEY (`ID_Empresa`),
-  INDEX `fk_Empresa_Giro_idx` (`ID_Giro` ASC),
   CONSTRAINT `fk_Empresa_Giro`
     FOREIGN KEY (`ID_Giro`)
     REFERENCES `PortafolioInversiones`.`Giro` (`ID_Giro`)
@@ -67,13 +66,12 @@ CREATE TABLE IF NOT EXISTS `PortafolioInversiones`.`PreferenciaEmpresa` (
   `Correo` VARCHAR(250) NOT NULL,
   `ID_Empresa` INT(50) NOT NULL,
   PRIMARY KEY (`Correo`, `ID_Empresa`),
-  INDEX `fk_Empresa_idx` (`ID_Empresa` ASC),
-  CONSTRAINT `fk_Usuario`
+  CONSTRAINT `fk_Usuario_Empresa`
     FOREIGN KEY (`Correo`)
     REFERENCES `PortafolioInversiones`.`Usuario` (`Correo`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `fk_Empresa`
+  CONSTRAINT `fk_Empresa_Usuario`
     FOREIGN KEY (`ID_Empresa`)
     REFERENCES `PortafolioInversiones`.`Empresa` (`ID_Empresa`)
     ON DELETE NO ACTION
@@ -88,13 +86,12 @@ CREATE TABLE IF NOT EXISTS `PortafolioInversiones`.`PreferenciaGiro` (
   `Correo` VARCHAR(250) NOT NULL,
   `ID_Giro` INT(50) NOT NULL,
   PRIMARY KEY (`Correo`, `ID_Giro`),
-  INDEX `fk_Giro_idx` (`ID_Giro` ASC),
-  CONSTRAINT `fk_Usuario`
+  CONSTRAINT `fk_Usuario_Giro`
     FOREIGN KEY (`Correo`)
     REFERENCES `PortafolioInversiones`.`Usuario` (`Correo`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `fk_Giro`
+  CONSTRAINT `fk_Giro_Usuario`
     FOREIGN KEY (`ID_Giro`)
     REFERENCES `PortafolioInversiones`.`Giro` (`ID_Giro`)
     ON DELETE NO ACTION
@@ -108,13 +105,12 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `PortafolioInversiones`.`Accion` (
   `Fecha` DATE NOT NULL,
   `ID_Empresa` INT(50) NOT NULL,
-  `PrecioApertura` DECIMAL(100) NULL,
-  `PrecioClausura` DECIMAL(100) NULL,
-  `Pico` DECIMAL(100) NULL,
-  `Depresión` DECIMAL(100) NULL,
+  `PrecioApertura` DECIMAL(65) NULL,
+  `PrecioClausura` DECIMAL(65) NULL,
+  `Pico` DECIMAL(65) NULL,
+  `Depresión` DECIMAL(65) NULL,
   `Volumen` INT(50) NULL,
   PRIMARY KEY (`Fecha`, `ID_Empresa`),
-  INDEX `fk_AccionEmpresa_idx` (`ID_Empresa` ASC),
   CONSTRAINT `fk_AccionEmpresa`
     FOREIGN KEY (`ID_Empresa`)
     REFERENCES `PortafolioInversiones`.`Empresa` (`ID_Empresa`)
@@ -131,16 +127,14 @@ CREATE TABLE IF NOT EXISTS `PortafolioInversiones`.`Inversion` (
   `Correo` VARCHAR(255) NOT NULL,
   `Fecha` DATE NULL,
   `ID_Empresa` INT(50) NOT NULL,
-  `CapitalInvertido` DECIMAL(100) NOT NULL,
+  `CapitalInvertido` DECIMAL(65) NOT NULL,
   PRIMARY KEY (`ID_Inversion`),
-  INDEX `fk_Empresa_idx` (`ID_Empresa` ASC),
-  INDEX `fk_Usuario_idx` (`Correo` ASC),
-  CONSTRAINT `fk_Empresa`
+  CONSTRAINT `fk_Empresa_Inversion`
     FOREIGN KEY (`ID_Empresa`)
     REFERENCES `PortafolioInversiones`.`Empresa` (`ID_Empresa`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `fk_Usuario`
+  CONSTRAINT `fk_Usuario_Inversion`
     FOREIGN KEY (`Correo`)
     REFERENCES `PortafolioInversiones`.`Usuario` (`Correo`)
     ON DELETE NO ACTION
