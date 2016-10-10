@@ -27,7 +27,7 @@ CREATE TABLE IF NOT EXISTS `PortafolioInversiones`.`Usuario` (
   `ApellidoMaterno` VARCHAR(50) NULL,
   `FechaNacimiento` DATE NULL,
   `Passwrd` VARCHAR(50) NOT NULL,
-  `Capital` DECIMAL(65) NOT NULL,
+  `Capital` DECIMAL(65,5) NOT NULL,
   PRIMARY KEY (`Correo`))
 ENGINE = InnoDB;
 
@@ -105,10 +105,10 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `PortafolioInversiones`.`Accion` (
   `Fecha` DATE NOT NULL,
   `ID_Empresa` INT(50) NOT NULL,
-  `PrecioApertura` DECIMAL(65) NULL,
-  `PrecioClausura` DECIMAL(65) NULL,
-  `Pico` DECIMAL(65) NULL,
-  `Depresion` DECIMAL(65) NULL,
+  `PrecioApertura` DECIMAL(65,5) NULL,
+  `PrecioClausura` DECIMAL(65,5) NULL,
+  `Pico` DECIMAL(65,5) NULL,
+  `Depresion` DECIMAL(65,5) NULL,
   `Volumen` INT(50) NULL,
   PRIMARY KEY (`Fecha`, `ID_Empresa`),
   CONSTRAINT `fk_Accion_Empresa`
@@ -127,7 +127,7 @@ CREATE TABLE IF NOT EXISTS `PortafolioInversiones`.`Inversion` (
   `Correo` VARCHAR(255) NOT NULL,
   `Fecha` DATE NULL,
   `ID_Empresa` INT(50) NOT NULL,
-  `CapitalInvertido` DECIMAL(65) NOT NULL,
+  `CapitalInvertido` DECIMAL(65,5) NOT NULL,
   PRIMARY KEY (`ID_Inversion`),
   CONSTRAINT `fk_Empresa_Inversion`
     FOREIGN KEY (`ID_Empresa`)
