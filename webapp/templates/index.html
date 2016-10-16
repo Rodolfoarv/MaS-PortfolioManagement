@@ -266,7 +266,7 @@
                     Plotly.newPlot('myDiv', data, layout);
                   </script>
                   </div>
-                </div>  
+                </div>
               </div>
               
               <div class="col-md-6 col-sm-12 col-xs-12">
@@ -296,6 +296,22 @@
               
             </div>
           </div>
+
+          <table>
+            <tr>
+              <td>Company Name</td>
+              <td>Ask</td>
+              <td>Bid</td>
+            </tr>
+
+            {% for row in stocks %}
+            <tr>
+              {% for info in row %}
+                <td>{{ info }}</td>
+              {% endfor %}
+            </tr>
+            {% endfor %}
+          </table>
         </div>
         <!-- /page content -->
 

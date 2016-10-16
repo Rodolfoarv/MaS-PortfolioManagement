@@ -5,13 +5,17 @@ import sys
 sys.path.append('../')
 from src.coordinator import Coordinator
 
+import read_api
+
 app = Flask(__name__)
 
 @app.route("/")
 def index():
-    	coordinator = Coordinator("coordinator@"+"127.0.0.1","secret")
-    	coordinator.start()
-        return render_template('index.html')
+    current_stocks = read_api.read_stocks()
+    coordinator = Coordinator("coordinator@"+"127.0.0.1","secret")
+    coordinator.start()
+    return render_template('index.html',
+                           stocks = current_stocks)
 
 @app.route("/login")
 def logIn_SignIn():
@@ -31,3 +35,4 @@ def showAllStockData():
 
 if __name__ == "__main__":
     app.run()
+    #app.run(port=1200)
