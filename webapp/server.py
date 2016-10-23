@@ -34,5 +34,5 @@ def showAllStockData():
 #     return render_template('login.html')
 
 if __name__ == "__main__":
-    app.run()
-    #app.run(port=1200)
+    #app.run()
+    app.run(port=1200)

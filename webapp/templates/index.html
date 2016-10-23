@@ -256,7 +256,7 @@
                   <script>
                     var data = [{
                       values: [22, 16, 20, 24, 18],
-                      labels: ['Netflix', 'Apple', 'Google', 'Amazon', 'Unilever'],
+                      labels: ['Netflix', 'Apple', 'Google', 'Amazon', 'Microsoft'],
                       type: 'pie'
                     }];
                     var layout = {
@@ -292,26 +292,35 @@
                   </script>
                   </div>
                 </div>  
-              </div>
-              
+              </div>  
             </div>
+
+            <!-- Trying something else... -->
+            <div class="panel panel-info">
+              <div class="panel-heading">Today's Stock Values</div>
+                <div class="panel-body">
+
+                  <table class="table table-striped">
+                    <tr>
+                      <td><strong>Company</strong></td>
+                      <td><strong>Ask</strong></td>
+                      <td><strong>Bid</strong></td>
+                      <td><strong>Change</strong></td>
+                      <td><strong>Percentage</strong></td>
+                    </tr>
+
+                    {% for row in stocks %}
+                    <tr>
+                      {% for info in row %}
+                        <td>{{ info }}</td>
+                      {% endfor %}
+                    </tr>
+                    {% endfor %}
+                  </table>
+                </div>
+            </div>
+
           </div>
-
-          <table>
-            <tr>
-              <td>Company Name</td>
-              <td>Ask</td>
-              <td>Bid</td>
-            </tr>
-
-            {% for row in stocks %}
-            <tr>
-              {% for info in row %}
-                <td>{{ info }}</td>
-              {% endfor %}
-            </tr>
-            {% endfor %}
-          </table>
         </div>
         <!-- /page content -->
 
