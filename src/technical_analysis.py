@@ -20,26 +20,16 @@ class TechnicalAnalysis(spade.Agent.Agent):
         self.addBehaviour(self.RecvMsgBehav(),mt)
 
     def sendToCoordinator(self, perf, id, content):
-     # Create the message Object
-     msg = spade.ACLMessage.ACLMessage()
-     # Fill it
-     msg.setOntology( "MaS" )
-     msg.setPerformative( perf )
-     msg.setConversationId( id )
-     msg.setContent( '[{"Empresa": "Microsoft", "PrecioApertura": 114.31, "PrecioClausura": 114.06, "Pico": 114.56, "Depresion": 113.51, "Volumen": 24329900}, {"Empresa": "Apple", "PrecioApertura": 113.7, "PrecioClausura": 113.89, "Pico": 114.34, "Depresion": 113.13, "Volumen": 28779300}, {"Empresa": "Alphabet", "PrecioApertura": 113.4, "PrecioClausura": 113.05, "Pico": 113.66, "Depresion": 112.69, "Volumen": 21453100}, {"Empresa": "IBM", "PrecioApertura": 113.06, "PrecioClausura": 113.0, "Pico": 114.31, "Depresion": 112.63, "Volumen": 29736800}]' )
-
-     receiver = spade.AID.aid(name="coordinator@127.0.0.1",addresses=["xmpp://coordinator@127.0.0.1"])
-     msg.addReceiver( receiver )
-     print msg
-     self._send(msg)
+        msg = spade.ACLMessage.ACLMessage()
+        msg.setOntology("MaS")
+        msg.setPerformative("inform")
+        msg.setConversationId("TechnicalAnalysis")
+        msg.setContent( '[{"Empresa": "Microsoft", "PrecioApertura": 114.31, "PrecioClausura": 114.06, "Pico": 114.56, "Depresion": 113.51, "Volumen": 24329900}, {"Empresa": "Apple", "PrecioApertura": 113.7, "PrecioClausura": 113.89, "Pico": 114.34, "Depresion": 113.13, "Volumen": 28779300}, {"Empresa": "Alphabet", "PrecioApertura": 113.4, "PrecioClausura": 113.05, "Pico": 113.66, "Depresion": 112.69, "Volumen": 21453100}, {"Empresa": "IBM", "PrecioApertura": 113.06, "PrecioClausura": 113.0, "Pico": 114.31, "Depresion": 112.63, "Volumen": 29736800}]' )
+        msg.addReceiver(spade.AID.aid("coordinator@"+HOST,["xmpp://coordinator@"+HOST]))
+        self.myAgent.send(msg)
+        print msg
 
     class RecvMsgBehav(spade.Behaviour.OneShotBehaviour):
-
-        def q1(self):
-            print "Sleeping"
-            time.sleep(5)
-            print "Message has been sent: "
-            self.myAgent.sendToCoordinator("inform", "TechnicalAnalysis", None)
 
         def _process(self):
             print "Waiting for message"
@@ -48,6 +38,17 @@ class TechnicalAnalysis(spade.Agent.Agent):
             print str(self.msg.getContent())
             print "Sending back the results to the Coordinator agent"
             self.q1()
+
+
+        def q1(self):
+            msg = spade.ACLMessage.ACLMessage()
+            msg.setOntology("MaS")
+            msg.setPerformative("inform")
+            msg.setConversationId("TechnicalAnalysis")
+            msg.setContent( '[{"Empresa": "Microsoft", "PrecioApertura": 114.31, "PrecioClausura": 114.06, "Pico": 114.56, "Depresion": 113.51, "Volumen": 24329900}, {"Empresa": "Apple", "PrecioApertura": 113.7, "PrecioClausura": 113.89, "Pico": 114.34, "Depresion": 113.13, "Volumen": 28779300}, {"Empresa": "Alphabet", "PrecioApertura": 113.4, "PrecioClausura": 113.05, "Pico": 113.66, "Depresion": 112.69, "Volumen": 21453100}, {"Empresa": "IBM", "PrecioApertura": 113.06, "PrecioClausura": 113.0, "Pico": 114.31, "Depresion": 112.63, "Volumen": 29736800}]' )
+            msg.addReceiver(spade.AID.aid("coordinator@"+HOST,["xmpp://coordinator@"+HOST]))
+            print "Sending....."
+            self.myAgent.send(msg)
 
 
 if __name__ == "__main__":

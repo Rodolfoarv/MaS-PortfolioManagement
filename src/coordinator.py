@@ -28,7 +28,7 @@ class Coordinator(spade.Agent.Agent):
             print "Waiting for response"
             self.msg = self._receive(True)
             print "Coordinator agent has received the response"
-            print str(msg.getContent())
+            print str(self.msg.getContent())
 
         #Query all share’s quotation on the current day
         def q1(self):
@@ -39,7 +39,6 @@ class Coordinator(spade.Agent.Agent):
             msg.setContent("Apple, Alphabet, IBM, Microsoft")
             msg.addReceiver(spade.AID.aid("technical_analysis@"+HOST,["xmpp://technical_analysis@"+HOST]))
             self.myAgent.send(msg)
-            print msg
 
         #Query all share’s quotation on the current day
         def q2(self):
