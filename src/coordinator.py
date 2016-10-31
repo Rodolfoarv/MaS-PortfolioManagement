@@ -1,4 +1,4 @@
-    # -*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 '''
 Coordinator Agent description, send messages to their agents
 '''
@@ -21,6 +21,16 @@ class Coordinator(spade.Agent.Agent):
         mt = spade.Behaviour.MessageTemplate(template)
         self.addBehaviour(self.TechnicalAnalysisBehav(),mt)
 
+    def sendToAgent(self, agent, performative, conversationID, content):
+        msg = spade.ACLMessage.ACLMessage()
+        msg.setOntology("MaS")
+        msg.setPerformative(performative)
+        msg.setConversationId(conversationID)
+        msg.setContent(content)
+        msg.addReceiver(spade.AID.aid(agent+"@"+HOST,["xmpp://"+ agent + "@" + HOST]))
+        self.send(msg)
+
+
     class TechnicalAnalysisBehav(spade.Behaviour.OneShotBehaviour):
 
         def _process(self):
@@ -32,13 +42,9 @@ class Coordinator(spade.Agent.Agent):
 
         #Query all share’s quotation on the current day
         def q1(self):
-            msg = spade.ACLMessage.ACLMessage()
-            msg.setOntology("MaS")
-            msg.setPerformative("inform")
-            msg.setConversationId("TechnicalAnalysis")
-            msg.setContent("Apple, Alphabet, IBM, Microsoft")
-            msg.addReceiver(spade.AID.aid("technical_analysis@"+HOST,["xmpp://technical_analysis@"+HOST]))
-            self.myAgent.send(msg)
+            content = "Apple, Alphabet, IBM, Microsoft"
+            self.myAgent.sendToAgent("technical_analysis", "inform", "TechnicalAnalysis", content)
+
 
         #Query all share’s quotation on the current day
         def q2(self):
