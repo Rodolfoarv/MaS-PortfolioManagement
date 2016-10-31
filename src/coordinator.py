@@ -12,16 +12,29 @@ import spade
 HOST = "127.0.0.1"
 
 class Coordinator(spade.Agent.Agent):
+    '''The coordinator agent (CA) is responsible for
+    task decomposition and planning. The CA
+    maintains a set of beliefs about the capabilities
+    of all agents in MASST. It can decompose a
+    given task into a number of subtasks and dispatch
+    the subtasks to relevant agents to execution,
+    in order to achieve its goals. '''
 
     def _setup(self):
+        ''' Initial setup for the Coordinator it will addBehaviour for the
+        different agents that the simulation will use'''
+
         template = spade.Behaviour.ACLTemplate()
         template.setOntology("MaS")
-        template.setPerformative("inform")
+        template.setPerformative("request")
         template.setConversationId("TechnicalAnalysis")
         mt = spade.Behaviour.MessageTemplate(template)
         self.addBehaviour(self.TechnicalAnalysisBehav(),mt)
 
     def sendToAgent(self, agent, performative, conversationID, content):
+        ''' Method that takes as arguments the agent name, performative, conversationID
+        and content to be sent to any agent'''
+
         msg = spade.ACLMessage.ACLMessage()
         msg.setOntology("MaS")
         msg.setPerformative(performative)
@@ -30,8 +43,10 @@ class Coordinator(spade.Agent.Agent):
         msg.addReceiver(spade.AID.aid(agent+"@"+HOST,["xmpp://"+ agent + "@" + HOST]))
         self.send(msg)
 
-
     class TechnicalAnalysisBehav(spade.Behaviour.OneShotBehaviour):
+        ''' Behavior that will simulate the interaction between the Technical Analysis
+        agent, it will query what it needs, such as retrieving information from a specific date,
+        a given share, a range between dates, etc '''
 
         def _process(self):
             self.q1()
@@ -42,12 +57,14 @@ class Coordinator(spade.Agent.Agent):
 
         #Query all share’s quotation on the current day
         def q1(self):
+            ''' Query all share's quotation on the current day '''
+
             content = "Apple, Alphabet, IBM, Microsoft"
-            self.myAgent.sendToAgent("technical_analysis", "inform", "TechnicalAnalysis", content)
+            self.myAgent.sendToAgent("technical_analysis", "request", "TechnicalAnalysis", content)
 
-
-        #Query all share’s quotation on the current day
+        #Query a given share’s quotation on the current day
         def q2(self):
+            ''' Query a given share's quotation on the current day '''
             pass
 
         # Query a given share’s real-time trading chart
