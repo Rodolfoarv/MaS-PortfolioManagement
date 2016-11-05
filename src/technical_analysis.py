@@ -51,6 +51,36 @@ class TechnicalAnalysis(spade.Agent.Agent):
             content = '[{"Empresa": "Microsoft", "PrecioApertura": 114.31, "PrecioClausura": 114.06, "Pico": 114.56, "Depresion": 113.51, "Volumen": 24329900}, {"Empresa": "Apple", "PrecioApertura": 113.7, "PrecioClausura": 113.89, "Pico": 114.34, "Depresion": 113.13, "Volumen": 28779300}, {"Empresa": "Alphabet", "PrecioApertura": 113.4, "PrecioClausura": 113.05, "Pico": 113.66, "Depresion": 112.69, "Volumen": 21453100}, {"Empresa": "IBM", "PrecioApertura": 113.06, "PrecioClausura": 113.0, "Pico": 114.31, "Depresion": 112.63, "Volumen": 29736800}]'
             self.myAgent.sendToCoordinator("request", "TechnicalAnalysis", content )
 
+        #Query a given share’s quotation on the current day
+        def q2(self):
+            ''' Query a given share's quotation on the current day '''
+            pass
+
+        # Query a given share’s real-time trading chart
+        def q3(self):
+            '''Query a given share's real time trading chart'''
+            pass
+
+        # Query a given share’s history price chart over a period
+        def q4(self):
+            '''Query a given share's history price chart over a period'''
+            pass
+
+        # Query a given share's price and technical indicator chart over a period
+        def q5(self):
+            ''' Query a given share's price and technical indicator chart over a period'''
+            pass
+
+        # Query a given share’s fundamental analysis data
+        def q6(self):
+            ''' Query a given share's fundamental analysis data '''
+            pass
+
+        # Query the market statistic information over a period
+        def q7(self):
+            ''' Query the market statistic information over a period '''
+            pass
+
 
 
 if __name__ == "__main__":
