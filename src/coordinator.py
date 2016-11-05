@@ -69,22 +69,27 @@ class Coordinator(spade.Agent.Agent):
 
         # Query a given share’s real-time trading chart
         def q3(self):
+            '''Query a given share's real time trading chart'''
             pass
 
         # Query a given share’s history price chart over a period
         def q4(self):
+            '''Query a given share's history price chart over a period'''
             pass
 
         # Query a given share's price and technical indicator chart over a period
         def q5(self):
+            ''' Query a given share's price and technical indicator chart over a period'''
             pass
 
         # Query a given share’s fundamental analysis data
         def q6(self):
+            ''' Query a given share's fundamental analysis data '''
             pass
 
         # Query the market statistic information over a period
         def q7(self):
+            ''' Query the market statistic information over a period '''
             pass
 
 if __name__ == "__main__":
