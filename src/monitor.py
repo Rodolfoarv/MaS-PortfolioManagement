@@ -76,7 +76,17 @@ class Monitor(spade.Agent.Agent):
 
 
     class MonitorAbnormalTradingVolume(spade.Behaviour.Behaviour):
-        '''  '''
+        '''Monitoring abnormal trading volume '''
+        def _process(self):
+            pass
+
+    class MonitorAbnormalTechnicalIndicator(spade.Behaviour.Behaviour):
+        '''Monitoring abnormal technical indicator's status'''
+        def _process(self):
+            pass
+
+    class MonitorAbnormalPriceChart(spade.Behaviour.Behaviour):
+        '''Monitoring price chart pattern'''
         def _process(self):
             pass
 
