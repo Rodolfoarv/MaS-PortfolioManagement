@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 '''
 Coordinator Agent description, receiver to their agents
 '''
