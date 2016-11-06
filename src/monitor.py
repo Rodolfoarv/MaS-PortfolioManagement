@@ -16,7 +16,7 @@ import spade
 
 HOST = "127.0.0.1"
 
-class Coordinator(spade.Agent.Agent):
+class Monitor(spade.Agent.Agent):
     '''The monitoring agent monitors the status of
     the given stocks on behalf of users according
     to their profiles. This agent reports on the
@@ -25,32 +25,33 @@ class Coordinator(spade.Agent.Agent):
     volume and price  '''
 
     def _setup(self):
-        ''' Initial setup for the Coordinator it will addBehaviour for the
-        different agents that the simulation will use'''
+        ''''''
 
         template = spade.Behaviour.ACLTemplate()
         template.setOntology("MaS")
         template.setPerformative("inform")
         template.setConversationId("Monitor")
         mt = spade.Behaviour.MessageTemplate(template)
-        self.addBehaviour(self.TechnicalAnalysisBehav(),mt)
+        self.addBehaviour(self.MonitorPriceFluctuationBehav(),mt)
 
-    def sendToAgent(self, agent, performative, conversationID, content):
-        ''' Method that takes as arguments the agent name, performative, conversationID
-        and content to be sent to any agent'''
-
+    def sendToCoordinator(self, performative, conversationID, content):
+        '''Function that takes as parameter the perfomative, conversation and content to
+        be sent back to the coordinator '''
         msg = spade.ACLMessage.ACLMessage()
         msg.setOntology("MaS")
         msg.setPerformative(performative)
         msg.setConversationId(conversationID)
         msg.setContent(content)
-        msg.addReceiver(spade.AID.aid(agent+"@"+HOST,["xmpp://"+ agent + "@" + HOST]))
+        msg.addReceiver(spade.AID.aid("coordinator@"+HOST,["xmpp://coordinator@"+HOST]))
+        print "Sending....."
         self.send(msg)
 
-    class MonitorPriceFluctuationBehav(spade.Behaviour.Behaviour):
-        '''  '''
+    class MonitorPriceFluctuationBehav(spade.Behaviour.OneShotBehaviour):
+        '''Monitoring abnormal price fluctuation '''
         def _process(self):
-            pass
+            print "Sending information to coordinator"
+            content = "Fluctuation Detected!!!!!!"
+            self.myAgent.sendToCoordinator("inform", "Monitor", content )
 
     class MonitorAbnormalTradingVolume(spade.Behaviour.Behaviour):
         '''  '''
@@ -59,14 +60,14 @@ class Coordinator(spade.Agent.Agent):
 
 
 if __name__ == "__main__":
-	coordinator = Coordinator("coordinator@"+HOST,"secret")
-	coordinator.start()
+	monitor = Monitor("monitor@"+HOST,"secret")
+	monitor.start()
         alive = True
         while alive:
             try:
                 time.sleep(1)
             except KeyboardInterrupt:
                 alive=False
-        print "Coordinator stopped"
-        coordinator.stop()
+        print "Monitor stopped"
+        monitor.stop()
         sys.exit(0)
