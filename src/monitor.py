@@ -46,3 +46,23 @@ class Coordinator(spade.Agent.Agent):
         msg.setContent(content)
         msg.addReceiver(spade.AID.aid(agent+"@"+HOST,["xmpp://"+ agent + "@" + HOST]))
         self.send(msg)
+
+    class MonitorBehav(spade.Behaviour.OneShotBehaviour):
+        '''  '''
+        def _process(self):
+            pass
+
+
+
+if __name__ == "__main__":
+	coordinator = Coordinator("coordinator@"+HOST,"secret")
+	coordinator.start()
+        alive = True
+        while alive:
+            try:
+                time.sleep(1)
+            except KeyboardInterrupt:
+                alive=False
+        print "Coordinator stopped"
+        coordinator.stop()
+        sys.exit(0)
