@@ -110,6 +110,7 @@ CREATE TABLE IF NOT EXISTS `PortafolioInversiones`.`Accion` (
   `Pico` DECIMAL(65,5) NULL,
   `Depresion` DECIMAL(65,5) NULL,
   `Volumen` INT(50) NULL,
+  `Volatilidad` INT(20) NULL,
   PRIMARY KEY (`Fecha`, `ID_Empresa`),
   CONSTRAINT `fk_Accion_Empresa`
     FOREIGN KEY (`ID_Empresa`)
@@ -128,6 +129,7 @@ CREATE TABLE IF NOT EXISTS `PortafolioInversiones`.`Inversion` (
   `Fecha` DATE NULL,
   `ID_Empresa` INT(50) NOT NULL,
   `CapitalInvertido` DECIMAL(65,5) NOT NULL,
+  `ToleranciaRiesgo` DECIMAL(65,4) NOT NULL,
   PRIMARY KEY (`ID_Inversion`),
   CONSTRAINT `fk_Empresa_Inversion`
     FOREIGN KEY (`ID_Empresa`)
