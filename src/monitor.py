@@ -13,6 +13,7 @@ import sys
 import time
 import unittest
 import spade
+import random
 
 HOST = "127.0.0.1"
 
@@ -46,12 +47,28 @@ class Monitor(spade.Agent.Agent):
         print "Sending....."
         self.send(msg)
 
-    class MonitorPriceFluctuationBehav(spade.Behaviour.OneShotBehaviour):
+    class MonitorPriceFluctuationBehav(spade.Behaviour.Behaviour):
         '''Monitoring abnormal price fluctuation '''
         def _process(self):
-            print "Sending information to coordinator"
-            content = "Fluctuation Detected!!!!!!"
-            self.myAgent.sendToCoordinator("inform", "Monitor", content )
+            print "Starting Abnormal price fluctuation"
+            date = "Nov 04, 2016"
+            price = 100
+            while True:
+                time.sleep(2)
+                lastPrice = price
+                randomPriceFluctuation = random.randint(-1000,1000)
+                if randomPriceFluctuation > 900 or randomPriceFluctuation < -900:
+                    print "randomPriceFluctuation"
+                    price = price + randomPriceFluctuation
+                    changePercentage = (price - lastPrice) / 100
+                    print "Sending information to coordinator Random Fluctuation detected!!!!"
+                    content = "Last Price: " + str(lastPrice)+ " Price:" +  str(price) +  " Change Percentage: " + str(changePercentage)
+                    self.myAgent.sendToCoordinator("inform", "Monitor", content )
+                    break
+                else:
+                    price = price + random.uniform(-20.3,40.0)
+                    print price
+
 
     class MonitorAbnormalTradingVolume(spade.Behaviour.Behaviour):
         '''  '''

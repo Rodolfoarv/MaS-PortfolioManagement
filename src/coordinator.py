@@ -102,7 +102,7 @@ class Coordinator(spade.Agent.Agent):
 
     class MonitorBehav(spade.Behaviour.Behaviour):
         def _process(self):
-            print "Waiting for monitor response"
+            print "Waiting for response from the monitor agent"
             self.msg = self._receive(True)
             print "Coordinator agent has received the response"
             print str(self.msg.getContent())
