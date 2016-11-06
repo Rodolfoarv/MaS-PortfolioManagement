@@ -50,7 +50,7 @@ class Coordinator(spade.Agent.Agent):
         template.setConversationId("Monitor")
         mt = spade.Behaviour.MessageTemplate(template)
         self.addBehaviour(self.MonitorBehav(), mt)
-        
+
     class TechnicalAnalysisBehav(spade.Behaviour.Behaviour):
         ''' Behavior that will simulate the interaction between the Technical Analysis
         agent, it will query what it needs, such as retrieving information from a specific date,
@@ -98,6 +98,10 @@ class Coordinator(spade.Agent.Agent):
         # Query the market statistic information over a period
         def q7(self):
             ''' Query the market statistic information over a period '''
+            pass
+
+    class MonitorBehav(spade.Behaviour.Behaviour):
+        def _process(self):
             pass
 
 if __name__ == "__main__":
