@@ -17,4 +17,20 @@ import spade
 HOST = "127.0.0.1"
 
 class Coordinator(spade.Agent.Agent):
-    pass
+    '''The monitoring agent monitors the status of
+    the given stocks on behalf of users according
+    to their profiles. This agent reports on the
+    technical indicators status of the given stocks
+    and notifies any abnormal changes in trading
+    volume and price  '''
+
+    def _setup(self):
+        ''' Initial setup for the Coordinator it will addBehaviour for the
+        different agents that the simulation will use'''
+
+        template = spade.Behaviour.ACLTemplate()
+        template.setOntology("MaS")
+        template.setPerformative("inform")
+        template.setConversationId("Monitor")
+        mt = spade.Behaviour.MessageTemplate(template)
+        self.addBehaviour(self.TechnicalAnalysisBehav(),mt)
