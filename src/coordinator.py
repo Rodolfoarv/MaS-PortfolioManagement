@@ -32,6 +32,10 @@ class Coordinator(spade.Agent.Agent):
         self.addBehaviour(self.TechnicalAnalysisBehav(),mt)
 
         # Add the monitor agent
+        template.setPerformative("inform")
+        template.setConversationId("Monitor")
+        mt = spade.Behaviour.MessageTemplate(template)
+        self.addBehaviour(self.MonitorBehav(),mt)
 
 
 
