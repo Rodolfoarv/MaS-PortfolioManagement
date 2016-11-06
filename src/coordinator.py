@@ -31,6 +31,10 @@ class Coordinator(spade.Agent.Agent):
         mt = spade.Behaviour.MessageTemplate(template)
         self.addBehaviour(self.TechnicalAnalysisBehav(),mt)
 
+        # Add the monitor agent
+
+
+
     def sendToAgent(self, agent, performative, conversationID, content):
         ''' Method that takes as arguments the agent name, performative, conversationID
         and content to be sent to any agent'''
@@ -43,7 +47,7 @@ class Coordinator(spade.Agent.Agent):
         msg.addReceiver(spade.AID.aid(agent+"@"+HOST,["xmpp://"+ agent + "@" + HOST]))
         self.send(msg)
 
-    class TechnicalAnalysisBehav(spade.Behaviour.OneShotBehaviour):
+    class TechnicalAnalysisBehav(spade.Behaviour.Behaviour):
         ''' Behavior that will simulate the interaction between the Technical Analysis
         agent, it will query what it needs, such as retrieving information from a specific date,
         a given share, a range between dates, etc '''
