@@ -51,10 +51,6 @@ class Coordinator(spade.Agent.Agent):
         msg.addReceiver(spade.AID.aid(agent+"@"+HOST,["xmpp://"+ agent + "@" + HOST]))
         self.send(msg)
 
-        template.setConversationId("Monitor")
-        mt = spade.Behaviour.MessageTemplate(template)
-        self.addBehaviour(self.MonitorBehav(), mt)
-
     class TechnicalAnalysisBehav(spade.Behaviour.Behaviour):
         ''' Behavior that will simulate the interaction between the Technical Analysis
         agent, it will query what it needs, such as retrieving information from a specific date,
@@ -106,7 +102,10 @@ class Coordinator(spade.Agent.Agent):
 
     class MonitorBehav(spade.Behaviour.Behaviour):
         def _process(self):
-            pass
+            print "Waiting for monitor response"
+            self.msg = self._receive(True)
+            print "Coordinator agent has received the response"
+            print str(self.msg.getContent())
 
 if __name__ == "__main__":
 	coordinator = Coordinator("coordinator@"+HOST,"secret")
