@@ -47,11 +47,15 @@ class Coordinator(spade.Agent.Agent):
         msg.addReceiver(spade.AID.aid(agent+"@"+HOST,["xmpp://"+ agent + "@" + HOST]))
         self.send(msg)
 
-    class MonitorBehav(spade.Behaviour.OneShotBehaviour):
+    class MonitorPriceFluctuationBehav(spade.Behaviour.Behaviour):
         '''  '''
         def _process(self):
             pass
 
+    class MonitorAbnormalTradingVolume(spade.Behaviour.Behaviour):
+        '''  '''
+        def _process(self):
+            pass
 
 
 if __name__ == "__main__":
