@@ -12,8 +12,8 @@ app = Flask(__name__)
 @app.route("/")
 def index():
     current_stocks = read_api.read_stocks()
-    coordinator = Coordinator("coordinator@"+"127.0.0.1","secret")
-    coordinator.start()
+#    coordinator = Coordinator("coordinator@"+"127.0.0.1","secret")
+#    coordinator.start()
     return render_template('index.html',
                            stocks = current_stocks)
 
