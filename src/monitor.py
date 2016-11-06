@@ -34,3 +34,15 @@ class Coordinator(spade.Agent.Agent):
         template.setConversationId("Monitor")
         mt = spade.Behaviour.MessageTemplate(template)
         self.addBehaviour(self.TechnicalAnalysisBehav(),mt)
+
+    def sendToAgent(self, agent, performative, conversationID, content):
+        ''' Method that takes as arguments the agent name, performative, conversationID
+        and content to be sent to any agent'''
+
+        msg = spade.ACLMessage.ACLMessage()
+        msg.setOntology("MaS")
+        msg.setPerformative(performative)
+        msg.setConversationId(conversationID)
+        msg.setContent(content)
+        msg.addReceiver(spade.AID.aid(agent+"@"+HOST,["xmpp://"+ agent + "@" + HOST]))
+        self.send(msg)
