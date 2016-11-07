@@ -96,8 +96,10 @@ def read_user_from_db(email, passwd):
         cursor.execute("SELECT * FROM Usuario WHERE Correo = '%s'" % (email))
         rows = cursor.fetchall()
         for row in rows:
-            print row[0]
-            print row[5]
+            if (row[5] == passwd):
+                return row[1]
+            else:
+                continue
     except:
         print("Unable to fetch data.")
 
@@ -113,10 +115,6 @@ def insert_user_into_db(data):
     datebirth = data['datebirth']
     password = data['password']
     budget = data['budget']
-
-    # header_string = ('Correo', 'Nombre', 'ApellidoPaterno', 'ApellidoMaterno',
-    #                  'FechaNacimiento', 'Passwrd', 'Capital')
-    # values = (email, names, lname1, lname2, datebirth, password, budget)
 
     db = MySQLdb.connect(host = '127.0.0.1',
                          user = 'root',
