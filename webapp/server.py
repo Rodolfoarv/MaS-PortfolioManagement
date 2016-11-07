@@ -117,6 +117,48 @@ def shares():
                             usr_spns = spin_data,
                             usr_entrps = entrp_data)
 
+""" Queries Page """
+@app.route("/queries")
+def queries():
+    investing = read_spins_and_enterprises()
+    spins = investing[0]
+    enterprises = investing[1]
+
+    preferences = read_user_prefs(session['email'])
+    spin_data = preferences[0]
+    entrp_data = preferences[1]
+
+    # print(spins)
+    # print(enterprises)
+
+    return render_template('queries.html',
+                            username = session['username'],
+                            all_spns = spins,
+                            all_entrps = enterprises,
+                            usr_spns = spin_data,
+                            usr_entrps = entrp_data)
+
+""" Table Page """
+@app.route("/table")
+def table():
+    investing = read_spins_and_enterprises()
+    spins = investing[0]
+    enterprises = investing[1]
+
+    preferences = read_user_prefs(session['email'])
+    spin_data = preferences[0]
+    entrp_data = preferences[1]
+
+    # print(spins)
+    # print(enterprises)
+
+    return render_template('table.html',
+                            username = session['username'],
+                            all_spns = spins,
+                            all_entrps = enterprises,
+                            usr_spns = spin_data,
+                            usr_entrps = entrp_data)
+
 """
 /*********************************************************************
  *                          Other Methods
