@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+
+<head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <!-- Meta, title, CSS, favicons, etc. -->
     <meta charset="utf-8">
@@ -27,49 +28,49 @@
 
     <!-- Custom Theme Style -->
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='build/css/custom.min.css') }}">
-  </head>
+</head>
 
-  <body class="nav-md">
+<body class="nav-md">
     <div class="container body">
-      <div class="main_container">
-        <div class="col-md-3 left_col">
-          <div class="left_col scroll-view">
-            <div class="navbar nav_title" style="border: 0;">
-              <a href="index.html" class="site_title"><i class="fa fa-paw"></i> <span>Gentellela!</span></a>
-            </div>
+        <div class="main_container">
+            <div class="col-md-3 left_col">
+                <div class="left_col scroll-view">
+                    <div class="navbar nav_title" style="border: 0;">
+                        <a href="index.html" class="site_title"><i class="fa fa-paw"></i> <span>Gentellela!</span></a>
+                    </div>
 
-            <div class="clearfix"></div>
+                    <div class="clearfix"></div>
 
-            <!-- menu profile quick info -->
-            <div class="profile">
-              <div class="profile_pic">
-                <img src="../static/images/img.png" alt="..." class="img-circle profile_img">
-              </div>
-              <div class="profile_info">
-                <span>Welcome,</span>
-                <h2>{{ username }}</h2>
-              </div>
-            </div>
-            <!-- /menu profile quick info -->
+                    <!-- menu profile quick info -->
+                    <div class="profile">
+                        <div class="profile_pic">
+                            <img src="../static/images/img.png" alt="..." class="img-circle profile_img">
+                        </div>
+                        <div class="profile_info">
+                            <span>Welcome,</span>
+                            <h2>{{ username }}</h2>
+                        </div>
+                    </div>
+                    <!-- /menu profile quick info -->
 
-            <br />
+                    <br />
 
-            <!-- sidebar menu -->
-            <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
-              <div class="menu_section">
-                <h3>General</h3>
-                <ul class="nav side-menu">
-                  <li><a><i class="fa fa-home"></i> Home </a>
-                    <!--
+                    <!-- sidebar menu -->
+                    <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+                        <div class="menu_section">
+                            <h3>General</h3>
+                            <ul class="nav side-menu">
+                                <li><a><i class="fa fa-home"></i>Home</a>
+                                    <!--
                     <ul class="nav child_menu">
                       <li><a href="index.html">Dashboard</a></li>
                       <li><a href="index2.html">Dashboard2</a></li>
                       <li><a href="index3.html">Dashboard3</a></li>
                     </ul>
                     -->
-                  </li>
-                  <li><a><i class="fa fa-edit"></i> Shares </a>
-                    <!--
+                                </li>
+                                <li><a><i class="fa fa-edit"></i> Shares </a>
+                                    <!--
                     <ul class="nav child_menu">
                       <li><a href="form.html">General Form</a></li>
                       <li><a href="form_advanced.html">Advanced Components</a></li>
@@ -79,9 +80,9 @@
                       <li><a href="form_buttons.html">Form Buttons</a></li>
                     </ul>
                     -->
-                  </li>
-                  <li><a><i class="fa fa-desktop"></i> Profile </a>
-                    <!--
+                                </li>
+                                <li><a><i class="fa fa-desktop"></i> Profile </a>
+                                    <!--
                     <ul class="nav child_menu">
                       <li><a href="general_elements.html">General Elements</a></li>
                       <li><a href="media_gallery.html">Media Gallery</a></li>
@@ -94,17 +95,17 @@
                       <li><a href="calendar.html">Calendar</a></li>
                     </ul>
                     -->
-                  </li>
-                  <li><a><i class="fa fa-table"></i> Data </a>
-                    <!--
+                                </li>
+                                <li><a><i class="fa fa-table"></i> Data </a>
+                                    <!--
                     <ul class="nav child_menu">
                       <li><a href="tables.html">Tables</a></li>
                       <li><a href="tables_dynamic.html">Table Dynamic</a></li>
                     </ul>
                     -->
-                  </li>
-                  <li><a><i class="fa fa-bar-chart-o"></i> Data Presentation</a>
-                    <!--
+                                </li>
+                                <li><a><i class="fa fa-bar-chart-o"></i> Layouts </a>
+                                    <!--
                     <ul class="nav child_menu">
                       <li><a href="chartjs.html">Chart JS</a></li>
                       <li><a href="chartjs2.html">Chart JS2</a></li>
@@ -113,226 +114,224 @@
                       <li><a href="other_charts.html">Other Charts</a></li>
                     </ul>
                     -->
-                  </li>
-                  <li><a><i class="fa fa-clone"></i>Layouts</span></a>
-                    <!--
+                                </li>
+                                <li><a href="{{ url_for('logout') }}"><i class="fa fa-clone"></i> Log Out </span></a>
+                                    <!--
                     <ul class="nav child_menu">
                       <li><a href="fixed_sidebar.html">Fixed Sidebar</a></li>
                       <li><a href="fixed_footer.html">Fixed Footer</a></li>
                     </ul>
                     -->
-                  </li>
-                </ul>
-              </div>
-            </div>
-            <!-- /sidebar menu -->
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- /sidebar menu -->
 
-            <!-- /menu footer buttons -->
-            <div class="sidebar-footer hidden-small">
-              <a data-toggle="tooltip" data-placement="top" title="Settings">
-                <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
-              </a>
-              <a data-toggle="tooltip" data-placement="top" title="FullScreen">
-                <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
-              </a>
-              <a data-toggle="tooltip" data-placement="top" title="Lock">
-                <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
-              </a>
-              <a data-toggle="tooltip" data-placement="top" title="Logout">
-                <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
-              </a>
-            </div>
-            <!-- /menu footer buttons -->
-          </div>
-        </div>
-
-        <!-- top navigation -->
-        <div class="top_nav">
-          <div class="nav_menu">
-            <nav class="" role="navigation">
-              <div class="nav toggle">
-                <a id="menu_toggle"><i class="fa fa-bars"></i></a>
-              </div>
-
-              <ul class="nav navbar-nav navbar-right">
-                <li class="">
-                  <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                    <img src="../static/images/img.png" alt="">{{ username }}
-                    <span class=" fa fa-angle-down"></span>
-                  </a>
-                  <ul class="dropdown-menu dropdown-usermenu pull-right">
-                    <li><a href="javascript:;"> Profile</a></li>
-                    <li>
-                      <a href="javascript:;">
-                        <span class="badge bg-red pull-right">50%</span>
-                        <span>Settings</span>
-                      </a>
-                    </li>
-                    <li><a href="javascript:;">Help</a></li>
-                    <li><a href="login.html"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
-                  </ul>
-                </li>
-
-                <li role="presentation" class="dropdown">
-                  <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false">
-                    <i class="fa fa-envelope-o"></i>
-                    <span class="badge bg-green">6</span>
-                  </a>
-                  <ul id="menu1" class="dropdown-menu list-unstyled msg_list" role="menu">
-                    <li>
-                      <a>
-                        <span class="image"><img src="../static/images/img.png" alt="Profile Image" /></span>
-                        <span>
-                          <span>John Smith</span>
-                          <span class="time">3 mins ago</span>
-                        </span>
-                        <span class="message">
-                          Film festivals used to be do-or-die moments for movie makers. They were where...
-                        </span>
-                      </a>
-                    </li>
-                    <li>
-                      <a>
-                        <span class="image"><img src="../static/images/img.png" alt="Profile Image" /></span>
-                        <span>
-                          <span>John Smith</span>
-                          <span class="time">3 mins ago</span>
-                        </span>
-                        <span class="message">
-                          Film festivals used to be do-or-die moments for movie makers. They were where...
-                        </span>
-                      </a>
-                    </li>
-                    <li>
-                      <a>
-                        <span class="image"><img src="../static/images/img.png" alt="Profile Image" /></span>
-                        <span>
-                          <span>John Smith</span>
-                          <span class="time">3 mins ago</span>
-                        </span>
-                        <span class="message">
-                          Film festivals used to be do-or-die moments for movie makers. They were where...
-                        </span>
-                      </a>
-                    </li>
-                    <li>
-                      <a>
-                        <span class="image"><img src="../static/images/img.png" alt="Profile Image" /></span>
-                        <span>
-                          <span>John Smith</span>
-                          <span class="time">3 mins ago</span>
-                        </span>
-                        <span class="message">
-                          Film festivals used to be do-or-die moments for movie makers. They were where...
-                        </span>
-                      </a>
-                    </li>
-                    <li>
-                      <div class="text-center">
-                        <a>
-                          <strong>See All Alerts</strong>
-                          <i class="fa fa-angle-right"></i>
+                    <!-- /menu footer buttons -->
+                    <div class="sidebar-footer hidden-small">
+                        <a data-toggle="tooltip" data-placement="top" title="Settings">
+                            <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
                         </a>
-                      </div>
-                    </li>
-                  </ul>
-                </li>
-              </ul>
-            </nav>
-          </div>
-        </div>
-        <!-- /top navigation -->
-
-        <!-- page content -->
-        <div class="right_col" role="main">
-          <div class="">
-            <div class="row">
-              <div class="col-md-6 col-sm-12 col-xs-12">
-                <div class="x_panel">
-                  <div class="x_title">
-                    <h3>Shares</h3>
-                  </div>  
-                  <div id="myDiv">
-                  <script>
-                    var data = [{
-                      values: [22, 16, 20, 24, 18],
-                      labels: ['Netflix', 'Apple', 'Google', 'Amazon', 'Microsoft'],
-                      type: 'pie'
-                    }];
-                    var layout = {
-                      height: 450,
-                      width: 600
-                    };
-                    Plotly.newPlot('myDiv', data, layout);
-                  </script>
-                  </div>
-                </div>
-              </div>
-              
-              <div class="col-md-6 col-sm-12 col-xs-12">
-                <div class="x_panel">
-                  <div class="x_title">
-                    <h3>Amazon</h3>
-                  </div>  
-                  <div id="myDiv2">
-                  <script>
-                    var data = [
-                      {
-                        x: ['2016-10-04 22:23:00', '2016-10-05 22:23:00', '2016-10-06 22:23:00', '2016-10-07 22:23:00',
-                          '2016-10-07 22:23:00', '2016-10-08 22:23:00', '2016-10-09 22:23:00', '2016-10-10 22:23:00',
-                          '2016-10-11 22:23:00', '2016-10-12 22:23:00', '2016-10-13 22:23:00', '2016-10-14 22:23:00',
-                          '2016-10-15 22:23:00', '2016-10-16 22:23:00'
-                        ],
-                        y: [840, 841, 839, 842, 836, 842, 841, 845, 847, 848, 844, 846, 847, 843],
-                        type: 'scatter'
-                      }
-                    ];
-
-                    Plotly.newPlot('myDiv2', data);
-                  </script>
-                  </div>
-                </div>  
-              </div>  
-            </div>
-
-            <!-- Trying something else... -->
-            <div class="panel panel-info">
-              <div class="panel-heading">Today's Stock Values</div>
-                <div class="panel-body">
-
-                  <table class="table table-striped">
-                    <tr>
-                      <td><strong>Company</strong></td>
-                      <td><strong>Ask</strong></td>
-                      <td><strong>Bid</strong></td>
-                      <td><strong>Change</strong></td>
-                      <td><strong>Percentage</strong></td>
-                    </tr>
-
-                    {% for row in stocks %}
-                    <tr>
-                      {% for info in row %}
-                        <td>{{ info }}</td>
-                      {% endfor %}
-                    </tr>
-                    {% endfor %}
-                  </table>
+                        <a data-toggle="tooltip" data-placement="top" title="FullScreen">
+                            <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
+                        </a>
+                        <a data-toggle="tooltip" data-placement="top" title="Lock">
+                            <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
+                        </a>
+                        <a data-toggle="tooltip" data-placement="top" title="Logout">
+                            <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
+                        </a>
+                    </div>
+                    <!-- /menu footer buttons -->
                 </div>
             </div>
 
-          </div>
-        </div>
-        <!-- /page content -->
+            <!-- top navigation -->
+            <div class="top_nav">
+                <div class="nav_menu">
+                    <nav class="" role="navigation">
+                        <div class="nav toggle">
+                            <a id="menu_toggle"><i class="fa fa-bars"></i></a>
+                        </div>
 
-        <!-- footer content -->
-        <footer>
-          <div class="pull-right">
-            Gentelella - Bootstrap Admin Template by <a href="https://colorlib.com">Colorlib</a>
-          </div>
-          <div class="clearfix"></div>
-        </footer>
-        <!-- /footer content -->
-      </div>
+                        <ul class="nav navbar-nav navbar-right">
+                            <li class="">
+                                <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                    <img src="../static/images/img.png" alt="">{{ username }}
+                                    <span class=" fa fa-angle-down"></span>
+                                </a>
+                                <ul class="dropdown-menu dropdown-usermenu pull-right">
+                                    <li><a href="javascript:;"> Profile</a></li>
+                                    <li>
+                                        <a href="javascript:;">
+                                            <span class="badge bg-red pull-right">50%</span>
+                                            <span>Settings</span>
+                                        </a>
+                                    </li>
+                                    <li><a href="javascript:;">Help</a></li>
+                                    <li><a href="{{ url_for('logout') }}"><i class="fa fa-sign-out pull-right"></i> Log Out </a></li>
+                                </ul>
+                            </li>
+
+                            <li role="presentation" class="dropdown">
+                                <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false">
+                                    <i class="fa fa-envelope-o"></i>
+                                    <span class="badge bg-green">6</span>
+                                </a>
+                                <ul id="menu1" class="dropdown-menu list-unstyled msg_list" role="menu">
+                                    <li>
+                                        <a>
+                                            <span class="image"><img src="../static/images/img.png" alt="Profile Image" /></span>
+                                            <span>
+                          <span>John Smith</span>
+                                            <span class="time">3 mins ago</span>
+                                            </span>
+                                            <span class="message">
+                          Film festivals used to be do-or-die moments for movie makers. They were where...
+                        </span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a>
+                                            <span class="image"><img src="../static/images/img.png" alt="Profile Image" /></span>
+                                            <span>
+                          <span>John Smith</span>
+                                            <span class="time">3 mins ago</span>
+                                            </span>
+                                            <span class="message">
+                          Film festivals used to be do-or-die moments for movie makers. They were where...
+                        </span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a>
+                                            <span class="image"><img src="../static/images/img.png" alt="Profile Image" /></span>
+                                            <span>
+                          <span>John Smith</span>
+                                            <span class="time">3 mins ago</span>
+                                            </span>
+                                            <span class="message">
+                          Film festivals used to be do-or-die moments for movie makers. They were where...
+                        </span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a>
+                                            <span class="image"><img src="../static/images/img.png" alt="Profile Image" /></span>
+                                            <span>
+                          <span>John Smith</span>
+                                            <span class="time">3 mins ago</span>
+                                            </span>
+                                            <span class="message">
+                          Film festivals used to be do-or-die moments for movie makers. They were where...
+                        </span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <div class="text-center">
+                                            <a>
+                                                <strong>See All Alerts</strong>
+                                                <i class="fa fa-angle-right"></i>
+                                            </a>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+            <!-- /top navigation -->
+
+            <!-- page content -->
+            <div class="right_col" role="main">
+                <div class="">
+                    <div class="row">
+                        <div class="col-md-6 col-sm-12 col-xs-12">
+                            <div class="x_panel">
+                                <div class="x_title">
+                                    <h3>Shares</h3>
+                                </div>
+                                <div id="myDiv">
+                                    <script>
+                                        var data = [{
+                                            values: [22, 16, 20, 24, 18],
+                                            labels: ['Netflix', 'Apple', 'Google', 'Amazon', 'Microsoft'],
+                                            type: 'pie'
+                                        }];
+                                        var layout = {
+                                            height: 450,
+                                            width: 600
+                                        };
+                                        Plotly.newPlot('myDiv', data, layout);
+                                    </script>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 col-sm-12 col-xs-12">
+                            <div class="x_panel">
+                                <div class="x_title">
+                                    <h3>Amazon</h3>
+                                </div>
+                                <div id="myDiv2">
+                                    <script>
+                                        var data = [{
+                                            x: ['2016-10-04 22:23:00', '2016-10-05 22:23:00', '2016-10-06 22:23:00', '2016-10-07 22:23:00',
+                                                '2016-10-07 22:23:00', '2016-10-08 22:23:00', '2016-10-09 22:23:00', '2016-10-10 22:23:00',
+                                                '2016-10-11 22:23:00', '2016-10-12 22:23:00', '2016-10-13 22:23:00', '2016-10-14 22:23:00',
+                                                '2016-10-15 22:23:00', '2016-10-16 22:23:00'
+                                            ],
+                                            y: [840, 841, 839, 842, 836, 842, 841, 845, 847, 848, 844, 846, 847, 843],
+                                            type: 'scatter'
+                                        }];
+
+                                        Plotly.newPlot('myDiv2', data);
+                                    </script>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Trying something else... -->
+                    <div class="panel panel-info">
+                        <div class="panel-heading">Today's Stock Values</div>
+                        <div class="panel-body">
+
+                            <table class="table table-striped">
+                                <tr>
+                                    <td><strong>Company</strong></td>
+                                    <td><strong>Ask</strong></td>
+                                    <td><strong>Bid</strong></td>
+                                    <td><strong>Change</strong></td>
+                                    <td><strong>Percentage</strong></td>
+                                </tr>
+
+                                {% for row in stocks %}
+                                <tr>
+                                    {% for info in row %}
+                                    <td>{{ info }}</td>
+                                    {% endfor %}
+                                </tr>
+                                {% endfor %}
+                            </table>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <!-- /page content -->
+
+            <!-- footer content -->
+            <footer>
+                <div class="pull-right">
+                    Gentelella - Bootstrap Admin Template by <a href="https://colorlib.com">Colorlib</a>
+                </div>
+                <div class="clearfix"></div>
+            </footer>
+            <!-- /footer content -->
+        </div>
     </div>
 
     <!-- jQuery -->
@@ -367,12 +366,13 @@
     <script src="js/flot/curvedLines.js"></script>-->
     <!-- jVectorMap -->
     <!--<script src="js/maps/jquery-jvectormap-2.0.3.min.js"></script>-->
-    
+
     <!-- bootstrap-daterangepicker -->
     <script src="{{ url_for('static', filename='js/moment/moment.min.js') }}"></script>
     <script src="{{ url_for('static', filename='js/datepicker/daterangepicker.js') }}"></script>
 
     <!-- Custom Theme Scripts -->
     <script src="{{ url_for('static', filename='build/js/custom.min.js') }}"></script>
-  </body>
+</body>
+
 </html>

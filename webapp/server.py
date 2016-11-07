@@ -22,6 +22,12 @@ app.secret_key = "secret key"
 def home():
     return redirect("/login")
 
+"""
+/*********************************************************************
+ *                       Index and Main Methods
+ ********************************************************************/
+"""
+
 @app.route("/index")
 def index():
     current_stocks = read_api.read_stocks()
@@ -31,6 +37,17 @@ def index():
     return render_template('index.html',
                            stocks = current_stocks,
                            username = user)
+
+@app.route("/logout")
+def logout():
+    session['username'] = None
+    return redirect("/")
+
+"""
+/*********************************************************************
+ *                        Login and Register
+ ********************************************************************/
+"""
 
 @app.route("/login")
 def logIn_SignIn():
@@ -63,6 +80,12 @@ def get_user_registration():
         return redirect("/index")
 
     return redirect("/login")
+
+"""
+/*********************************************************************
+ *                          Other Methods
+ ********************************************************************/
+"""
 
 @app.route("/q1", methods=["POST"])
 def showAllStockData():
