@@ -9,7 +9,7 @@ import read_api
 
 app = Flask(__name__)
 
-@app.route("/")
+@app.route("/index")
 def index():
     current_stocks = read_api.read_stocks()
 #    coordinator = Coordinator("coordinator@"+"127.0.0.1","secret")
@@ -17,7 +17,7 @@ def index():
     return render_template('index.html',
                            stocks = current_stocks)
 
-@app.route("/login")
+@app.route("/")
 def logIn_SignIn():
     return render_template('login.html')
 
