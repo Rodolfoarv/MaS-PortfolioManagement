@@ -16,7 +16,7 @@ import spade
 import random
 import json
 
-from db.Queries import q03,q04
+from db.Queries import q03,q04,q06
 
 
 HOST = "127.0.0.1"

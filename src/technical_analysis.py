@@ -53,9 +53,10 @@ class TechnicalAnalysis(spade.Agent.Agent):
             self.myAgent.sendToCoordinator("request", "TechnicalAnalysis", content )
 
         #Query a given share’s quotation on the current day
-        def q2(self):
+        def q2(self, enterprise):
             ''' Query a given share's quotation on the current day '''
-            pass
+            content = q02(enterprise)
+            self.myAgent.sendToCoordinator("request", "TechnicalAnalysis", content )
 
         # Query a given share’s real-time trading chart
         def q3(self):
@@ -63,13 +64,15 @@ class TechnicalAnalysis(spade.Agent.Agent):
             pass
 
         # Query a given share’s history price chart over a period
-        def q4(self):
+        def q4(self, enterprise, startDate, endDate):
             '''Query a given share's history price chart over a period'''
             pass
 
         # Query a given share's price and technical indicator chart over a period
         def q5(self):
             ''' Query a given share's price and technical indicator chart over a period'''
+            content = q05(enterprise,startDate,endDate)
+            self.myAgent.sendToCoordinator("request", "TechnicalAnalysis", content )
             pass
 
         # Query a given share’s fundamental analysis data
