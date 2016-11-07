@@ -1,4 +1,5 @@
 #QUERIES
+# -*- coding: utf-8 -*-
 
 #Importa las librerias.
 import MySQLdb
@@ -192,7 +193,7 @@ def q05(empresa, inicio, final):
 
 	#Crea una lista de objetos.
 	objects_list = []
-	if query.upper().startswith('SELECT'): 
+	if query.upper().startswith('SELECT'):
 		rows = cursor.fetchall()   # Lectura de datos.
 		#Crea un diccionario por cada registro devuelto del query.
 		for row in rows:
@@ -208,15 +209,15 @@ def q05(empresa, inicio, final):
 		#Convierte a JSON los diccionarios.
 		jsonResult = json.dumps(objects_list)
 
-	else: 
+	else:
 		#Escritura, modificacion o eliminacion de datos.
 		conn.commit()
-		rows = None 
+		rows = None
 
-	#Cierra el cursor. 
-	cursor.close() 
-	#Cierra la conexion.                
-	conn.close()                   
+	#Cierra el cursor.
+	cursor.close()
+	#Cierra la conexion.
+	conn.close()
 	#Muestra lo obtenido.
 	return jsonResult
 
@@ -235,7 +236,7 @@ def q06(usuario):
 
 	#Crea una lista de objetos.
 	objects_list = []
-	if query.upper().startswith('SELECT'): 
+	if query.upper().startswith('SELECT'):
 		rows = cursor.fetchall()   # Lectura de datos.
 		#Crea un diccionario por cada registro devuelto del query.
 		for row in rows:
@@ -245,14 +246,16 @@ def q06(usuario):
 		#Convierte a JSON los diccionarios.
 		jsonResult = json.dumps(objects_list)
 
-	else: 
+	else:
 		#Escritura, modificacion o eliminacion de datos.
 		conn.commit()
-		rows = None 
+		rows = None
 
-	#Cierra el cursor. 
-	cursor.close() 
-	#Cierra la conexion.                
-	conn.close()                    
+	#Cierra el cursor.
+	cursor.close()
+	#Cierra la conexion.
+	conn.close()
 	#Muestra lo obtenido.
 	return jsonResult
+
+# print q05("Apple", "2016-10-09", "2016-10-10")

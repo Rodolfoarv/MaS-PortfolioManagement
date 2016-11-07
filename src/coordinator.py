@@ -67,13 +67,16 @@ class Coordinator(spade.Agent.Agent):
         def q1(self):
             ''' Query all share's quotation on the current day '''
 
-            content = "Apple, Alphabet, IBM, Microsoft"
+            content = {}
             self.myAgent.sendToAgent("technical_analysis", "request", "TechnicalAnalysis", content)
 
         #Query a given share’s quotation on the current day
-        def q2(self):
+        def q2(self,enterpise):
             ''' Query a given share's quotation on the current day '''
-            pass
+            content = {
+                "Enterprise": enterprise
+                }
+            self.myAgent.sendToAgent("technical_analysis", "request", "TechnicalAnalysis", content)
 
         # Query a given share’s real-time trading chart
         def q3(self):
@@ -86,9 +89,13 @@ class Coordinator(spade.Agent.Agent):
             pass
 
         # Query a given share's price and technical indicator chart over a period
-        def q5(self):
+        def q5(self,enterprise,startDate,endDate):
             ''' Query a given share's price and technical indicator chart over a period'''
-            pass
+            content = {
+                "Enterprise" : enterprise,
+                "startDate"  : startDate,
+                "endDate"    : endDate
+            }
 
         # Query a given share’s fundamental analysis data
         def q6(self):
