@@ -6,6 +6,8 @@ sys.path.append('../')
 from src.coordinator import Coordinator
 
 import read_api
+import os
+import MySQLdb
 
 app = Flask(__name__)
 app.secret_key = "secret key"
@@ -42,8 +44,10 @@ def get_user_registration():
     confrm = form_data['confirm-password']
 
     if (validate_registration_password(passwd, confrm)):
+        insert_user_into_db(form_data)
         session['username'] = form_data['names']
         return redirect("/index")
+
     return redirect("/login")
 
 @app.route("/q1", methods=["POST"])
@@ -67,6 +71,37 @@ def showAllStockData():
 def validate_registration_password(passwd, confirmation):
     return passwd == confirmation
 
+def insert_user_into_db(data):
+    email = data['email']
+    names = data['names']
+    lname1 = data['lname1']
+    lname2 = data['lname2']
+    datebirth = data['datebirth']
+    password = data['password']
+    budget = data['budget']
+
+    # header_string = ('Correo', 'Nombre', 'ApellidoPaterno', 'ApellidoMaterno',
+    #                  'FechaNacimiento', 'Passwrd', 'Capital')
+    # values = (email, names, lname1, lname2, datebirth, password, budget)
+
+    db = MySQLdb.connect(host = '127.0.0.1',
+                         user = 'root',
+                         passwd = 'passcode',
+                         db = 'PortafolioInversiones')
+    cursor = db.cursor()
+
+    try:
+        cursor.execute("""INSERT INTO Usuario VALUES (%s,%s,%s,%s,%s,%s,%s)""",
+                    (email, names, lname1, lname2, datebirth, password, budget))
+        db.commit()
+    except:
+        db.rollback()
+    
+    db.close()
+
 if __name__ == "__main__":
     #app.run()
     app.run(port=1200)
+
+app.secret_key = os.urandom(32)
+print("Cleared secret key...")
