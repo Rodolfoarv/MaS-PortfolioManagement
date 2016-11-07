@@ -18,6 +18,7 @@ app.secret_key = "secret key"
  ********************************************************************/
 """
 
+""" Home Access """
 @app.route("/")
 def home():
     return redirect("/login")
@@ -28,6 +29,7 @@ def home():
  ********************************************************************/
 """
 
+""" Index Dashboard Page """
 @app.route("/index")
 def index():
     current_stocks = read_api.read_stocks()
@@ -38,9 +40,11 @@ def index():
                             stocks = current_stocks,
                             username = user)
 
+""" Logout Action """
 @app.route("/logout")
 def logout():
     session['username'] = None
+    session['email'] = None
     return redirect("/")
 
 """
@@ -49,10 +53,12 @@ def logout():
  ********************************************************************/
 """
 
+""" Login Page """
 @app.route("/login")
 def logIn_SignIn():
     return render_template('login.html')
 
+""" Login POST Action """
 @app.route("/validatelogin/", methods=['POST'])
 def retrieve_user_credentials():
     form_data = request.form
@@ -62,11 +68,13 @@ def retrieve_user_credentials():
 
     if (user):
         session['username'] = user
+        session['email'] = email
         return redirect("/index")
     
     print(user)
     return redirect("/login")
 
+""" Register POST Action """
 @app.route("/register/", methods=['POST'])
 def get_user_registration():
     form_data = request.form
@@ -77,6 +85,7 @@ def get_user_registration():
     if (validate_registration_password(passwd, confrm)):
         insert_user_into_db(form_data)
         session['username'] = form_data['names']
+        session['email'] = form_data['email']
         return redirect("/index")
 
     return redirect("/login")
@@ -87,8 +96,16 @@ def get_user_registration():
  ********************************************************************/
 """
 
+""" Shares Page """
 @app.route("/shares")
 def shares():
+    preferences = read_user_prefs(session['email'])
+    spin_data = preferences[0]
+    pref_data = preferences[1]
+
+    print(spin_data)
+    print(pref_data)
+
     return render_template('shares.html',
                             username = session['username'])
 
@@ -116,9 +133,11 @@ def showAllStockData():
  ********************************************************************/
 """
 
+""" Validate the given password is correct when a user registers. """
 def validate_registration_password(passwd, confirmation):
     return passwd == confirmation
 
+""" Read a user's login credentials from the database. """
 def read_user_from_db(email, passwd):
     db = MySQLdb.connect(host = '127.0.0.1',
                          user = 'root',
@@ -141,6 +160,7 @@ def read_user_from_db(email, passwd):
     db.close()
     return 0
 
+""" Insert a new entry with a new user's basic information to the database. """
 def insert_user_into_db(data):
     email = data['email']
     names = data['names']
@@ -166,6 +186,30 @@ def insert_user_into_db(data):
     
     cursor.close()
     db.close()
+
+""" Read a given user's investing preferences. """
+def read_user_prefs(user_email):
+    db = MySQLdb.connect(host = '127.0.0.1',
+                         user = 'root',
+                         passwd = 'passcode',
+                         db = 'PortafolioInversiones')
+    cursor = db.cursor()
+
+    try:
+        cursor.execute("SELECT * FROM PreferenciaGiro WHERE Correo = '%s'"
+                        % (user_email))
+        spins = cursor.fetchall()
+        cursor.execute("SELECT * FROM PreferenciaEmpresa WHERE Correo = '%s'"
+                        % (user_email))
+        enterprises = cursor.fetchall()
+        return [spins, enterprises]
+        
+    except:
+        print("Unable to fetch user preferences.")
+    
+    cursor.close()
+    db.close()
+    return [0,0]
 
 if __name__ == "__main__":
     #app.run()
