@@ -91,6 +91,17 @@ def read_user_from_db(email, passwd):
                          passwd = 'passcode',
                          db = 'PortafolioInversiones')
     cursor = db.cursor()
+
+    try:
+        cursor.execute("SELECT * FROM Usuario WHERE Correo = '%s'" % (email))
+        rows = cursor.fetchall()
+        for row in rows:
+            print row[0]
+            print row[5]
+    except:
+        print("Unable to fetch data.")
+
+    cursor.close()
     db.close()
     return 0
 
@@ -118,8 +129,10 @@ def insert_user_into_db(data):
                     (email, names, lname1, lname2, datebirth, password, budget))
         db.commit()
     except:
+        print("Could not insert values to the database.")
         db.rollback()
     
+    cursor.close()
     db.close()
 
 if __name__ == "__main__":
