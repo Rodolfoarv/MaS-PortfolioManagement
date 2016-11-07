@@ -99,15 +99,23 @@ def get_user_registration():
 """ Shares Page """
 @app.route("/shares")
 def shares():
+    investing = read_spins_and_enterprises()
+    spins = investing[0]
+    enterprises = investing[1]
+
     preferences = read_user_prefs(session['email'])
     spin_data = preferences[0]
-    pref_data = preferences[1]
+    entrp_data = preferences[1]
 
-    print(spin_data)
-    print(pref_data)
+    # print(spins)
+    # print(enterprises)
 
     return render_template('shares.html',
-                            username = session['username'])
+                            username = session['username'],
+                            all_spns = spins,
+                            all_entrps = enterprises,
+                            usr_spns = spin_data,
+                            usr_entrps = entrp_data)
 
 """
 /*********************************************************************
@@ -203,13 +211,31 @@ def read_user_prefs(user_email):
                         % (user_email))
         enterprises = cursor.fetchall()
         return [spins, enterprises]
-        
+
     except:
         print("Unable to fetch user preferences.")
     
     cursor.close()
     db.close()
     return [0,0]
+
+""" Read current possible spins and enterprises to invest. """
+def read_spins_and_enterprises():
+    db = MySQLdb.connect(host = '127.0.0.1',
+                         user = 'root',
+                         passwd = 'passcode',
+                         db = 'PortafolioInversiones')
+    cursor = db.cursor()
+
+    try:
+        cursor.execute("SELECT * FROM Giro")
+        spins = cursor.fetchall()
+        cursor.execute("SELECT * FROM Empresa")
+        enterprises = cursor.fetchall()
+    except:
+        print("Could not retrieve spins and enterprises.")
+
+    return [spins, enterprises]
 
 if __name__ == "__main__":
     #app.run()

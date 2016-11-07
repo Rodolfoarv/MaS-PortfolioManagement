@@ -247,6 +247,40 @@
             <!-- page content -->
             <div class="right_col" role="main">
                 <h1>Shares Management will go here!</h1>
+                <br>
+
+                <table class="table table-striped">
+                    <tr>
+                        <td><strong>Enterprise</strong></td>
+                        <td><strong>Spin</strong></td>
+                    </tr>
+                </table>
+
+                <br>
+                <br>
+
+                <form>
+                    <fieldset>
+                        <legend>Select your Investing Preferences</legend>
+                        <p>
+                            <label>Select Spin: </label>
+                            <select id="spin-list">
+                                {% for row in all_spns %}
+                                <option value="{{ row[0] }}">{{ row[1] }}</option>
+                                {% endfor %}
+                            </select>
+                        </p>
+
+                        <p>
+                            <label>Select Enterprise: </label>
+                            <select id="enterp-list">
+                                {% for row in all_entrps %}
+                                <option value="{{ row[0] }}">{{ row[1] }}</option>
+                                {% endfor %}
+                            </select>
+                        </p>
+                    </fieldset>
+                </form>
             </div>
             <!-- /page content -->
 
