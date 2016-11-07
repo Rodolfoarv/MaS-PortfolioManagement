@@ -1,7 +1,7 @@
 #QUERIES
 
 #Importa las librerias.
-import MySQLdb 
+import MySQLdb
 import json
 import collections
 
@@ -10,7 +10,7 @@ db_host = '127.0.0.1'
 db_port = 3306
 db_usuario = 'root'
 db_password = '1'
-base_de_datos = 'portafolioinversiones'
+base_de_datos = 'PortafolioInversiones'
 
 #Q01: Regresa todas las acciones del dia actual.
 def q01():
@@ -19,13 +19,13 @@ def q01():
 	#Crea un cursor.
 	cursor = conn.cursor()
 	#Query 01: Regresa todas las acciones del dia actual.
-	query = "SELECT E.Nombre, A.PrecioApertura, A.PrecioClausura, A.Pico, A.Depresion, A.Volumen, A.Volatilidad FROM Accion AS A INNER JOIN Empresa AS E ON A.ID_Empresa=E.ID_EMPRESA WHERE fecha = DATE(NOW())" 
+	query = "SELECT E.Nombre, A.PrecioApertura, A.PrecioClausura, A.Pico, A.Depresion, A.Volumen, A.Volatilidad FROM Accion AS A INNER JOIN Empresa AS E ON A.ID_Empresa=E.ID_EMPRESA WHERE fecha = DATE(NOW())"
 	#Se ejecuta el query disenado.
 	cursor.execute(query)
 
 	#Crea una lista de objetos.
 	objects_list = []
-	if query.upper().startswith('SELECT'): 
+	if query.upper().startswith('SELECT'):
 		rows = cursor.fetchall()   # Lectura de datos.
 		#Crea un diccionario por cada registro devuelto del query.
 		for row in rows:
@@ -41,18 +41,18 @@ def q01():
 		#Convierte a JSON los diccionarios.
 		jsonResult = json.dumps(objects_list)
 
-	else: 
+	else:
 		#Escritura, modificacion o eliminacion de datos.
 		conn.commit()
-		rows = None 
+		rows = None
 
-	#Cierra el cursor. 
-	cursor.close() 
-	#Cierra la conexion.                
-	conn.close()                    
+	#Cierra el cursor.
+	cursor.close()
+	#Cierra la conexion.
+	conn.close()
 	#Muestra lo obtenido.
 	return jsonResult
-	
+
 #Q02: Regresa todas las acciones de la empresa indicada del dia actual.
 def q02(empresa):
 	#Conecta a la base de datos.
@@ -67,7 +67,7 @@ def q02(empresa):
 
 	#Crea una lista de objetos.
 	objects_list = []
-	if query.upper().startswith('SELECT'): 
+	if query.upper().startswith('SELECT'):
 		rows = cursor.fetchall()   # Lectura de datos.
 		#Crea un diccionario por cada registro devuelto del query.
 		for row in rows:
@@ -83,15 +83,15 @@ def q02(empresa):
 		#Convierte a JSON los diccionarios.
 		jsonResult = json.dumps(objects_list)
 
-	else: 
+	else:
 		#Escritura, modificacion o eliminacion de datos.
 		conn.commit()
-		rows = None 
+		rows = None
 
-	#Cierra el cursor. 
-	cursor.close() 
-	#Cierra la conexion.                
-	conn.close()                   
+	#Cierra el cursor.
+	cursor.close()
+	#Cierra la conexion.
+	conn.close()
 	#Muestra lo obtenido.
 	return jsonResult
 
@@ -108,7 +108,7 @@ def q03(usuario):
 
 	#Crea una lista de objetos.
 	objects_list = []
-	if query.upper().startswith('SELECT'): 
+	if query.upper().startswith('SELECT'):
 		rows = cursor.fetchall()   # Lectura de datos.
 		#Crea un diccionario por cada registro devuelto del query.
 		for row in rows:
@@ -124,18 +124,18 @@ def q03(usuario):
 		#Convierte a JSON los diccionarios.
 		jsonResult = json.dumps(objects_list)
 
-	else: 
+	else:
 		#Escritura, modificacion o eliminacion de datos.
 		conn.commit()
-		rows = None 
+		rows = None
 
-	#Cierra el cursor. 
-	cursor.close() 
-	#Cierra la conexion.                
-	conn.close()                    
+	#Cierra el cursor.
+	cursor.close()
+	#Cierra la conexion.
+	conn.close()
 	#Muestra lo obtenido.
 	return jsonResult
-	
+
 #Q02_User: Regresa todas las acciones del dia actual relacionadas con cierto usuario.
 def q04(usuario):
 	#Conecta a la base de datos.
@@ -151,7 +151,7 @@ def q04(usuario):
 
 	#Crea una lista de objetos.
 	objects_list = []
-	if query.upper().startswith('SELECT'): 
+	if query.upper().startswith('SELECT'):
 		rows = cursor.fetchall()   # Lectura de datos.
 		#Crea un diccionario por cada registro devuelto del query.
 		for row in rows:
@@ -167,15 +167,16 @@ def q04(usuario):
 		#Convierte a JSON los diccionarios.
 		jsonResult = json.dumps(objects_list)
 
-	else: 
+	else:
 		#Escritura, modificacion o eliminacion de datos.
 		conn.commit()
-		rows = None 
+		rows = None
 
-	#Cierra el cursor. 
-	cursor.close() 
-	#Cierra la conexion.                
-	conn.close()                    
+	#Cierra el cursor.
+	cursor.close()
+	#Cierra la conexion.
+	conn.close()
 	#Muestra lo obtenido.
 	return jsonResult
-	
+
+print q01()
