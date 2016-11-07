@@ -22,7 +22,7 @@ INSERT INTO Accion(Fecha, ID_Empresa, PrecioApertura, PrecioClausura, Pico, Depr
 
 INSERT INTO PreferenciaEmpresa(Correo, ID_Empresa) VALUES ("aers@gmail.com", 01);
 INSERT INTO PreferenciaEmpresa(Correo, ID_Empresa) VALUES ("aers@gmail.com", 02);
-INSERT INTO PreferenciaEmpresa(Correo, ID_Empresa) VALUES ("bc@gmail.com", 03); 
+INSERT INTO PreferenciaEmpresa(Correo, ID_Empresa) VALUES ("bc@gmail.com", 03);
 
-INSERT INTO PreferenciaGiro(Correo, ID_Empresa) VALUES ("bc@gmail.com", 01);
-INSERT INTO PreferenciaGiro(Correo, ID_Empresa) VALUES ("aers@gmail.com", 02);
+INSERT INTO PreferenciaGiro(Correo, ID_Giro) VALUES ("bc@gmail.com", 01);
+INSERT INTO PreferenciaGiro(Correo, ID_Giro) VALUES ("aers@gmail.com", 02);
