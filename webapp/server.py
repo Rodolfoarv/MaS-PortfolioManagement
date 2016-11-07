@@ -36,6 +36,20 @@ def index():
 def logIn_SignIn():
     return render_template('login.html')
 
+@app.route("/validatelogin/", methods=['POST'])
+def retrieve_user_credentials():
+    form_data = request.form
+    email = form_data['email']
+    passwd = form_data['password']
+    user = read_user_from_db(email, passwd)
+
+    if (user):
+        session['username'] = user
+        return redirect("/index")
+    
+    print(user)
+    return redirect("/login")
+
 @app.route("/register/", methods=['POST'])
 def get_user_registration():
     form_data = request.form
@@ -70,6 +84,15 @@ def showAllStockData():
 
 def validate_registration_password(passwd, confirmation):
     return passwd == confirmation
+
+def read_user_from_db(email, passwd):
+    db = MySQLdb.connect(host = '127.0.0.1',
+                         user = 'root',
+                         passwd = 'passcode',
+                         db = 'PortafolioInversiones')
+    cursor = db.cursor()
+    db.close()
+    return 0
 
 def insert_user_into_db(data):
     email = data['email']
