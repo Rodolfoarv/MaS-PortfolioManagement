@@ -35,8 +35,8 @@ def index():
 #    coordinator = Coordinator("coordinator@"+"127.0.0.1","secret")
 #    coordinator.start()
     return render_template('index.html',
-                           stocks = current_stocks,
-                           username = user)
+                            stocks = current_stocks,
+                            username = user)
 
 @app.route("/logout")
 def logout():
@@ -80,6 +80,17 @@ def get_user_registration():
         return redirect("/index")
 
     return redirect("/login")
+
+"""
+/*********************************************************************
+ *                             Profile
+ ********************************************************************/
+"""
+
+@app.route("/shares")
+def shares():
+    return render_template('shares.html',
+                            username = session['username'])
 
 """
 /*********************************************************************

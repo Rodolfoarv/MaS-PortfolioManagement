@@ -8,7 +8,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Dashboard</title>
+    <title>Your Shares</title>
 
     <!-- Bootstrap -->
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='vendors/bootstrap/dist/css/bootstrap.min.css') }}">
@@ -246,80 +246,7 @@
 
             <!-- page content -->
             <div class="right_col" role="main">
-                <div class="">
-                    <div class="row">
-                        <div class="col-md-6 col-sm-12 col-xs-12">
-                            <div class="x_panel">
-                                <div class="x_title">
-                                    <h3>Shares</h3>
-                                </div>
-                                <div id="myDiv">
-                                    <script>
-                                        var data = [{
-                                            values: [22, 16, 20, 24, 18],
-                                            labels: ['Netflix', 'Apple', 'Google', 'Amazon', 'Microsoft'],
-                                            type: 'pie'
-                                        }];
-                                        var layout = {
-                                            height: 450,
-                                            width: 600
-                                        };
-                                        Plotly.newPlot('myDiv', data, layout);
-                                    </script>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-md-6 col-sm-12 col-xs-12">
-                            <div class="x_panel">
-                                <div class="x_title">
-                                    <h3>Amazon</h3>
-                                </div>
-                                <div id="myDiv2">
-                                    <script>
-                                        var data = [{
-                                            x: ['2016-10-04 22:23:00', '2016-10-05 22:23:00', '2016-10-06 22:23:00', '2016-10-07 22:23:00',
-                                                '2016-10-07 22:23:00', '2016-10-08 22:23:00', '2016-10-09 22:23:00', '2016-10-10 22:23:00',
-                                                '2016-10-11 22:23:00', '2016-10-12 22:23:00', '2016-10-13 22:23:00', '2016-10-14 22:23:00',
-                                                '2016-10-15 22:23:00', '2016-10-16 22:23:00'
-                                            ],
-                                            y: [840, 841, 839, 842, 836, 842, 841, 845, 847, 848, 844, 846, 847, 843],
-                                            type: 'scatter'
-                                        }];
-
-                                        Plotly.newPlot('myDiv2', data);
-                                    </script>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Trying something else... -->
-                    <div class="panel panel-info">
-                        <div class="panel-heading">Today's Stock Values</div>
-                        <div class="panel-body">
-
-                            <table class="table table-striped">
-                                <tr>
-                                    <td><strong>Company</strong></td>
-                                    <td><strong>Ask</strong></td>
-                                    <td><strong>Bid</strong></td>
-                                    <td><strong>Change</strong></td>
-                                    <td><strong>Percentage</strong></td>
-                                </tr>
-
-                                {% for row in stocks %}
-                                <tr>
-                                    {% for info in row %}
-                                    <td>{{ info }}</td>
-                                    {% endfor %}
-                                </tr>
-                                {% endfor %}
-                            </table>
-                        </div>
-                    </div>
-
-                </div>
+                <h1>Shares Management will go here!</h1>
             </div>
             <!-- /page content -->
 
