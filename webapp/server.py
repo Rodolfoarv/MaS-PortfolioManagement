@@ -9,6 +9,12 @@ import read_api
 
 app = Flask(__name__)
 
+"""
+/*********************************************************************
+ *                        Redirection Methods
+ ********************************************************************/
+"""
+
 @app.route("/")
 def home():
     return redirect("/login")
@@ -42,6 +48,12 @@ def showAllStockData():
 #     data = request.data
 #     print data
 #     return render_template('login.html')
+
+"""
+/*********************************************************************
+ *                          Auxiliary Methods
+ ********************************************************************/
+"""
 
 if __name__ == "__main__":
     #app.run()
