@@ -21,6 +21,12 @@ def index():
 def logIn_SignIn():
     return render_template('login.html')
 
+@app.route("/register/", methods=['POST'])
+def get_user_registration():
+    form_data = request.form
+    print(form_data['names'])
+    return render_template('signup_success_test.html')
+
 @app.route("/q1", methods=["POST"])
 def showAllStockData():
     data = request.data
