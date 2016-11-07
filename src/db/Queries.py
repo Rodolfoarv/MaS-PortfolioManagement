@@ -229,7 +229,7 @@ def q06(usuario):
 	cursor = conn.cursor()
 	#Ingreso del nombre.
 	usuario = raw_input ("Ingrese el correo del usuario: ")
-	#Query 02_User: Regresa todas las acciones del dia actual relacionadas con cierto usuario.
+	#Query 03_User: Regresa los giros de interés para un usuario.
 	query = "SELECT G.Nombre FROM Giro AS G INNER JOIN PreferenciaGiro AS P ON G.ID_Giro=P.ID_Giro WHERE P.Correo = '%s'" %usuario
 	#Se ejecuta el query disenado.
 	cursor.execute(query)
