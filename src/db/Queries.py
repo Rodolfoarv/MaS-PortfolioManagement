@@ -178,5 +178,3 @@ def q04(usuario):
 	conn.close()
 	#Muestra lo obtenido.
 	return jsonResult
-
-print q01()
