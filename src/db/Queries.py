@@ -220,3 +220,40 @@ def q05(empresa, inicio, final):
 	conn.close()                   
 	#Muestra lo obtenido.
 	return jsonResult
+
+#Q06: Regresa los giros de interés para un usuario.
+def q06(usuario):
+	#Conecta a la base de datos.
+	conn = MySQLdb.Connect(host = db_host, port = db_port, user = db_usuario, passwd = db_password, db = base_de_datos)
+	#Crea un cursor.
+	cursor = conn.cursor()
+	#Ingreso del nombre.
+	usuario = raw_input ("Ingrese el correo del usuario: ")
+	#Query 02_User: Regresa todas las acciones del dia actual relacionadas con cierto usuario.
+	query = "SELECT G.Nombre FROM Giro AS G INNER JOIN PreferenciaGiro AS P ON G.ID_Giro=P.ID_Giro WHERE P.Correo = '%s'" %usuario
+	#Se ejecuta el query disenado.
+	cursor.execute(query)
+
+	#Crea una lista de objetos.
+	objects_list = []
+	if query.upper().startswith('SELECT'): 
+		rows = cursor.fetchall()   # Lectura de datos.
+		#Crea un diccionario por cada registro devuelto del query.
+		for row in rows:
+			d = collections.OrderedDict()
+			d['Giro'] = row[0]
+			objects_list.append(d)
+		#Convierte a JSON los diccionarios.
+		jsonResult = json.dumps(objects_list)
+
+	else: 
+		#Escritura, modificacion o eliminacion de datos.
+		conn.commit()
+		rows = None 
+
+	#Cierra el cursor. 
+	cursor.close() 
+	#Cierra la conexion.                
+	conn.close()                    
+	#Muestra lo obtenido.
+	return jsonResult
