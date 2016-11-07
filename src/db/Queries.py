@@ -136,14 +136,13 @@ def q03(usuario):
 	#Muestra lo obtenido.
 	return jsonResult
 
-#Q02_User: Regresa todas las acciones del dia actual relacionadas con cierto usuario.
+#Q02_User: Regresa todas las acciones del dia actual relacionadas con el giro
 def q04(usuario):
 	#Conecta a la base de datos.
 	conn = MySQLdb.Connect(host = db_host, port = db_port, user = db_usuario, passwd = db_password, db = base_de_datos)
 	#Crea un cursor.
 	cursor = conn.cursor()
 	#Ingreso del nombre.
-	usuario = raw_input ("Ingrese el correo del usuario: ")
 	#Query 02_User: Regresa todas las acciones del dia actual relacionadas con cierto usuario.
 	query = "SELECT E.Nombre, A.PrecioApertura, A.PrecioClausura, A.Pico, A.Depresion, A.Volumen, A.Volatilidad FROM Accion AS A INNER JOIN Empresa AS E ON A.ID_Empresa=E.ID_EMPRESA INNER JOIN PreferenciaGiro AS P ON P.ID_Giro=E.ID_Giro WHERE fecha = DATE(NOW()) AND P.Correo = '%s'" %usuario
 	#Se ejecuta el query disenado.

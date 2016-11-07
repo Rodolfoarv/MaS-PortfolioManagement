@@ -16,6 +16,9 @@ import spade
 import random
 import json
 
+from db.Queries import q03,q04
+
+
 HOST = "127.0.0.1"
 
 class Monitor(spade.Agent.Agent):
@@ -28,13 +31,13 @@ class Monitor(spade.Agent.Agent):
 
     def _setup(self):
         ''''''
-
         template = spade.Behaviour.ACLTemplate()
         template.setOntology("MaS")
         template.setPerformative("inform")
         template.setConversationId("Monitor")
         mt = spade.Behaviour.MessageTemplate(template)
         self.addBehaviour(self.MonitorPriceFluctuationBehav(),mt)
+        self.addBehaviour(self.MonitorAbnormalTradingVolumeBehav(),mt)
 
     def sendToCoordinator(self, performative, conversationID, content):
         '''Function that takes as parameter the perfomative, conversation and content to
@@ -51,8 +54,9 @@ class Monitor(spade.Agent.Agent):
     class MonitorPriceFluctuationBehav(spade.Behaviour.Behaviour):
         '''Monitoring abnormal price fluctuation '''
         def _process(self):
-            print "Starting Abnormal price fluctuation"
-            date = "Nov 04, 2016"
+            print "Starting Abnormal price fluctuation\n"
+            enterprise = 'Apple'
+            date = "Nov 06, 2016"
             currentPrice = 100
             while True:
                 time.sleep(4)
@@ -63,6 +67,7 @@ class Monitor(spade.Agent.Agent):
                     changePercentage = (currentPrice - lastPrice) / 100
                     print "Sending information to coordinator Random Fluctuation detected!!!!"
                     content = {
+                        'Enterprise' : enterprise,
                         'date' : date,
                         'lastPrice': lastPrice,
                         'currentPrice': currentPrice,
@@ -75,14 +80,36 @@ class Monitor(spade.Agent.Agent):
                     print currentPrice
 
 
-    class MonitorAbnormalTradingVolume(spade.Behaviour.Behaviour):
+    class MonitorAbnormalTradingVolumeBehav(spade.Behaviour.Behaviour):
         '''Monitoring abnormal trading volume '''
         def _process(self):
-            pass
+            print "Starting Abnormal volume fluctuation"
+            enterprise = 'Alphabet'
+            date = "Nov 06, 2016"
+            currentVolume = 34000928
+            while True:
+                time.sleep(4)
+                lastVolume = currentVolume
+                randomPriceFluctuation = random.randint(-1000,1000)
+                if randomPriceFluctuation > 500 or randomPriceFluctuation < -500:
+                    currentVolume = currentVolume + randomPriceFluctuation
+                    print "Sending information to coordinator Abnormal Volume detected!!!!"
+                    content = {
+                        'Enterprise' : enterprise,
+                        'date' : date,
+                        'lastVolume': lastVolume,
+                        'currentVolume': currentVolume,
+                    }
+                    self.myAgent.sendToCoordinator("inform", "Monitor", content )
+                    break
+                else:
+                    currentVolume = currentVolume + random.randint(-20,40)
+                    print currentVolume
 
     class MonitorAbnormalTechnicalIndicator(spade.Behaviour.Behaviour):
         '''Monitoring abnormal technical indicator's status'''
         def _process(self):
+
             pass
 
     class MonitorAbnormalPriceChart(spade.Behaviour.Behaviour):
