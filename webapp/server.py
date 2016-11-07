@@ -9,6 +9,10 @@ import read_api
 
 app = Flask(__name__)
 
+@app.route("/")
+def home():
+    return redirect("/login")
+
 @app.route("/index")
 def index():
     current_stocks = read_api.read_stocks()
@@ -17,7 +21,7 @@ def index():
     return render_template('index.html',
                            stocks = current_stocks)
 
-@app.route("/")
+@app.route("/login")
 def logIn_SignIn():
     return render_template('login.html')
 
