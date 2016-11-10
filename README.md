@@ -35,6 +35,14 @@
 - Iván Díaz Sánchez
 - Steeven Muñoz
 
+#TODO
+
+- Agent Interactions in the Stock Information Retrieval Process ( First part )
+      Implement a Behaviour in the Technical Analysis agent which will simulate
+      the retrieval of information from Internet, it will add the information
+      to the database that the user is interested. We will need to retrieve
+      the stock information from the user and the category he is interested in,
+      so the agent can insert these.
 
 ## License
 

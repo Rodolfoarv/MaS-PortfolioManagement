@@ -67,7 +67,9 @@ class Coordinator(spade.Agent.Agent):
         def q1(self):
             ''' Query all share's quotation on the current day '''
 
-            content = {}
+            content = {
+                "Enterprise" : "Apple"
+            }
             self.myAgent.sendToAgent("technical_analysis", "request", "TechnicalAnalysis", content)
 
         #Query a given share’s quotation on the current day

@@ -41,7 +41,7 @@ class TechnicalAnalysis(spade.Agent.Agent):
     class RecvMsgBehav(spade.Behaviour.OneShotBehaviour):
         '''Class that will make the queries depending on the coordinator's request '''
         def _process(self):
-            print "Waiting for message"
+            print "Waiting for query request"
             self.msg = self._receive(True)
             print "technical_analysis has received a message:"
             print str(self.msg.getContent())
