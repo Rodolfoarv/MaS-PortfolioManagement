@@ -28,6 +28,16 @@
 
     <!-- Custom Theme Style -->
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='build/css/custom.min.css') }}">
+
+    <!-- Table-->
+    <link rel="icon" type="image/png" href="../static/assets/img/favicon.ico">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
+    <link href="../static/assets/css/fresh-bootstrap-table.css" rel="stylesheet" />
+
+    <!--     Table Fonts and icons     -->
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300' rel='stylesheet' type='text/css'>
+
 </head>
 
 <body class="nav-md">
@@ -246,42 +256,218 @@
 
             <!-- page content -->
             <div class="right_col" role="main">
-                <h1>Shares Management will go here!</h1>
-                <br>
+              <div class="">
+                <div class="row">
+                  <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="x_panel">
+                      <div class="x_title">
+                        <h3>All shares on current day</h3>
+                      </div>  
 
-                <table class="table table-striped">
-                    <tr>
-                        <td><strong>Enterprise</strong></td>
-                        <td><strong>Spin</strong></td>
-                    </tr>
-                </table>
+                      <div class="wrapper">
+                        <div class="container">
+                          <div class="row">
+                            <div class="col-md-8 col-md-offset-2">
+                                                      
+                              <div class="fresh-table">
+                              <!--Available colors for the full background: full-color-blue, full-color-azure, full-color-green, full-color-red, full-color-orange                  
+                              Available colors only for the toolbar: toolbar-color-blue, toolbar-color-azure, toolbar-color-green, toolbar-color-red, toolbar-color-orange
+                              -->
 
-                <br>
-                <br>
+                              <!--   
+                              <div class="toolbar">
+                                <button id="alertBtn" class="btn btn-default">Alert</button>
+                              </div>
+                              -->
 
-                <form>
-                    <fieldset>
-                        <legend>Select your Investing Preferences</legend>
-                        <p>
-                            <label>Select Spin: </label>
-                            <select id="spin-list">
-                                {% for row in all_spns %}
-                                <option value="{{ row[0] }}">{{ row[1] }}</option>
-                                {% endfor %}
-                            </select>
-                        </p>
+                              <table id="fresh-table" class="table">
+                                <thead>
+                                  <th data-field="nombre" data-sortable="true">Nombre</th>
+                                  <th data-field="precioApertura" data-sortable="true">P. Apertura</th>
+                                  <th data-field="precioClausura" data-sortable="true">P. Clausura</th>
+                                  <th data-field="pico" data-sortable="true">Pico</th>
+                                  <th data-field="depresion" data-sortable="true">Depresión</th>
+                                  <th data-field="volumen" data-sortable="true">Volumen</th>
+                                  <th data-field="volatilidad" data-sortable="true">Volatilidad</th>
 
-                        <p>
-                            <label>Select Enterprise: </label>
-                            <select id="enterp-list">
-                                {% for row in all_entrps %}
-                                <option value="{{ row[0] }}">{{ row[1] }}</option>
-                                {% endfor %}
-                            </select>
-                        </p>
-                    </fieldset>
-                </form>
+                                </thead>
+                                <tbody>
+                                  <!-- Mostrar el json en tabla -->
+                                  <!--
+                                  {% for row in arr %}
+                                  <tr>
+                                    {% for info in row %}
+                                      <td>{{ info }}</td>
+                                    {% endfor %}
+                                  </tr>
+                                  {% endfor %}
+                                  -->
+                                  <tr>
+                                    <td>1</td>
+                                    <td>Dakota Rice</td>
+                                    <td>$36,738</td>
+                                    <td>Niger</td>
+                                    <td>Oud-Turnhout</td>
+                                    <td></td>
+                                  </tr>
+                                  <tr>
+                                    <td>2</td>
+                                    <td>Minerva Hooper</td>
+                                    <td>$23,789</td>
+                                    <td>Curaçao</td>
+                                    <td>Sinaai-Waas</td>
+                                    <td></td>
+                                  </tr>
+                                  <tr>
+                                    <td>3</td>
+                                    <td>Sage Rodriguez</td>
+                                    <td>$56,142</td>
+                                    <td>Netherlands</td>
+                                    <td>Baileux</td>
+                                    <td></td>
+                                  </tr>
+                                  <tr>
+                                    <td>4</td>
+                                    <td>Philip Chaney</td>
+                                    <td>$38,735</td>
+                                    <td>Korea, South</td>
+                                    <td>Overland Park</td>
+                                    <td></td>
+                                  </tr>
+                                  <tr>
+                                    <td>5</td>
+                                    <td>Doris Greene</td>
+                                    <td>$63,542</td>
+                                    <td>Malawi</td>
+                                    <td>Feldkirchen in Kärnten</td>
+                                    <td></td>
+                                  </tr>
+                                  <tr>
+                                    <td>6</td>
+                                    <td>Mason Porter</td>
+                                    <td>$78,615</td>
+                                    <td>Chile</td>
+                                    <td>Gloucester</td>
+                                    <td></td>
+                                  </tr>
+                                  <tr>
+                                    <td>7</td>
+                                    <td>Alden Chen</td>
+                                    <td>$63,929</td>
+                                    <td>Finland</td>
+                                    <td>Gary</td>
+                                    <td></td>
+                                  </tr>
+                                  <tr>
+                                    <td>8</td>
+                                    <td>Colton Hodges</td>
+                                    <td>$93,961</td>
+                                    <td>Nicaragua</td>
+                                    <td>Delft</td>
+                                    <td></td>
+                                  </tr>
+                                  <tr>
+                                    <td>9</td>
+                                    <td>Illana Nelson</td>
+                                    <td>$56,142</td>
+                                    <td>Heard Island</td>
+                                    <td>Montone</td>
+                                    <td></td>
+                                  </tr>
+                                  <tr>
+                                    <td>10</td>
+                                    <td>Nicole Lane</td>
+                                    <td>$93,148</td>
+                                    <td>Cayman Islands</td>
+                                    <td>Cottbus</td>
+                                    <td></td>
+                                  </tr>
+                                  <tr>
+                                    <td>11</td>
+                                    <td>Chaim Saunders</td>
+                                    <td>$5,502</td>
+                                    <td>Romania</td>
+                                    <td>New Quay</td>
+                                    <td></td>
+                                  </tr>
+                                  <tr>
+                                    <td>12</td>
+                                    <td>Josiah Simon</td>
+                                    <td>$50,265</td>
+                                    <td>Christmas Island</td>
+                                    <td>Sint-Jans-Molenbeek</td>
+                                    <td></td>
+                                  </tr>
+                                  <tr>
+                                    <td>13</td>
+                                    <td>Ila Poole</td>
+                                    <td>$67,413</td>
+                                    <td>Montenegro</td>
+                                    <td>Pontevedra</td>
+                                    <td></td>
+                                  </tr>
+                                  <tr>
+                                    <td>14</td>
+                                    <td>Shana Mejia</td>
+                                    <td>$58,566</td>
+                                    <td>Afghanistan</td>
+                                    <td>Ballarat</td>
+                                    <td></td>
+                                  </tr>
+                                  <tr>
+                                    <td>15</td>
+                                    <td>Lana Ryan</td>
+                                    <td>$64,151</td>
+                                    <td>Martinique</td>
+                                    <td>Portobuffolè</td>
+                                    <td></td>
+                                  </tr>
+                                  <tr>
+                                    <td>16</td>
+                                    <td>Daquan Bender</td>
+                                    <td>$91,906</td>
+                                    <td>Sao Tome and Principe</td>
+                                    <td>Walhain-Saint-Paul</td>
+                                    <td></td>
+                                  </tr>
+                                  <tr>
+                                    <td>17</td>
+                                    <td>Connor Wagner</td>
+                                    <td>$86,537</td>
+                                    <td>Germany</td>
+                                    <td>Solihull</td>
+                                    <td></td>
+                                  </tr>
+                                  <tr>
+                                    <td>18</td>
+                                    <td>Boris Horton</td>
+                                    <td>$35,094</td>
+                                    <td>Laos</td>
+                                    <td>Saint-Mard</td>
+                                    <td></td>
+                                  </tr>
+                                  <tr>
+                                    <td>19</td>
+                                    <td>Winifred Ryan</td>
+                                    <td>$64,436</td>
+                                    <td>Ireland</td>
+                                    <td>Ronciglione</td>
+                                    <td></td>
+                                  </tr>
+                                </tbody>
+                              </table>
+                              </div>      
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
+
+
             <!-- /page content -->
 
             <!-- footer content -->
