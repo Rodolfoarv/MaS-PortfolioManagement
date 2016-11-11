@@ -85,6 +85,14 @@ class TechnicalAnalysis(spade.Agent.Agent):
             ''' Query the market statistic information over a period '''
             pass
 
+    class RetrieveInformationBehav(spade.Behaviour.PeriodicBehaviour, 10):
+
+        def _process(self):
+            # Retrieve the user assets and categories he is interested in, insert data into
+            # the database
+
+
+
 
 
 if __name__ == "__main__":
