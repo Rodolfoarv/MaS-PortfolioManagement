@@ -38,6 +38,8 @@ class Monitor(spade.Agent.Agent):
         mt = spade.Behaviour.MessageTemplate(template)
         self.addBehaviour(self.MonitorPriceFluctuationBehav(),mt)
         self.addBehaviour(self.MonitorAbnormalTradingVolumeBehav(),mt)
+        self.addBehaviour(self.MonitorAbnormalTechnicalIndicator(),mt)
+
 
     def sendToCoordinator(self, performative, conversationID, content):
         '''Function that takes as parameter the perfomative, conversation and content to
@@ -106,16 +108,13 @@ class Monitor(spade.Agent.Agent):
                     currentVolume = currentVolume + random.randint(-20,40)
                     print currentVolume
 
-    class MonitorAbnormalTechnicalIndicator(spade.Behaviour.Behaviour):
+    class MonitorAbnormalTechnicalIndicator(spade.Behaviour.PeriodicBehaviour):
         '''Monitoring abnormal technical indicator's status'''
         def _process(self):
+            user_interests = q06("aers@gmail.com")
+            
+            print user_interests
 
-            pass
-
-    class MonitorAbnormalPriceChart(spade.Behaviour.Behaviour):
-        '''Monitoring price chart pattern'''
-        def _process(self):
-            pass
 
 
 if __name__ == "__main__":
