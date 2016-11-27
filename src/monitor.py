@@ -15,8 +15,9 @@ import unittest
 import spade
 import random
 import json
+from datetime import datetime
 
-from db.Queries import q03,q04,q06
+from db.Queries import q01,q03,q04,q06
 
 
 HOST = "127.0.0.1"
@@ -37,8 +38,9 @@ class Monitor(spade.Agent.Agent):
         template.setConversationId("Monitor")
         mt = spade.Behaviour.MessageTemplate(template)
         self.addBehaviour(self.MonitorPriceFluctuationBehav(),mt)
-        self.addBehaviour(self.MonitorAbnormalTradingVolumeBehav(),mt)
-        self.addBehaviour(self.MonitorAbnormalTechnicalIndicator(),mt)
+        # self.addBehaviour(self.MonitorAbnormalTradingVolumeBehav(),mt)
+        # self.addBehaviour(self.MonitorAbnormalTechnicalIndicator(),mt)
+        print "\n\n*********** Monitor Agent has Started\n\n"
 
 
     def sendToCoordinator(self, performative, conversationID, content):
@@ -56,11 +58,19 @@ class Monitor(spade.Agent.Agent):
     class MonitorPriceFluctuationBehav(spade.Behaviour.Behaviour):
         '''Monitoring abnormal price fluctuation '''
         def _process(self):
-            print "Starting Abnormal price fluctuation\n"
-            enterprise = 'Apple'
-            date = "Nov 06, 2016"
-            currentPrice = 100
-            while True:
+
+            user_stocks = q01()
+            # Obtain the stock information of every asset
+            for stock in user_stocks:
+                enterprise = stock['Empresa']
+                current_date = datetime.now()
+                date = current_date.strftime('%Y-%m-%d ')
+                volumen = stock['Volumen']
+                precio_apertura = stock['PrecioApertura']
+                volatilidad = stock['Volatilidad']
+                valor_actual = stock['ValorActual']
+                precio_clausura = stock['PrecioClausura']
+                currentPrice = valor_actual
                 time.sleep(4)
                 lastPrice = currentPrice
                 randomPriceFluctuation = random.randint(-1000,1000)
@@ -76,10 +86,12 @@ class Monitor(spade.Agent.Agent):
                         'changePercentage': changePercentage,
                     }
                     self.myAgent.sendToCoordinator("inform", "Monitor", content )
-                    break
                 else:
                     currentPrice = currentPrice + random.uniform(-20.3,40.0)
                     print currentPrice
+                print "The current price for %s is: %f\n" %(enterprise,currentPrice)
+
+
 
 
     class MonitorAbnormalTradingVolumeBehav(spade.Behaviour.Behaviour):
@@ -108,11 +120,11 @@ class Monitor(spade.Agent.Agent):
                     currentVolume = currentVolume + random.randint(-20,40)
                     print currentVolume
 
-    class MonitorAbnormalTechnicalIndicator(spade.Behaviour.PeriodicBehaviour):
+    class MonitorAbnormalTechnicalIndicator(spade.Behaviour.Behaviour):
         '''Monitoring abnormal technical indicator's status'''
         def _process(self):
             user_interests = q06("aers@gmail.com")
-            
+
             print user_interests
 
 
