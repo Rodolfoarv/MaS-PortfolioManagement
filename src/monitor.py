@@ -38,7 +38,7 @@ class Monitor(spade.Agent.Agent):
         template.setConversationId("Monitor")
         mt = spade.Behaviour.MessageTemplate(template)
         self.addBehaviour(self.MonitorPriceFluctuationBehav(),mt)
-        # self.addBehaviour(self.MonitorAbnormalTradingVolumeBehav(),mt)
+        self.addBehaviour(self.MonitorAbnormalTradingVolumeBehav(),mt)
         # self.addBehaviour(self.MonitorAbnormalTechnicalIndicator(),mt)
         print "\n\n*********** Monitor Agent has Started\n\n"
 
@@ -58,7 +58,6 @@ class Monitor(spade.Agent.Agent):
     class MonitorPriceFluctuationBehav(spade.Behaviour.Behaviour):
         '''Monitoring abnormal price fluctuation '''
         def _process(self):
-
             user_stocks = q01()
             # Obtain the stock information of every asset
             for stock in user_stocks:
@@ -71,7 +70,7 @@ class Monitor(spade.Agent.Agent):
                 valor_actual = stock['ValorActual']
                 precio_clausura = stock['PrecioClausura']
                 currentPrice = valor_actual
-                time.sleep(4)
+                time.sleep(2)
                 lastPrice = currentPrice
                 randomPriceFluctuation = random.randint(-1000,1000)
                 if randomPriceFluctuation > 900 or randomPriceFluctuation < -900:
@@ -88,7 +87,6 @@ class Monitor(spade.Agent.Agent):
                     self.myAgent.sendToCoordinator("inform", "Monitor", content )
                 else:
                     currentPrice = currentPrice + random.uniform(-20.3,40.0)
-                    print currentPrice
                 print "The current price for %s is: %f\n" %(enterprise,currentPrice)
 
 
@@ -97,12 +95,20 @@ class Monitor(spade.Agent.Agent):
     class MonitorAbnormalTradingVolumeBehav(spade.Behaviour.Behaviour):
         '''Monitoring abnormal trading volume '''
         def _process(self):
-            print "Starting Abnormal volume fluctuation"
-            enterprise = 'Alphabet'
-            date = "Nov 06, 2016"
-            currentVolume = 34000928
-            while True:
-                time.sleep(4)
+            user_stocks = q01()
+            for stock in user_stocks:
+                enterprise = stock['Empresa']
+                current_date = datetime.now()
+                date = current_date.strftime('%Y-%m-%d ')
+                volumen = stock['Volumen']
+                precio_apertura = stock['PrecioApertura']
+                volatilidad = stock['Volatilidad']
+                valor_actual = stock['ValorActual']
+                precio_clausura = stock['PrecioClausura']
+                currentPrice = valor_actual
+
+                currentVolume = volumen
+                time.sleep(2)
                 lastVolume = currentVolume
                 randomPriceFluctuation = random.randint(-1000,1000)
                 if randomPriceFluctuation > 500 or randomPriceFluctuation < -500:
@@ -118,7 +124,7 @@ class Monitor(spade.Agent.Agent):
                     break
                 else:
                     currentVolume = currentVolume + random.randint(-20,40)
-                    print currentVolume
+                    print "The current volume for %s is: %d\n" %(enterprise,currentVolume)
 
     class MonitorAbnormalTechnicalIndicator(spade.Behaviour.Behaviour):
         '''Monitoring abnormal technical indicator's status'''
