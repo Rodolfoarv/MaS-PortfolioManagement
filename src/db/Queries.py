@@ -52,6 +52,7 @@ def q01():
 	#Cierra la conexion.
 	conn.close()
 	#Muestra lo obtenido.
+	jsonResult = json.loads(jsonResult)
 	return jsonResult
 
 #Q02: Regresa todas las acciones de la empresa indicada del dia actual.
@@ -94,6 +95,7 @@ def q02(empresa):
 	#Cierra la conexion.
 	conn.close()
 	#Muestra lo obtenido.
+	jsonResult = json.loads(jsonResult)
 	return jsonResult
 
 #Q01_User: Regresa todas las acciones del dia actual relacionadas con cierto usuario.
@@ -135,6 +137,7 @@ def q03(usuario):
 	#Cierra la conexion.
 	conn.close()
 	#Muestra lo obtenido.
+	jsonResult = json.loads(jsonResult)
 	return jsonResult
 
 #Q02_User: Regresa todas las acciones del dia actual relacionadas con el giro
@@ -177,6 +180,7 @@ def q04(usuario):
 	#Cierra la conexion.
 	conn.close()
 	#Muestra lo obtenido.
+	jsonResult = json.loads(jsonResult)
 	return jsonResult
 
 #Q05: Regresa todas las acciones de la empresa indicada dentro de un rango de fechas.
@@ -219,6 +223,7 @@ def q05(empresa, inicio, final):
 	#Cierra la conexion.
 	conn.close()
 	#Muestra lo obtenido.
+	jsonResult = json.loads(jsonResult)
 	return jsonResult
 
 #Q06: Regresa los giros de interés para un usuario.
@@ -228,7 +233,6 @@ def q06(usuario):
 	#Crea un cursor.
 	cursor = conn.cursor()
 	#Ingreso del nombre.
-	usuario = raw_input ("Ingrese el correo del usuario: ")
 	#Query 03_User: Regresa los giros de interés para un usuario.
 	query = "SELECT G.Nombre FROM Giro AS G INNER JOIN PreferenciaGiro AS P ON G.ID_Giro=P.ID_Giro WHERE P.Correo = '%s'" %usuario
 	#Se ejecuta el query disenado.
@@ -256,6 +260,7 @@ def q06(usuario):
 	#Cierra la conexion.
 	conn.close()
 	#Muestra lo obtenido.
+	jsonResult = json.loads(jsonResult)
 	return jsonResult
 
 # print q05("Apple", "2016-10-09", "2016-10-10")
