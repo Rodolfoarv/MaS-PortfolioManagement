@@ -76,7 +76,7 @@ class Monitor(spade.Agent.Agent):
                 if randomPriceFluctuation > 900 or randomPriceFluctuation < -900:
                     currentPrice = currentPrice + randomPriceFluctuation
                     changePercentage = (currentPrice - lastPrice) / 100
-                    print "Sending information to coordinator Random Fluctuation detected!!!!"
+                    print "******** Sending information to coordinator Abnormal Fluctuation detected!!!! ********"
                     content = {
                         'Enterprise' : enterprise,
                         'date' : date,
@@ -87,7 +87,7 @@ class Monitor(spade.Agent.Agent):
                     self.myAgent.sendToCoordinator("inform", "Monitor", content )
                 else:
                     currentPrice = currentPrice + random.uniform(-20.3,40.0)
-                print "The current price for %s is: %f\n" %(enterprise,currentPrice)
+                print "The current price for %s is: %f" %(enterprise,currentPrice)
 
 
 
@@ -113,7 +113,7 @@ class Monitor(spade.Agent.Agent):
                 randomPriceFluctuation = random.randint(-1000,1000)
                 if randomPriceFluctuation > 500 or randomPriceFluctuation < -500:
                     currentVolume = currentVolume + randomPriceFluctuation
-                    print "Sending information to coordinator Abnormal Volume detected!!!!"
+                    print "*********** Sending information to coordinator Abnormal Volume detected!!!! ***********"
                     content = {
                         'Enterprise' : enterprise,
                         'date' : date,
@@ -124,14 +124,14 @@ class Monitor(spade.Agent.Agent):
                     break
                 else:
                     currentVolume = currentVolume + random.randint(-20,40)
-                    print "The current volume for %s is: %d\n" %(enterprise,currentVolume)
+                    print "The current volume for %s is: %d" %(enterprise,currentVolume)
 
     class MonitorAbnormalTechnicalIndicator(spade.Behaviour.Behaviour):
         '''Monitoring abnormal technical indicator's status'''
         def _process(self):
             user_interests = q06("aers@gmail.com")
-
             print user_interests
+
 
 
 
