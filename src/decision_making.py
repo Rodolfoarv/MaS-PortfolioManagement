@@ -29,9 +29,9 @@ class DecisionMaking(spade.Agent.Agent):
         template = spade.Behaviour.ACLTemplate()
         template.setOntology("MaS")
         template.setPerformative("inform")
-        template.setConversationId("DecisionMaking")
+        template.setConversationId("Monitor")
         mt = spade.Behaviour.MessageTemplate(template)
-        self.addBehaviour(self.GenericBehav(),mt)
+        self.addBehaviour(self.SellingRuleBehav(),mt)
         print "\n\n*********** Decision Making Agent has Started\n\n"
 
 
@@ -47,15 +47,19 @@ class DecisionMaking(spade.Agent.Agent):
         print "Sending....."
         self.send(msg)
 
-    class GenericBehav(spade.Behaviour.Behaviour):
-        pass
+    class SellingRuleBehav(spade.Behaviour.Behaviour):
+        def _process(self):
+            #Wait for a message from the monitor agent
+            self.msg = self._receive(True)
+            print str(self.msg.getContent())
+
 
 
 
 
 
 if __name__ == "__main__":
-	decision_making = Monitor("decision_making@"+HOST,"secret")
+	decision_making = DecisionMaking("decision_making@"+HOST,"secret")
 	decision_making.start()
         alive = True
         while alive:
