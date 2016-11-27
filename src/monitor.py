@@ -39,7 +39,7 @@ class Monitor(spade.Agent.Agent):
         mt = spade.Behaviour.MessageTemplate(template)
         self.addBehaviour(self.MonitorPriceFluctuationBehav(),mt)
         self.addBehaviour(self.MonitorAbnormalTradingVolumeBehav(),mt)
-        # self.addBehaviour(self.MonitorAbnormalTechnicalIndicator(),mt)
+        self.addBehaviour(self.MonitorAbnormalTechnicalIndicator(),mt)
         print "\n\n*********** Monitor Agent has Started\n\n"
 
 
@@ -53,6 +53,17 @@ class Monitor(spade.Agent.Agent):
         msg.setContent(content)
         msg.addReceiver(spade.AID.aid("coordinator@"+HOST,["xmpp://coordinator@"+HOST]))
         print "Sending....."
+        self.send(msg)
+
+    def sendToAgent(self, agent, performative, conversationID, content):
+        ''' Method that takes as arguments the agent name, performative, conversationID
+        and content to be sent to any agent'''
+        msg = spade.ACLMessage.ACLMessage()
+        msg.setOntology("MaS")
+        msg.setPerformative(performative)
+        msg.setConversationId(conversationID)
+        msg.setContent(content)
+        msg.addReceiver(spade.AID.aid(agent+"@"+HOST,["xmpp://"+ agent + "@" + HOST]))
         self.send(msg)
 
     class MonitorPriceFluctuationBehav(spade.Behaviour.Behaviour):
@@ -87,7 +98,16 @@ class Monitor(spade.Agent.Agent):
                     self.myAgent.sendToCoordinator("inform", "Monitor", content )
                 else:
                     currentPrice = currentPrice + random.uniform(-20.3,40.0)
+                    changePercentage = (currentPrice - lastPrice) / 100
+                    content = {
+                        'Enterprise' : enterprise,
+                        'date' : date,
+                        'lastPrice': lastPrice,
+                        'currentPrice': currentPrice,
+                        'changePercentage': changePercentage,
+                    }
                 print "The current price for %s is: %f" %(enterprise,currentPrice)
+                self.myAgent.sendToAgent("risk", "inform", "Monitor", content)
 
 
 
@@ -129,8 +149,9 @@ class Monitor(spade.Agent.Agent):
     class MonitorAbnormalTechnicalIndicator(spade.Behaviour.Behaviour):
         '''Monitoring abnormal technical indicator's status'''
         def _process(self):
-            user_interests = q06("aers@gmail.com")
-            print user_interests
+            user_interests = q04("aers@gmail.com")
+            for stock in user_interests:
+                pass
 
 
 
