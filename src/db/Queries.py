@@ -20,7 +20,7 @@ def q01():
 	#Crea un cursor.
 	cursor = conn.cursor()
 	#Query 01: Regresa todas las acciones del dia actual.
-	query = "SELECT E.Nombre, A.PrecioApertura, A.PrecioClausura, A.Pico, A.Depresion, A.Volumen, A.Volatilidad FROM Accion AS A INNER JOIN Empresa AS E ON A.ID_Empresa=E.ID_EMPRESA WHERE fecha = DATE(NOW())"
+	query = "SELECT E.Nombre, A.PrecioApertura, A.PrecioClausura, A.ValorActual, A.Volumen, A.Volatilidad FROM Accion AS A INNER JOIN Empresa AS E ON A.ID_Empresa=E.ID_EMPRESA WHERE fecha = DATE(NOW())"
 	#Se ejecuta el query disenado.
 	cursor.execute(query)
 
@@ -34,10 +34,9 @@ def q01():
 			d['Empresa'] = row[0]
 			d['PrecioApertura'] = float(row[1])
 			d['PrecioClausura'] = float(row[2])
-			d['Pico'] = float(row[3])
-			d['Depresion'] = float(row[4])
-			d['Volumen'] = int(row[5])
-			d['Volatilidad'] = int(row[6])
+			d['ValorActual'] = float(row[3])
+			d['Volumen'] = int(row[4])
+			d['Volatilidad'] = int(row[5])
 			objects_list.append(d)
 		#Convierte a JSON los diccionarios.
 		jsonResult = json.dumps(objects_list)
@@ -63,7 +62,7 @@ def q02(empresa):
 	cursor = conn.cursor()
 	#Query 02: Regresa todas las acciones de la empresa indicada del dia actual.
 	#En este caso recupera las de Apple, pero hay que cambiar ese campo cada vez que se quieran buscar acciones de cierta empresa.
-	query = "SELECT E.Nombre, A.PrecioApertura, A.PrecioClausura, A.Pico, A.Depresion, A.Volumen, A.Volatilidad FROM Accion AS A INNER JOIN Empresa AS E ON A.ID_Empresa=E.ID_EMPRESA WHERE fecha = DATE(NOW()) AND E.Nombre = '%s'" %empresa
+	query = "SELECT E.Nombre, A.PrecioApertura, A.PrecioClausura, A.ValorActual, A.Volumen, A.Volatilidad FROM Accion AS A INNER JOIN Empresa AS E ON A.ID_Empresa=E.ID_EMPRESA WHERE fecha = DATE(NOW()) AND E.Nombre = '%s'" %empresa
 	#Se ejecuta el query disenado.
 	cursor.execute(query)
 
@@ -77,10 +76,9 @@ def q02(empresa):
 			d['Empresa'] = row[0]
 			d['PrecioApertura'] = float(row[1])
 			d['PrecioClausura'] = float(row[2])
-			d['Pico'] = float(row[3])
-			d['Depresion'] = float(row[4])
-			d['Volumen'] = int(row[5])
-			d['Volatilidad'] = int(row[6])
+			d['ValorActual'] = float(row[3])
+			d['Volumen'] = int(row[4])
+			d['Volatilidad'] = int(row[5])
 			objects_list.append(d)
 		#Convierte a JSON los diccionarios.
 		jsonResult = json.dumps(objects_list)
@@ -105,7 +103,7 @@ def q03(usuario):
 	#Crea un cursor.
 	cursor = conn.cursor()
 	#Query 01_User: Regresa todas las acciones del dia actual relacionadas con cierto usuario.
-	query = "SELECT E.Nombre, A.PrecioApertura, A.PrecioClausura, A.Pico, A.Depresion, A.Volumen, A.Volatilidad FROM Accion AS A INNER JOIN Empresa AS E ON A.ID_Empresa=E.ID_EMPRESA INNER JOIN PreferenciaEmpresa AS P ON P.ID_EMPRESA=E.ID_EMPRESA WHERE fecha = DATE(NOW()) AND P.Correo = '%s'" %usuario
+	query = "SELECT E.Nombre, A.PrecioApertura, A.PrecioClausura, A.ValorActual, A.Volumen, A.Volatilidad FROM Accion AS A INNER JOIN Empresa AS E ON A.ID_Empresa=E.ID_EMPRESA INNER JOIN PreferenciaEmpresa AS P ON P.ID_EMPRESA=E.ID_EMPRESA WHERE fecha = DATE(NOW()) AND P.Correo = '%s'" %usuario
 	#Se ejecuta el query disenado.
 	cursor.execute(query)
 
@@ -119,10 +117,9 @@ def q03(usuario):
 			d['Empresa'] = row[0]
 			d['PrecioApertura'] = float(row[1])
 			d['PrecioClausura'] = float(row[2])
-			d['Pico'] = float(row[3])
-			d['Depresion'] = float(row[4])
-			d['Volumen'] = int(row[5])
-			d['Volatilidad'] = int(row[6])
+			d['ValorActual'] = float(row[3])
+			d['Volumen'] = int(row[4])
+			d['Volatilidad'] = int(row[5])
 			objects_list.append(d)
 		#Convierte a JSON los diccionarios.
 		jsonResult = json.dumps(objects_list)
@@ -148,7 +145,7 @@ def q04(usuario):
 	cursor = conn.cursor()
 	#Ingreso del nombre.
 	#Query 02_User: Regresa todas las acciones del dia actual relacionadas con cierto usuario.
-	query = "SELECT E.Nombre, A.PrecioApertura, A.PrecioClausura, A.Pico, A.Depresion, A.Volumen, A.Volatilidad FROM Accion AS A INNER JOIN Empresa AS E ON A.ID_Empresa=E.ID_EMPRESA INNER JOIN PreferenciaGiro AS P ON P.ID_Giro=E.ID_Giro WHERE fecha = DATE(NOW()) AND P.Correo = '%s'" %usuario
+	query = "SELECT E.Nombre, A.PrecioApertura, A.PrecioClausura, A.ValorActual, A.Volumen, A.Volatilidad FROM Accion AS A INNER JOIN Empresa AS E ON A.ID_Empresa=E.ID_EMPRESA INNER JOIN PreferenciaGiro AS P ON P.ID_Giro=E.ID_Giro WHERE fecha = DATE(NOW()) AND P.Correo = '%s'" %usuario
 	#Se ejecuta el query disenado.
 	cursor.execute(query)
 
@@ -162,10 +159,9 @@ def q04(usuario):
 			d['Empresa'] = row[0]
 			d['PrecioApertura'] = float(row[1])
 			d['PrecioClausura'] = float(row[2])
-			d['Pico'] = float(row[3])
-			d['Depresion'] = float(row[4])
-			d['Volumen'] = int(row[5])
-			d['Volatilidad'] = int(row[6])
+			d['ValorActual'] = float(row[3])
+			d['Volumen'] = int(row[4])
+			d['Volatilidad'] = int(row[5])
 			objects_list.append(d)
 		#Convierte a JSON los diccionarios.
 		jsonResult = json.dumps(objects_list)
@@ -191,7 +187,7 @@ def q05(empresa, inicio, final):
 	cursor = conn.cursor()
 	#Query 04: Regresa todas las acciones de la empresa indicada dentro de un rango de fechas.
 	#En este caso recupera las de Apple, pero hay que cambiar ese campo cada vez que se quieran buscar acciones de cierta empresa.
-	query = "SELECT E.Nombre, A.PrecioApertura, A.PrecioClausura, A.Pico, A.Depresion, A.Volumen, A.Volatilidad FROM Accion AS A INNER JOIN Empresa AS E ON A.ID_Empresa=E.ID_EMPRESA WHERE fecha BETWEEN '%s' AND '%s' AND E.Nombre = '%s'" %(inicio, final, empresa)
+	query = "SELECT E.Nombre, A.PrecioApertura, A.PrecioClausura, A.ValorActual, A.Volumen, A.Volatilidad FROM Accion AS A INNER JOIN Empresa AS E ON A.ID_Empresa=E.ID_EMPRESA WHERE fecha BETWEEN '%s' AND '%s' AND E.Nombre = '%s'" %(inicio, final, empresa)
 	#Se ejecuta el query disenado.
 	cursor.execute(query)
 
@@ -205,10 +201,9 @@ def q05(empresa, inicio, final):
 			d['Empresa'] = row[0]
 			d['PrecioApertura'] = float(row[1])
 			d['PrecioClausura'] = float(row[2])
-			d['Pico'] = float(row[3])
-			d['Depresion'] = float(row[4])
-			d['Volumen'] = int(row[5])
-			d['Volatilidad'] = int(row[6])
+			d['ValorActual'] = float(row[3])
+			d['Volumen'] = int(row[4])
+			d['Volatilidad'] = int(row[5])
 			objects_list.append(d)
 		#Convierte a JSON los diccionarios.
 		jsonResult = json.dumps(objects_list)

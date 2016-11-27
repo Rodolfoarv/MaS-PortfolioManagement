@@ -54,8 +54,8 @@ CREATE TABLE IF NOT EXISTS `PortafolioInversiones`.`Empresa` (
   CONSTRAINT `fk_Empresa_Giro`
     FOREIGN KEY (`ID_Giro`)
     REFERENCES `PortafolioInversiones`.`Giro` (`ID_Giro`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
@@ -69,13 +69,13 @@ CREATE TABLE IF NOT EXISTS `PortafolioInversiones`.`PreferenciaEmpresa` (
   CONSTRAINT `fk_Usuario_Empresa`
     FOREIGN KEY (`Correo`)
     REFERENCES `PortafolioInversiones`.`Usuario` (`Correo`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
   CONSTRAINT `fk_Empresa_Usuario`
     FOREIGN KEY (`ID_Empresa`)
     REFERENCES `PortafolioInversiones`.`Empresa` (`ID_Empresa`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
@@ -89,13 +89,13 @@ CREATE TABLE IF NOT EXISTS `PortafolioInversiones`.`PreferenciaGiro` (
   CONSTRAINT `fk_Usuario_Giro`
     FOREIGN KEY (`Correo`)
     REFERENCES `PortafolioInversiones`.`Usuario` (`Correo`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
   CONSTRAINT `fk_Giro_Usuario`
     FOREIGN KEY (`ID_Giro`)
     REFERENCES `PortafolioInversiones`.`Giro` (`ID_Giro`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
@@ -107,16 +107,15 @@ CREATE TABLE IF NOT EXISTS `PortafolioInversiones`.`Accion` (
   `ID_Empresa` INT(50) NOT NULL,
   `PrecioApertura` DECIMAL(65,5) NULL,
   `PrecioClausura` DECIMAL(65,5) NULL,
-  `Pico` DECIMAL(65,5) NULL,
-  `Depresion` DECIMAL(65,5) NULL,
+  `ValorActual` DECIMAL(65,5) NULL,
   `Volumen` INT(50) NULL,
   `Volatilidad` INT(20) NULL,
   PRIMARY KEY (`Fecha`, `ID_Empresa`),
   CONSTRAINT `fk_Accion_Empresa`
     FOREIGN KEY (`ID_Empresa`)
     REFERENCES `PortafolioInversiones`.`Empresa` (`ID_Empresa`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
@@ -134,13 +133,13 @@ CREATE TABLE IF NOT EXISTS `PortafolioInversiones`.`Inversion` (
   CONSTRAINT `fk_Empresa_Inversion`
     FOREIGN KEY (`ID_Empresa`)
     REFERENCES `PortafolioInversiones`.`Empresa` (`ID_Empresa`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
   CONSTRAINT `fk_Usuario_Inversion`
     FOREIGN KEY (`Correo`)
     REFERENCES `PortafolioInversiones`.`Usuario` (`Correo`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
