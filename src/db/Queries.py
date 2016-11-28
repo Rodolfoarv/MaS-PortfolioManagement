@@ -279,9 +279,8 @@ def q07(volumen, empresa):
 	    #Cierra la conexion.
 	    conn.close()
 	    #Muestra lo obtenido.
-	    print "Actualizacion del volumen exitosa."
 
-#q08: Actualiza el valor actual de una accion. 
+#q08: Actualiza el valor actual de una accion.
 def q08(valorActual, empresa):
 	try:
 	    #Conecta a la base de datos.
@@ -301,17 +300,16 @@ def q08(valorActual, empresa):
 	    #Cierra la conexion.
 	    conn.close()
 	    #Muestra lo obtenido.
-	    print "Actualizacion del valor actual exitosa."
 
-#q09: Regresa el número de estrategia de la inversion para cierta empresa de un usuario 
-def q09(empresa,usuario):
+#q09: Regresa el número de estrategia de la inversion para cierta empresa de un usuario
+def q09(empresa):
 	#Conecta a la base de datos.
 	conn = MySQLdb.Connect(host = db_host, port = db_port, user = db_usuario, passwd = db_password, db = base_de_datos)
 	#Crea un cursor.
 	cursor = conn.cursor()
 	#Ingreso del nombre.
 	#Query 03_User: Regresa los giros de interés para un usuario.
-	query = "SELECT E.Nombre, I.EstrategiaInversion FROM Inversion AS I INNER JOIN Empresa AS E ON I.ID_Empresa = E.ID_EMPRESA WHERE E.Nombre = '%s' AND I.Correo = '%s'" %(empresa,usuario)
+	query = "SELECT I.EstrategiaInversion FROM Inversion AS I INNER JOIN Empresa AS E ON I.ID_Empresa = E.ID_EMPRESA WHERE E.Nombre = '%s' AND I.Correo = '%s'" %(empresa,"aers@gmail.com")
 	print query
 	#Se ejecuta el query disenado.
 	cursor.execute(query)
@@ -323,8 +321,7 @@ def q09(empresa,usuario):
 		#Crea un diccionario por cada registro devuelto del query.
 		for row in rows:
 			d = collections.OrderedDict()
-			d['Empresa'] = row[0]
-			d['EstrategiaInversion'] = int(row[1])
+			d['EstrategiaInversion'] = int(row[0])
 
 			objects_list.append(d)
 		#Convierte a JSON los diccionarios.
@@ -457,4 +454,4 @@ def q05_User(correo, giro):
 
 
 #print q05("Apple", "2016-10-09", "2016-10-10")
-#print q09("Apple", "aers@gmail.com")
+print q09("Apple")
