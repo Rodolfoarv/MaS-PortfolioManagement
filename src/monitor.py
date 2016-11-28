@@ -120,6 +120,7 @@ class Monitor(spade.Agent.Agent):
     class MonitorAbnormalTradingVolumeBehav(spade.Behaviour.Behaviour):
         '''Monitoring abnormal trading volume '''
         def _process(self):
+            print "Is this working?"
             user_stocks = q01()
             for stock in user_stocks:
                 enterprise = stock['Empresa']
@@ -151,7 +152,7 @@ class Monitor(spade.Agent.Agent):
                     currentVolume = currentVolume + random.randint(-20,40)
 
                 print "The current volume for %s is: %d" %(enterprise,currentVolume)
-                q09(currentVolume, enterprise)
+                q07(currentVolume, enterprise)
 
     class MonitorAbnormalTechnicalIndicator(spade.Behaviour.Behaviour):
         '''Monitoring abnormal technical indicator's status'''
