@@ -85,7 +85,7 @@ class Monitor(spade.Agent.Agent):
                 time.sleep(2)
                 lastPrice = currentPrice
                 randomPriceFluctuation = random.randint(-1000,1000)
-                if randomPriceFluctuation > 900 or randomPriceFluctuation < -900:
+                if randomPriceFluctuation > 950 or randomPriceFluctuation < -950:
                     currentPrice = currentPrice + randomPriceFluctuation
                     changePercentage = (currentPrice - lastPrice) / 100
                     print "******** Sending information to coordinator Abnormal Fluctuation detected!!!! ********"
@@ -120,7 +120,6 @@ class Monitor(spade.Agent.Agent):
     class MonitorAbnormalTradingVolumeBehav(spade.Behaviour.Behaviour):
         '''Monitoring abnormal trading volume '''
         def _process(self):
-            print "Is this working?"
             user_stocks = q01()
             for stock in user_stocks:
                 enterprise = stock['Empresa']
@@ -136,9 +135,9 @@ class Monitor(spade.Agent.Agent):
                 currentVolume = volumen
                 time.sleep(2)
                 lastVolume = currentVolume
-                randomPriceFluctuation = random.randint(-1000,1000)
-                if randomPriceFluctuation > 500 or randomPriceFluctuation < -500:
-                    currentVolume = currentVolume + randomPriceFluctuation
+                randomVolumeFluctuation = random.randint(-100000,100000)
+                if randomVolumeFluctuation > 95000 or randomVolumeFluctuation < -95000:
+                    currentVolume = currentVolume + randomVolumeFluctuation
                     print "*********** Sending information to coordinator Abnormal Volume detected!!!! ***********"
                     content = {
                         'Enterprise' : enterprise,
