@@ -26,6 +26,13 @@ class Profiler(spade.Agent.Agent):
         mt = spade.Behaviour.MessageTemplate(template)
         self.addBehaviour(self.ProfilerBehav(),mt)
 
+        # Watch for events
+
+        template.setPerformative("inform")
+        template.setConversationId("Event")
+        mt = spade.Behaviour.MessageTemplate(template)
+        self.addBehaviour(self.EventBehav(),mt)
+
         print "\n\n*********** Profiler Agent has Started\n\n"
 
 
@@ -178,6 +185,12 @@ class Profiler(spade.Agent.Agent):
             self.msg = self._receive(True)
             print self.msg.getContent()
             self.menu(usuario)
+#------------------------------------------------------------> Event Behaviour <--------------------------------------------------------------#
+
+    class EventBehav(spade.Behaviour.Behaviour):
+        def _process(self):
+            self.msg = self._receive(True)
+            print self.msg.getContent()
 
 
 
