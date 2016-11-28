@@ -340,7 +340,6 @@ def q09(empresa):
 	jsonResult = json.loads(jsonResult)
 	return jsonResult
 
-#Q02_User: Regresa todas las acciones del dia actual relacionadas con las inversiones del usuario.
 def q10(usuario):
 	#Conecta a la base de datos.
 	conn = MySQLdb.Connect(host = db_host, port = db_port, user = db_usuario, passwd = db_password, db = base_de_datos)
@@ -348,7 +347,7 @@ def q10(usuario):
 	cursor = conn.cursor()
 	#Ingreso del nombre.
 	#Query 02_User: Regresa todas las acciones del dia actual relacionadas con cierto usuario.
-	query = "SELECT E.Nombre, A.PrecioApertura, A.PrecioClausura, A.ValorActual, A.Volumen, A.Volatilidad FROM Accion AS A INNER JOIN Empresa AS E ON A.ID_Empresa=E.ID_EMPRESA INNER JOIN Inversion AS I ON I.ID_Empresa=E.ID_Empresa WHERE fecha = DATE(NOW()) AND P.Correo = '%s'" %usuario
+	query = "SELECT E.Nombre, A.PrecioApertura, A.PrecioClausura, A.ValorActual, A.Volumen, A.Volatilidad FROM Accion AS A INNER JOIN Empresa AS E ON A.ID_Empresa=E.ID_Empresa INNER JOIN Inversion AS I ON E.ID_Empresa=I.ID_Empresa WHERE A.Fecha = DATE(NOW()) AND I.Correo = '%s'" %usuario
 	#Se ejecuta el query disenado.
 	cursor.execute(query)
 
@@ -359,12 +358,12 @@ def q10(usuario):
 		#Crea un diccionario por cada registro devuelto del query.
 		for row in rows:
 			d = collections.OrderedDict()
-			d['Empresa'] = row[0]
-			d['PrecioApertura'] = float(row[1])
-			d['PrecioClausura'] = float(row[2])
-			d['ValorActual'] = float(row[3])
-			d['Volumen'] = int(row[4])
-			d['Volatilidad'] = int(row[5])
+			d['Empresa'] = str(row[0])
+			d['PrecioApertura'] = str(row[1])
+			d['PrecioClausura'] = str(row[2])
+			d['ValorActual'] = str(row[3])
+			d['Volumen'] = str(row[4])
+			d['Volatilidad'] = str(row[5])
 			objects_list.append(d)
 		#Convierte a JSON los diccionarios.
 		jsonResult = json.dumps(objects_list)
@@ -382,7 +381,6 @@ def q10(usuario):
 	jsonResult = json.loads(jsonResult)
 	return jsonResult
 
-#Q02_User: Regresa todas las acciones del dia actual relacionadas con las inversiones del usuario.
 def q11(usuario):
 	#Conecta a la base de datos.
 	conn = MySQLdb.Connect(host = db_host, port = db_port, user = db_usuario, passwd = db_password, db = base_de_datos)
@@ -390,7 +388,7 @@ def q11(usuario):
 	cursor = conn.cursor()
 	#Ingreso del nombre.
 	#Query 02_User: Regresa todas las acciones del dia actual relacionadas con cierto usuario.
-	query = "SELECT E.nombre, I.fecha, I.capitalInvertido, I.ToleranciaRiesgo, I.EstrategiaInversion FROM Inversion AS I INNER JOIN Empresa AS E ON I.ID_Empresa=E.ID_EMPRESA WHERE I.Correo = '%s'" %usuario
+	query = "SELECT E.Nombre, I.Fecha, I.CapitalInvertido, I.ToleranciaRiesgo, I.EstrategiaInversion FROM Inversion AS I INNER JOIN Empresa AS E ON I.ID_Empresa=E.ID_EMPRESA WHERE I.Correo = '%s'" %usuario
 	#Se ejecuta el query disenado.
 	cursor.execute(query)
 
@@ -402,7 +400,7 @@ def q11(usuario):
 		for row in rows:
 			d = collections.OrderedDict()
 			d['Empresa'] = row[0]
-			d['Fecha'] = row[1]
+			d['Fecha'] = str(row[1])
 			d['Capital Invertido'] = float(row[2])
 			d['Tolerancia Riesgo'] = float(row[3])
 			d['Estrategia'] = int(row[4])
