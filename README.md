@@ -41,7 +41,7 @@
 - Reminder of stop loss level for a certain stoock. The monitor agent will calculate and remove the money from the investment
 
 - Buying Rules
-  - New agent: Decision Making Agent, make decisions with the stocks
+  - New agent: Decision Making Agent, make decisions with the stocks  
 
 ## License
 

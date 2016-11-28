@@ -39,7 +39,7 @@ class Monitor(spade.Agent.Agent):
         mt = spade.Behaviour.MessageTemplate(template)
         self.addBehaviour(self.MonitorPriceFluctuationBehav(),mt)
         self.addBehaviour(self.MonitorAbnormalTradingVolumeBehav(),mt)
-        self.addBehaviour(self.MonitorAbnormalTechnicalIndicator(),mt)
+        # self.addBehaviour(self.MonitorAbnormalTechnicalIndicator(),mt)
         print "\n\n*********** Monitor Agent has Started\n\n"
 
 

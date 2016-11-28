@@ -116,10 +116,6 @@ class DecisionMaking(spade.Agent.Agent):
                     self.strategy2(enterprise,historic_prices[enterprise])
 
 
-
-
-
-
 if __name__ == "__main__":
 	decision_making = DecisionMaking("decision_making@"+HOST,"secret")
 	decision_making.start()
