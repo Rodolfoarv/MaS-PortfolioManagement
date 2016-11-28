@@ -13,7 +13,7 @@ import spade
 import random
 import json
 
-from db.Queries import q01,q03,q04,q06
+from db.Queries import q01,q03,q04,q06,q09
 
 
 HOST = "127.0.0.1"
@@ -77,16 +77,16 @@ class DecisionMaking(spade.Agent.Agent):
                     content = "You should sell the auction %s due to the Strategy #2: The value of the stock went up 5 times" %(enterprise)
                     self.myAgent.sendToCoordinator("inform", "Decision", content )
 
-        def strategy3(self,enterprise,historic_prices):
+        def strategy3(self,enterprise,historic_volumes):
             """If the value of an auction volume has an abnormal positive change, then buy"""
-            subArray = historic_prices[0:2]
+            subArray = historic_volumes[0:2]
             if (subArray[0] - subArray[1]) > 5000:
                 content = "You should buy the auction %s due to the Strategy #3: The volume of the auction has changed" %(enterprise)
                 self.myAgent.sendToCoordinator("inform", "Decision", content )
 
-        def strategy4(self,enterprise,historic_prices):
+        def strategy4(self,enterprise,historic_volumes):
             """If the value of an auction volume has an abnormal negative change, then sell"""
-            subArray = historic_prices[0:2]
+            subArray = historic_volumes[0:2]
             if (subArray[0] - subArray[1]) < -1000:
                 content = "You should sell the auction %s due to the Strategy #4: The volume of the auction has changed" %(enterprise)
                 self.myAgent.sendToCoordinator("inform", "Decision", content )
@@ -104,16 +104,27 @@ class DecisionMaking(spade.Agent.Agent):
                     historic_volumes[enterprise] = []
                 historic_prices[enterprise].insert(0,stock['ValorActual'])
                 historic_volumes[enterprise].insert(0,stock['Volumen'])
-                currentPrice = 0
-                lastPrice = 0
-                print historic_volumes
+
+                #What strategy for this stock?
+                strategy = q09(enterprise)
+                print strategy
 
                 # Strategy 1, If the value of my auction goes up 2 times
-                if len(historic_prices[enterprise]) > 2:
-                    self.strategy1(enterprise,historic_prices[enterprise])
-
-                if len(historic_prices[enterprise]) > 5:
-                    self.strategy2(enterprise,historic_prices[enterprise])
+                if strategy == 1:
+                    if len(historic_prices[enterprise]) > 2:
+                        self.strategy1(enterprise,historic_prices[enterprise])
+                #Strategy 2, If the value of the auction goes down 5 times
+                elif strategy == 2:
+                    if len(historic_prices[enterprise]) > 5:
+                        self.strategy2(enterprise,historic_prices[enterprise])
+                elif strategy == 3:
+                #Strategy 3, If the value of an auction volume has an abnormal positive change, then buy
+                    if len(historic_volumes[enterprise]) > 2:
+                        self.strategy2(enterprise,historic_volumes[enterprise])
+                elif strategy == 4:
+                #Strategy 4 If the value of an auction volume has an abnormal negative change, then sell
+                    if len(historic_volumes[enterprise]) > 2:
+                        self.strategy2(enterprise,historic_volumes[enterprise])
 
 
 if __name__ == "__main__":
