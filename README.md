@@ -42,10 +42,6 @@
 - Steeven Muñoz
 - Iván Díaz
 
-#TODO
-
-- Integrate the queries from profiler to coordinator
-
 ## License
 
 See [LICENSE] (https://github.com/Rodolfoarv/Evil-Hangman/blob/master/LICENSE)
