@@ -129,6 +129,7 @@ CREATE TABLE IF NOT EXISTS `PortafolioInversiones`.`Inversion` (
   `ID_Empresa` INT(50) NOT NULL,
   `CapitalInvertido` DECIMAL(65,5) NOT NULL,
   `ToleranciaRiesgo` DECIMAL(65,4) NOT NULL,
+  `EstrategiaInversion` INT(50) NOT NULL,
   PRIMARY KEY (`ID_Inversion`),
   CONSTRAINT `fk_Empresa_Inversion`
     FOREIGN KEY (`ID_Empresa`)
