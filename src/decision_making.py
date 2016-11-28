@@ -65,7 +65,17 @@ class DecisionMaking(spade.Agent.Agent):
                     content = "You should sell the auction %s due to the Strategy #1: If it goes up 2 times then sell" %(enterprise)
                     self.myAgent.sendToCoordinator("inform", "Decision", content )
 
-
+        def strategy2(self,enterprise,historic_prices):
+            """The value of the stock goes down 5 times in row"""
+            subArray = historic_prices[0:6]
+            length = len(subArray)
+            for i in range(length):
+                if subArray[0] < subArray[1] and subArray[1] < subArray[2]
+                and subArray[2] < subArray[3] and subArray[3] < subArray[4]
+                and subArray[4] < subArray[5]:
+                    print "Is it going to ever happen"
+                    content = "You should sell the auction %s due to the Strategy #1: If it goes up 2 times then sell" %(enterprise)
+                    self.myAgent.sendToCoordinator("inform", "Decision", content )
 
 
         def _process(self):
