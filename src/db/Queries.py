@@ -10,7 +10,7 @@ import collections
 db_host = '127.0.0.1'
 db_port = 3306
 db_usuario = 'root'
-db_password = 'passcode'
+db_password = '1'
 base_de_datos = 'PortafolioInversiones'
 
 #Q01: Regresa todas las acciones del dia actual.
