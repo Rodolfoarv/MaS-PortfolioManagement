@@ -20,9 +20,16 @@
     mysql -u root -p < dummyData.sql
 
 
-    #Execute in another terminal the agents
+    #Execute in a terminal each of the following agents
 
-    python <agent>.py
+    python coordinator.py
+    python technical_analysis.py
+    python monitor.py
+    python decision_making.py
+    python profiler.py
+
+    #You will be requested to create a user or you can use the default user
+      - user: aers@gmail.com password: IBM
 
 ## Diagrams
 
