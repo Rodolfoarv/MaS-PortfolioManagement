@@ -123,7 +123,7 @@ ENGINE = InnoDB;
 -- Table `PortafolioInversiones`.`Inversion`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `PortafolioInversiones`.`Inversion` (
-  `ID_Inversion` INT(150) NOT NULL,
+  `ID_Inversion` INT(150) NOT NULL AUTO_INCREMENT,
   `Correo` VARCHAR(255) NOT NULL,
   `Fecha` DATE NULL,
   `ID_Empresa` INT(50) NOT NULL,
