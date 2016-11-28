@@ -310,7 +310,6 @@ def q09(empresa):
 	#Ingreso del nombre.
 	#Query 03_User: Regresa los giros de interés para un usuario.
 	query = "SELECT I.EstrategiaInversion FROM Inversion AS I INNER JOIN Empresa AS E ON I.ID_Empresa = E.ID_EMPRESA WHERE E.Nombre = '%s' AND I.Correo = '%s'" %(empresa,"aers@gmail.com")
-	print query
 	#Se ejecuta el query disenado.
 	cursor.execute(query)
 
@@ -532,7 +531,7 @@ def q05_User(correo, giro):
 		#Cierra la conexion.
 		conn.close()
 		return 1
-	
+
 def q06_User(empresa):
 	try:
 		#Conecta a la base de datos.
@@ -558,4 +557,4 @@ def q06_User(empresa):
 
 
 #print q05("Apple", "2016-10-09", "2016-10-10")
-#print q09("Apple")
+# print q09("Apple")

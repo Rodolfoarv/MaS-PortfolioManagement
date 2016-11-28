@@ -95,7 +95,7 @@ class DecisionMaking(spade.Agent.Agent):
 
         def _process(self):
             #Wait for a message from the monitor agent
-            time.sleep(1)
+            time.sleep(3)
 
             for stock in q01():
                 enterprise = stock['Empresa']
@@ -107,7 +107,6 @@ class DecisionMaking(spade.Agent.Agent):
 
                 #What strategy for this stock?
                 strategy = q09(enterprise)
-                print strategy
 
                 # Strategy 1, If the value of my auction goes up 2 times
                 if strategy == 1:
@@ -125,7 +124,8 @@ class DecisionMaking(spade.Agent.Agent):
                 #Strategy 4 If the value of an auction volume has an abnormal negative change, then sell
                     if len(historic_volumes[enterprise]) > 2:
                         self.strategy2(enterprise,historic_volumes[enterprise])
-
+                print "Watching stock %s with strategy %d NO CHANGES" %(enterprise, strategy[0]['EstrategiaInversion'])
+            print "\n\n"
 
 if __name__ == "__main__":
 	decision_making = DecisionMaking("decision_making@"+HOST,"secret")
