@@ -343,6 +343,118 @@ def q09(empresa,usuario):
 	jsonResult = json.loads(jsonResult)
 	return jsonResult
 
+#Querys Usuario - Interfaz
+def q01_User(correo, passwd):
+	try:
+	    #Conecta a la base de datos.
+	    conn = MySQLdb.Connect(host = db_host, port = db_port, user = db_usuario, passwd = db_password, db = base_de_datos)
+	    #Crea un cursor.
+	    cursor = conn.cursor()
+	    #Query 01: Regresa el nombre del usuario.
+	    query = "SELECT u.correo FROM Usuario AS u WHERE Correo = '%s' and Passwrd = '%s'" %(correo, passwd)
+	    #Se ejecuta el query disenado.
+	    cursor.execute(query)
+	    #Lectura y manipulacion de datos.
+	    row = cursor.fetchone()
+	    user = ''.join(row[0])
+	except Exception, e:
+		print str(e)
+		return 0
+	else:
+		#Cierra el cursor.
+		cursor.close()
+		#Cierra la conexion.
+		conn.close()
+		return correo
+
+def q02_User(correo, nombre, apellidoP, apellidoM, fechaNac, passwd, capitalN):
+	try:
+		#Conecta a la base de datos.
+		conn = MySQLdb.Connect(host = db_host, port = db_port, user = db_usuario, passwd = db_password, db = base_de_datos)
+		#Crea un cursor.
+		cursor = conn.cursor()
+		#Query 02: Ingresa al usuario.
+		query = "INSERT INTO Usuario (Correo, Nombre, ApellidoPaterno, ApellidoMaterno, FechaNacimiento, Passwrd, Capital) VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%f')" %(correo, nombre, apellidoP, apellidoM, fechaNac, passwd, capitalN)
+		#Se ejecuta el query disenado.
+		cursor.execute(query)
+	except Exception, e:
+		print str(e)
+		return 0
+	else:
+		#Usarse en caso de escritura.
+		conn.commit()
+		#Cierra el cursor.
+		cursor.close()
+		#Cierra la conexion.
+		conn.close()
+		return correo
+
+def q03_User(correo, fecha, empresa, capital, riesgo, estrategia):
+	try:
+		#Conecta a la base de datos.
+		conn = MySQLdb.Connect(host = db_host, port = db_port, user = db_usuario, passwd = db_password, db = base_de_datos)
+		#Crea un cursor.
+		cursor = conn.cursor()
+		#Query 02: Ingresa al usuario.
+		query = "INSERT INTO Inversion(Correo, Fecha, ID_Empresa, CapitalInvertido, ToleranciaRiesgo, EstrategiaInversion) VALUES ('%s', '%s', '%d', '%f', '%f', '%d')" %(correo, fecha, empresa, capital, riesgo, estrategia)
+		#Se ejecuta el query disenado.
+		cursor.execute(query)
+	except Exception, e:
+		print str(e)
+		return 0
+	else:
+		#Usarse en caso de escritura.
+		conn.commit()
+		#Cierra el cursor.
+		cursor.close()
+		#Cierra la conexion.
+		conn.close()
+		return 1
+
+def q04_User(correo, empresa):
+	try:
+		#Conecta a la base de datos.
+		conn = MySQLdb.Connect(host = db_host, port = db_port, user = db_usuario, passwd = db_password, db = base_de_datos)
+		#Crea un cursor.
+		cursor = conn.cursor()
+		#Query 02: Ingresa al usuario.
+		query = "INSERT INTO PreferenciaEmpresa(Correo, ID_Empresa) VALUES ('%s', '%d')" %(correo, empresa)
+		#Se ejecuta el query disenado.
+		cursor.execute(query)
+	except Exception, e:
+		print str(e)
+		return 0
+	else:
+		#Usarse en caso de escritura.
+		conn.commit()
+		#Cierra el cursor.
+		cursor.close()
+		#Cierra la conexion.
+		conn.close()
+		return 1
+
+def q05_User(correo, giro):
+	try:
+		#Conecta a la base de datos.
+		conn = MySQLdb.Connect(host = db_host, port = db_port, user = db_usuario, passwd = db_password, db = base_de_datos)
+		#Crea un cursor.
+		cursor = conn.cursor()
+		#Query 02: Ingresa al usuario.
+		query = "INSERT INTO PreferenciaGiro(Correo, ID_Giro) VALUES ('%s', '%d')" %(correo, giro)
+		#Se ejecuta el query disenado.
+		cursor.execute(query)
+	except Exception, e:
+		print str(e)
+		return 0
+	else:
+		#Usarse en caso de escritura.
+		conn.commit()
+		#Cierra el cursor.
+		cursor.close()
+		#Cierra la conexion.
+		conn.close()
+		return 1
+
 
 #print q05("Apple", "2016-10-09", "2016-10-10")
 #print q09("Apple", "aers@gmail.com")
