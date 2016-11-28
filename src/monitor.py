@@ -17,7 +17,7 @@ import random
 import json
 from datetime import datetime
 
-from db.Queries import q01,q03,q04,q06
+from db.Queries import q01,q03,q04,q06,q07,q08
 
 
 HOST = "127.0.0.1"
@@ -81,6 +81,7 @@ class Monitor(spade.Agent.Agent):
                 valor_actual = stock['ValorActual']
                 precio_clausura = stock['PrecioClausura']
                 currentPrice = valor_actual
+
                 time.sleep(2)
                 lastPrice = currentPrice
                 randomPriceFluctuation = random.randint(-1000,1000)
@@ -106,8 +107,12 @@ class Monitor(spade.Agent.Agent):
                         'currentPrice': currentPrice,
                         'changePercentage': changePercentage,
                     }
+                #Update the database with the new values
+                q08(currentPrice, enterprise)
                 print "The current price for %s is: %f" %(enterprise,currentPrice)
                 self.myAgent.sendToAgent("risk", "inform", "Monitor", content)
+                self.myAgent.sendToAgent("decision_making", "inform", "Monitor", content)
+
 
 
 
@@ -144,7 +149,9 @@ class Monitor(spade.Agent.Agent):
                     break
                 else:
                     currentVolume = currentVolume + random.randint(-20,40)
-                    print "The current volume for %s is: %d" %(enterprise,currentVolume)
+
+                print "The current volume for %s is: %d" %(enterprise,currentVolume)
+                q09(currentVolume, enterprise)
 
     class MonitorAbnormalTechnicalIndicator(spade.Behaviour.Behaviour):
         '''Monitoring abnormal technical indicator's status'''
