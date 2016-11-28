@@ -166,8 +166,9 @@ class Profiler(spade.Agent.Agent):
             print " "
 
             if opcion == "1":
-                print "1"
-                #Invocar el query 01. -> No hay parametros.
+                self.myAgent.sendToCoordinator("request", "TechnicalAnalysis", "q01" )
+                self.msg = self._receive(True)
+                print self.msg.getContent()
             elif opcion == "2":
                 print "Empresa: "
             	print "1) Microsoft"
