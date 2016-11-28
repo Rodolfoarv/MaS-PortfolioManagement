@@ -32,16 +32,12 @@
 
 - Rodolfo Andrés Ramírez Valenzuela
 - Roberto Pliego Torres
-- Iván Díaz Sánchez
 - Steeven Muñoz
+- Iván Díaz
 
 #TODO
 
-- Add in the monitor agent the insert operation for every stock
-- Reminder of stop loss level for a certain stoock. The monitor agent will calculate and remove the money from the investment
-
-- Buying Rules
-  - New agent: Decision Making Agent, make decisions with the stocks  
+- Integrate the queries from profiler to coordinator
 
 ## License
 
