@@ -17,6 +17,7 @@ from db.Queries import q01,q03,q04,q06
 
 
 HOST = "127.0.0.1"
+historic_prices = {}
 
 class DecisionMaking(spade.Agent.Agent):
     '''The decision making agent is in charge
@@ -29,9 +30,15 @@ class DecisionMaking(spade.Agent.Agent):
         template = spade.Behaviour.ACLTemplate()
         template.setOntology("MaS")
         template.setPerformative("inform")
-        template.setConversationId("Monitor")
+        template.setConversationId("Decision")
         mt = spade.Behaviour.MessageTemplate(template)
-        self.addBehaviour(self.SellingRuleBehav(),mt)
+        self.addBehaviour(self.DecisionBehav(),mt)
+
+        for stock in q01():
+            enterprise = stock['Empresa']
+            historic_prices[enterprise] = []
+            historic_prices[enterprise].append(stock['ValorActual'])
+
         print "\n\n*********** Decision Making Agent has Started\n\n"
 
 
@@ -47,12 +54,36 @@ class DecisionMaking(spade.Agent.Agent):
         print "Sending....."
         self.send(msg)
 
-    class SellingRuleBehav(spade.Behaviour.Behaviour):
+    class DecisionBehav(spade.Behaviour.Behaviour):
+        def strategy1(self,enterprise, historic_prices ):
+            """The value of the stock goes up 2 times then report to sell"""
+            subArray = historic_prices[0:3]
+            length = len(subArray)
+            for i in range(length):
+                if subArray[0] > subArray[1] and subArray[1] > subArray[2]:
+                    print "Is it going to ever happen"
+                    content = "You should sell the auction %s due to the Strategy #1: If it goes up 2 times then sell" %(enterprise)
+                    self.myAgent.sendToCoordinator("inform", "Decision", content )
+
+
+
+
         def _process(self):
             #Wait for a message from the monitor agent
-            self.msg = self._receive(True)
-            print str(self.msg.getContent())
+            time.sleep(1)
 
+            for stock in q01():
+                enterprise = stock['Empresa']
+                if len(historic_prices[enterprise]) > 10:
+                    historic_prices[enterprise] = []
+                historic_prices[enterprise].insert(0,stock['ValorActual'])
+                currentPrice = 0
+                lastPrice = 0
+                print historic_prices
+
+                # Strategy 1, If the value of my auction goes up 2 times
+                if len(historic_prices[enterprise]) > 2:
+                    self.strategy1(enterprise,historic_prices[enterprise])
 
 
 
