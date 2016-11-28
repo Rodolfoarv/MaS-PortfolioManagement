@@ -174,7 +174,7 @@ class Profiler(spade.Agent.Agent):
         		print "Opcion invalida."
 
         def query(self,usuario):
-            self.myAgent.sendToCoordinator("request", "TechnicalAnalysis", "q01" )
+            self.myAgent.sendToCoordinator("request", "TechnicalAnalysis", "q01 Apple" )
             self.msg = self._receive(True)
             print self.msg.getContent()
             self.menu(usuario)

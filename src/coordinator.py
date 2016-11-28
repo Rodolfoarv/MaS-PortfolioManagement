@@ -64,13 +64,17 @@ class Coordinator(spade.Agent.Agent):
         def _process(self):
             self.msg = self._receive(True)
             print self.msg.getContent()
-            self.q1()
-            print "Waiting for response"
-            self.msg = self._receive(True)
-            print "Coordinator agent has received the response"
-            print str(self.msg.getContent())
-            print "Sending to profiler"
-            self.myAgent.sendToAgent("profiler", "inform", "Profiler", self.msg.getContent())
+            content = self.msg.getContent()
+            content = content.split()
+            if content[0] == "q01":
+                print "Requesting the technical_analysis for Query 01"
+                self.q1()
+                print "Waiting for response"
+                self.msg = self._receive(True)
+                print "Coordinator agent has received the response"
+                print str(self.msg.getContent())
+                print "Sending to profiler"
+                self.myAgent.sendToAgent("profiler", "inform", "Profiler", self.msg.getContent())
 
         #Query all share’s quotation on the current day
         def q1(self):
