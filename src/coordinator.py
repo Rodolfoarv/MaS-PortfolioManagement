@@ -66,7 +66,7 @@ class Coordinator(spade.Agent.Agent):
             print self.msg.getContent()
             content = self.msg.getContent()
             content = content.split()
-            print "Requesting the technical_analysis for Query 01"
+            print "Requesting the technical_analysis for Query"
             self.queryRequest(self.msg.getContent())
             print "Waiting for response"
             self.msg = self._receive(True)

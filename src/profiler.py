@@ -180,16 +180,23 @@ class Profiler(spade.Agent.Agent):
                 nombreEmpresa = q06_User(opcionEmpresa)
                 #Invocar el query 02. -> Parametro = nombreEmpresa.
                 content = "q02 " + nombreEmpresa
-                print content
                 self.myAgent.sendToCoordinator("request", "TechnicalAnalysis", content )
                 self.msg = self._receive(True)
                 print self.msg.getContent()
             elif opcion == "3":
                 correo = usuario
                 #Invocar el query 10. -> Parametro = correo.
+                content = "q10 " + correo
+                self.myAgent.sendToCoordinator("request", "TechnicalAnalysis", content )
+                self.msg = self._receive(True)
+                print self.msg.getContent()
             elif opcion == "4":
                 correo = usuario
                 #Invocar el query 03. -> Parametro = correo.
+                content = "q03 " + correo
+                self.myAgent.sendToCoordinator("request", "TechnicalAnalysis", content )
+                self.msg = self._receive(True)
+                print self.msg.getContent()
             elif opcion == "5":
                 correo = usuario
                 #Invocar el query 04. -> Parametro = correo.

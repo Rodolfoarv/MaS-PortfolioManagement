@@ -6,7 +6,7 @@ Coordinator Agent description, receiver to their agents
 import spade
 import sys
 import time
-from db.Queries import q01,q02,q03,q04,q05,q06,q07
+from db.Queries import q01,q02,q03,q10
 
 HOST = "127.0.0.1"
 
@@ -45,14 +45,19 @@ class TechnicalAnalysis(spade.Agent.Agent):
             self.msg = self._receive(True)
             content = self.msg.getContent()
             content = content.split()
+            print "Sending back the results to the Coordinator agent"
+
             if content[0] == "q01":
-                print "Sending back the results to the Coordinator agent"
                 self.q1()
-            if content[0] == "q02":
-                print "Sending back the results to the Coordinator agent"
+            elif content[0] == "q02":
                 enterprise = content[1]
-                print enterprise
                 self.q2(enterprise)
+            elif content[0] == "q03":
+                email = content[1]
+                self.q3(email)
+            elif content[0] == "q10":
+                email = content[1]
+                self.q10(email)
 
         def q1(self):
             content = q01()
@@ -61,15 +66,16 @@ class TechnicalAnalysis(spade.Agent.Agent):
         #Query a given share’s quotation on the current day
         def q2(self, enterprise):
             ''' Query a given share's quotation on the current day '''
-            print enterprise
             content = q02(enterprise)
             print content
             self.myAgent.sendToCoordinator("request", "TechnicalAnalysis", content )
 
-        # Query a given share’s real-time trading chart
-        def q3(self):
-            '''Query a given share's real time trading chart'''
-            pass
+        # Query all stock from today's related with my preferneces
+        def q3(self,email):
+            '''Query all stock from today's related with my preferneces'''
+            content = q03(email)
+            print content
+            self.myAgent.sendToCoordinator("request", "TechnicalAnalysis", content )
 
         # Query a given share’s history price chart over a period
         def q4(self, enterprise, startDate, endDate):
@@ -92,6 +98,12 @@ class TechnicalAnalysis(spade.Agent.Agent):
         def q7(self):
             ''' Query the market statistic information over a period '''
             pass
+
+        def q10(self,email):
+            ''' Query all stocks I have inversions in '''
+            content = q10(email)
+            print content
+            self.myAgent.sendToCoordinator("request", "TechnicalAnalysis", content )
 
 
 
