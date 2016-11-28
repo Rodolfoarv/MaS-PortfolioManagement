@@ -37,12 +37,11 @@ class Coordinator(spade.Agent.Agent):
         mt = spade.Behaviour.MessageTemplate(template)
         self.addBehaviour(self.MonitorBehav(),mt)
 
-        # Add the monitor agent
+        # Add the decision agent
         template.setPerformative("inform")
         template.setConversationId("Decision")
         mt = spade.Behaviour.MessageTemplate(template)
         self.addBehaviour(self.DecisionBehav(),mt)
-
 
 
     def sendToAgent(self, agent, performative, conversationID, content):
@@ -63,11 +62,15 @@ class Coordinator(spade.Agent.Agent):
         a given share, a range between dates, etc '''
 
         def _process(self):
+            self.msg = self._receive(True)
+            print self.msg.getContent()
             self.q1()
             print "Waiting for response"
             self.msg = self._receive(True)
             print "Coordinator agent has received the response"
             print str(self.msg.getContent())
+            print "Sending to profiler"
+            self.myAgent.sendToAgent("profiler", "inform", "Profiler", self.msg.getContent())
 
         #Query all share’s quotation on the current day
         def q1(self):
@@ -77,6 +80,8 @@ class Coordinator(spade.Agent.Agent):
                 "Enterprise" : "Apple"
             }
             self.myAgent.sendToAgent("technical_analysis", "request", "TechnicalAnalysis", content)
+
+
 
         #Query a given share’s quotation on the current day
         def q2(self,enterpise):
@@ -127,6 +132,7 @@ class Coordinator(spade.Agent.Agent):
             print "Waiting for decision from the Decision Making agent"
             self.msg = self._receive(True)
             print str(self.msg.getContent())
+
 
 if __name__ == "__main__":
 	coordinator = Coordinator("coordinator@"+HOST,"secret")
