@@ -18,6 +18,7 @@ from db.Queries import q01,q03,q04,q06
 
 HOST = "127.0.0.1"
 historic_prices = {}
+historic_volumes = {}
 
 class DecisionMaking(spade.Agent.Agent):
     '''The decision making agent is in charge
@@ -37,7 +38,10 @@ class DecisionMaking(spade.Agent.Agent):
         for stock in q01():
             enterprise = stock['Empresa']
             historic_prices[enterprise] = []
+            historic_volumes[enterprise] = []
             historic_prices[enterprise].append(stock['ValorActual'])
+            historic_volumes[enterprise].append(stock['Volumen'])
+
 
         print "\n\n*********** Decision Making Agent has Started\n\n"
 
@@ -61,7 +65,6 @@ class DecisionMaking(spade.Agent.Agent):
             length = len(subArray)
             for i in range(length):
                 if subArray[0] > subArray[1] and subArray[1] > subArray[2]:
-                    print "Is it going to ever happen"
                     content = "You should sell the auction %s due to the Strategy #1: If it goes up 2 times then sell" %(enterprise)
                     self.myAgent.sendToCoordinator("inform", "Decision", content )
 
@@ -70,12 +73,19 @@ class DecisionMaking(spade.Agent.Agent):
             subArray = historic_prices[0:6]
             length = len(subArray)
             for i in range(length):
-                if subArray[0] < subArray[1] and subArray[1] < subArray[2]
-                and subArray[2] < subArray[3] and subArray[3] < subArray[4]
-                and subArray[4] < subArray[5]:
-                    print "Is it going to ever happen"
-                    content = "You should sell the auction %s due to the Strategy #1: If it goes up 2 times then sell" %(enterprise)
+                if subArray[0] < subArray[1] and subArray[1] < subArray[2] and subArray[2] < subArray[3] and subArray[3] < subArray[4] and subArray[4] < subArray[5]:
+                    content = "You should sell the auction %s due to the Strategy #2: The value of the stock went up 5 times" %(enterprise)
                     self.myAgent.sendToCoordinator("inform", "Decision", content )
+
+        def strategy3(self,enterprise,historic_prices):
+            """If the value of an auction volume has an abnormal positive change, then buy"""
+            subArray = historic_prices[0:2]
+            if (subArray[0] - subArray[1]) > 5000:
+                content = "You should buy the auction %s due to the Strategy #3: The volume of the auction has changed" %(enterprise)
+                self.myAgent.sendToCoordinator("inform", "Decision", content )
+
+
+
 
 
         def _process(self):
@@ -86,14 +96,20 @@ class DecisionMaking(spade.Agent.Agent):
                 enterprise = stock['Empresa']
                 if len(historic_prices[enterprise]) > 10:
                     historic_prices[enterprise] = []
+                    historic_volumes[enterprise] = []
                 historic_prices[enterprise].insert(0,stock['ValorActual'])
+                historic_volumes[enterprise].insert(0,stock['Volumen'])
                 currentPrice = 0
                 lastPrice = 0
-                print historic_prices
+                print historic_volumes
 
                 # Strategy 1, If the value of my auction goes up 2 times
                 if len(historic_prices[enterprise]) > 2:
                     self.strategy1(enterprise,historic_prices[enterprise])
+
+                if len(historic_prices[enterprise]) > 5:
+                    self.strategy2(enterprise,historic_prices[enterprise])
+
 
 
 
