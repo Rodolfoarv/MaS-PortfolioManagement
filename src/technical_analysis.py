@@ -6,7 +6,7 @@ Coordinator Agent description, receiver to their agents
 import spade
 import sys
 import time
-from db.Queries import q01,q02,q03,q10
+from db.Queries import q01,q02,q03,q04,q10,q11
 
 HOST = "127.0.0.1"
 
@@ -55,9 +55,20 @@ class TechnicalAnalysis(spade.Agent.Agent):
             elif content[0] == "q03":
                 email = content[1]
                 self.q3(email)
+            elif content[0] == "q04":
+                email = content[1]
+                self.q4(email)
+            elif content[0] == "q05":
+                enterprise = content[1]
+                startDate = content[2]
+                endDate = content[3]
+                self.q5(enterprise,startDate,endDate)
             elif content[0] == "q10":
                 email = content[1]
                 self.q10(email)
+            elif content[0] == "q11":
+                email = content[1]
+                self.q11(email)
 
         def q1(self):
             content = q01()
@@ -77,27 +88,19 @@ class TechnicalAnalysis(spade.Agent.Agent):
             print content
             self.myAgent.sendToCoordinator("request", "TechnicalAnalysis", content )
 
-        # Query a given share’s history price chart over a period
-        def q4(self, enterprise, startDate, endDate):
-            '''Query a given share's history price chart over a period'''
-            pass
+        #'''Query all stock from today's related with my enterprise preferences'''
+        def q4(self, email):
+            '''Query all stock from today's related with my enterprise preferneces'''
+            content = q04(email)
+            print content
+            self.myAgent.sendToCoordinator("request", "TechnicalAnalysis", content )
 
         # Query a given share's price and technical indicator chart over a period
-        def q5(self):
+        def q5(self,enterprise,startDate,endDate):
             ''' Query a given share's price and technical indicator chart over a period'''
             content = q05(enterprise,startDate,endDate)
+            print content
             self.myAgent.sendToCoordinator("request", "TechnicalAnalysis", content )
-            pass
-
-        # Query a given share’s fundamental analysis data
-        def q6(self):
-            ''' Query a given share's fundamental analysis data '''
-            pass
-
-        # Query the market statistic information over a period
-        def q7(self):
-            ''' Query the market statistic information over a period '''
-            pass
 
         def q10(self,email):
             ''' Query all stocks I have inversions in '''
@@ -105,10 +108,11 @@ class TechnicalAnalysis(spade.Agent.Agent):
             print content
             self.myAgent.sendToCoordinator("request", "TechnicalAnalysis", content )
 
-
-
-
-
+        def q11(self,email):
+            ''' Query all inversions '''
+            content = q11(email)
+            print content
+            self.myAgent.sendToCoordinator("request", "TechnicalAnalysis", content )
 
 if __name__ == "__main__":
 	technical_analysis = TechnicalAnalysis("technical_analysis@"+HOST,"secret")

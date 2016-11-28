@@ -85,17 +85,12 @@ class Monitor(spade.Agent.Agent):
                 time.sleep(2)
                 lastPrice = currentPrice
                 randomPriceFluctuation = random.randint(-1000,1000)
-                if randomPriceFluctuation > 950 or randomPriceFluctuation < -950:
+                if randomPriceFluctuation > 900 or randomPriceFluctuation < -900:
                     currentPrice = currentPrice + randomPriceFluctuation
                     changePercentage = (currentPrice - lastPrice) / 100
                     print "******** Sending information to coordinator Abnormal Fluctuation detected!!!! ********"
-                    content = {
-                        'Enterprise' : enterprise,
-                        'date' : date,
-                        'lastPrice': lastPrice,
-                        'currentPrice': currentPrice,
-                        'changePercentage': changePercentage,
-                    }
+                    content = "\n\n ************* ALERT Abnormal Price Flucutuation ************* \n The Enterprise %s last price was : %f and its current price is: %f the change percentage is %f\n" %(enterprise,lastPrice,currentPrice,changePercentage)
+                    print content
                     self.myAgent.sendToCoordinator("inform", "Monitor", content )
                 else:
                     currentPrice = currentPrice + random.uniform(-20.3,40.0)
@@ -110,11 +105,8 @@ class Monitor(spade.Agent.Agent):
                 #Update the database with the new values
                 q08(currentPrice, enterprise)
                 print "The current price for %s is: %f" %(enterprise,currentPrice)
-                self.myAgent.sendToAgent("risk", "inform", "Monitor", content)
-                self.myAgent.sendToAgent("decision_making", "inform", "Monitor", content)
-
-
-
+                # self.myAgent.sendToAgent("risk", "inform", "Monitor", content)
+                # self.myAgent.sendToAgent("decision_making", "inform", "Monitor", content)
 
 
     class MonitorAbnormalTradingVolumeBehav(spade.Behaviour.Behaviour):
@@ -136,29 +128,17 @@ class Monitor(spade.Agent.Agent):
                 time.sleep(2)
                 lastVolume = currentVolume
                 randomVolumeFluctuation = random.randint(-100000,100000)
-                if randomVolumeFluctuation > 95000 or randomVolumeFluctuation < -95000:
+                if randomVolumeFluctuation > 98000 or randomVolumeFluctuation < -98000:
                     currentVolume = currentVolume + randomVolumeFluctuation
                     print "*********** Sending information to coordinator Abnormal Volume detected!!!! ***********"
-                    content = {
-                        'Enterprise' : enterprise,
-                        'date' : date,
-                        'lastVolume': lastVolume,
-                        'currentVolume': currentVolume,
-                    }
+                    content = "\n\n ************* ALERT Abnormal Volume Flucutuation ************* \n The Enterprise %s last volume was : %f and its current volume is: %f\n" %(enterprise,lastVolume,currentVolume)
                     self.myAgent.sendToCoordinator("inform", "Monitor", content )
-                    break
                 else:
                     currentVolume = currentVolume + random.randint(-20,40)
 
                 print "The current volume for %s is: %d" %(enterprise,currentVolume)
                 q07(currentVolume, enterprise)
 
-    class MonitorAbnormalTechnicalIndicator(spade.Behaviour.Behaviour):
-        '''Monitoring abnormal technical indicator's status'''
-        def _process(self):
-            user_interests = q04("aers@gmail.com")
-            for stock in user_interests:
-                pass
 
 
 

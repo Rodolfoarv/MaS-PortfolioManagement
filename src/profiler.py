@@ -26,6 +26,11 @@ class Profiler(spade.Agent.Agent):
         mt = spade.Behaviour.MessageTemplate(template)
         self.addBehaviour(self.ProfilerBehav(),mt)
 
+        template.setPerformative("inform")
+        template.setConversationId("Event")
+        mt = spade.Behaviour.MessageTemplate(template)
+        self.addBehaviour(self.EventBehav(),mt)
+
         print "\n\n*********** ¡El Agente Perfilador ha sido inicializado! ***********\n\n"
 
 
@@ -200,6 +205,10 @@ class Profiler(spade.Agent.Agent):
             elif opcion == "5":
                 correo = usuario
                 #Invocar el query 04. -> Parametro = correo.
+                content = "q04 " + correo
+                self.myAgent.sendToCoordinator("request", "TechnicalAnalysis", content )
+                self.msg = self._receive(True)
+                print self.msg.getContent()
             elif opcion == "6":
                 print "Empresa: "
             	print "1) Microsoft"
@@ -214,9 +223,19 @@ class Profiler(spade.Agent.Agent):
                 datos = (nombreEmpresa, fechaInicial, fechaFinal)
                 datosSeparados = " ".join(datos)
                 #Invocar el query 05. -> Parametros = empresa, fecha inicial y fecha final.
+                content = "q05 " + datosSeparados
+                self.myAgent.sendToCoordinator("request", "TechnicalAnalysis", content )
+                self.msg = self._receive(True)
+                print self.msg.getContent()
+
             elif opcion == "7":
                 correo = usuario
                 #Invocar el 11. -> Parametro = correo.
+                content = "q11 " + correo
+                self.myAgent.sendToCoordinator("request", "TechnicalAnalysis", content )
+                self.msg = self._receive(True)
+                print self.msg.getContent()
+
             else:
         	print "Opcion invalida."
             self.menu(usuario)
@@ -241,12 +260,19 @@ class Profiler(spade.Agent.Agent):
         		self.ingresarPreferenciaEmpresa(usuario)
         	else:
         		print "Opcion invalida."
+                self.menu(usuario)
 
-        def query(self,usuario):
-            self.myAgent.sendToCoordinator("request", "TechnicalAnalysis", "q01" )
+    class EventBehav(spade.Behaviour.Behaviour):
+        def _process(self):
             self.msg = self._receive(True)
-            print self.msg.getContent()
-            self.menu(usuario)
+            print str(self.msg.getContent())
+            print "Menu: "
+            print "1) Crear Inversion"
+            print "2) Consultas"
+            print "3) Ingresar preferencia por giro de la empresa"
+            print "4) Ingresar preferencia por nombre de la empresa"
+
+
 
 
 
