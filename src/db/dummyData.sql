@@ -26,3 +26,10 @@ INSERT INTO PreferenciaEmpresa(Correo, ID_Empresa) VALUES ("bc@gmail.com", 03);
 
 INSERT INTO PreferenciaGiro(Correo, ID_Giro) VALUES ("bc@gmail.com", 01);
 INSERT INTO PreferenciaGiro(Correo, ID_Giro) VALUES ("aers@gmail.com", 02);
+
+INSERT INTO Inversion(ID_Inversion, Correo, Fecha, ID_Empresa, CapitalInvertido, ToleranciaRiesgo, EstrategiaInversion) VALUES (01, "aers@gmail.com", "2016-10-27", 02, 3000, 15, 2);
+INSERT INTO Inversion(ID_Inversion, Correo, Fecha, ID_Empresa, CapitalInvertido, ToleranciaRiesgo, EstrategiaInversion) VALUES (02, "aers@gmail.com", "2016-10-27", 03, 2000, 10, 1);
+INSERT INTO Inversion(ID_Inversion, Correo, Fecha, ID_Empresa, CapitalInvertido, ToleranciaRiesgo, EstrategiaInversion) VALUES (03, "aers@gmail.com", "2016-10-27", 01, 1500, 20, 3);
+INSERT INTO Inversion(ID_Inversion, Correo, Fecha, ID_Empresa, CapitalInvertido, ToleranciaRiesgo, EstrategiaInversion) VALUES (04, "bc@gmail.com", "2016-10-27", 01, 2500, 15, 4);
+INSERT INTO Inversion(ID_Inversion, Correo, Fecha, ID_Empresa, CapitalInvertido, ToleranciaRiesgo, EstrategiaInversion) VALUES (05, "bc@gmail.com", "2016-10-27", 02, 800, 8, 2);
+INSERT INTO Inversion(ID_Inversion, Correo, Fecha, ID_Empresa, CapitalInvertido, ToleranciaRiesgo, EstrategiaInversion) VALUES (06, "bc@gmail.com", "2016-10-27", 04, 1000, 10, 1);
