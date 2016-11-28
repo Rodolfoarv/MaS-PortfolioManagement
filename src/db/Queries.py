@@ -10,7 +10,7 @@ import collections
 db_host = '127.0.0.1'
 db_port = 3306
 db_usuario = 'root'
-db_password = '1'
+db_password = 'passcode'
 base_de_datos = 'PortafolioInversiones'
 
 #Q01: Regresa todas las acciones del dia actual.
@@ -189,6 +189,7 @@ def q05(empresa, inicio, final):
 	#En este caso recupera las de Apple, pero hay que cambiar ese campo cada vez que se quieran buscar acciones de cierta empresa.
 	query = "SELECT E.Nombre, A.PrecioApertura, A.PrecioClausura, A.ValorActual, A.Volumen, A.Volatilidad FROM Accion AS A INNER JOIN Empresa AS E ON A.ID_Empresa=E.ID_EMPRESA WHERE fecha BETWEEN '%s' AND '%s' AND E.Nombre = '%s'" %(inicio, final, empresa)
 	#Se ejecuta el query disenado.
+	print query
 	cursor.execute(query)
 
 	#Crea una lista de objetos.
@@ -302,5 +303,46 @@ def q08(valorActual, empresa):
 	    #Muestra lo obtenido.
 	    print "Actualizacion del valor actual exitosa."
 
+#q09: Regresa el número de estrategia de la inversion para cierta empresa de un usuario 
+def q09(empresa,usuario):
+	#Conecta a la base de datos.
+	conn = MySQLdb.Connect(host = db_host, port = db_port, user = db_usuario, passwd = db_password, db = base_de_datos)
+	#Crea un cursor.
+	cursor = conn.cursor()
+	#Ingreso del nombre.
+	#Query 03_User: Regresa los giros de interés para un usuario.
+	query = "SELECT E.Nombre, I.EstrategiaInversion FROM Inversion AS I INNER JOIN Empresa AS E ON I.ID_Empresa = E.ID_EMPRESA WHERE E.Nombre = '%s' AND I.Correo = '%s'" %(empresa,usuario)
+	print query
+	#Se ejecuta el query disenado.
+	cursor.execute(query)
 
-# print q05("Apple", "2016-10-09", "2016-10-10")
+	#Crea una lista de objetos.
+	objects_list = []
+	if query.upper().startswith('SELECT'):
+		rows = cursor.fetchall()   # Lectura de datos.
+		#Crea un diccionario por cada registro devuelto del query.
+		for row in rows:
+			d = collections.OrderedDict()
+			d['Empresa'] = row[0]
+			d['EstrategiaInversion'] = int(row[1])
+
+			objects_list.append(d)
+		#Convierte a JSON los diccionarios.
+		jsonResult = json.dumps(objects_list)
+
+	else:
+		#Escritura, modificacion o eliminacion de datos.
+		conn.commit()
+		rows = None
+
+	#Cierra el cursor.
+	cursor.close()
+	#Cierra la conexion.
+	conn.close()
+	#Muestra lo obtenido.
+	jsonResult = json.loads(jsonResult)
+	return jsonResult
+
+
+#print q05("Apple", "2016-10-09", "2016-10-10")
+#print q09("Apple", "aers@gmail.com")
