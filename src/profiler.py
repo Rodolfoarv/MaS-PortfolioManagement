@@ -19,20 +19,7 @@ def ingresarPreferenciaEmpresa(usuario):
 	print " "
 	menu(usuario)
 
-def ingresarPreferenciaGiro(usuario):
-	correo = usuario
-	print "Giro que te interesa: "
-	print "1) Software"
-	print "2) IT"
-	giro = raw_input("Giro deseado [1,2]: ")
-	giro = int(giro)
-	preferencia = q05_User(correo, giro)
-	if preferencia == 1:
-		print "Preferencia por giro agregada exitosamente."
-	else:
-		print "Preferencia no se pudo agregar. "
-	print " "
-	menu(usuario)
+
 
 #-------------------------------------------------------> Inversiones nuevas <--------------------------------------------------------#
 def crearInversion(usuario):
@@ -129,4 +116,3 @@ def menu(usuario):
 usuarioIngresado = ingreso()
 if usuarioIngresado != 0:
 	menu(usuarioIngresado)
-
