@@ -37,6 +37,12 @@ class Coordinator(spade.Agent.Agent):
         mt = spade.Behaviour.MessageTemplate(template)
         self.addBehaviour(self.MonitorBehav(),mt)
 
+        # Add the monitor agent
+        template.setPerformative("inform")
+        template.setConversationId("Decision")
+        mt = spade.Behaviour.MessageTemplate(template)
+        self.addBehaviour(self.DecisionBehav(),mt)
+
 
 
     def sendToAgent(self, agent, performative, conversationID, content):
@@ -114,6 +120,12 @@ class Coordinator(spade.Agent.Agent):
             print "Waiting for response from the monitor agent"
             self.msg = self._receive(True)
             print "Coordinator agent has received the response"
+            print str(self.msg.getContent())
+
+    class DecisionBehav(spade.Behaviour.Behaviour):
+        def _process(self):
+            print "Waiting for decision from the Decision Making agent"
+            self.msg = self._receive(True)
             print str(self.msg.getContent())
 
 if __name__ == "__main__":
