@@ -38,7 +38,7 @@ class TechnicalAnalysis(spade.Agent.Agent):
         print "Sending....."
         self.send(msg)
 
-    class RecvMsgBehav(spade.Behaviour.OneShotBehaviour):
+    class RecvMsgBehav(spade.Behaviour.Behaviour):
         '''Class that will make the queries depending on the coordinator's request '''
         def _process(self):
             print "Waiting for query request"
