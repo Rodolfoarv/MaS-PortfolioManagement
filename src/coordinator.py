@@ -66,23 +66,19 @@ class Coordinator(spade.Agent.Agent):
             print self.msg.getContent()
             content = self.msg.getContent()
             content = content.split()
-            if content[0] == "q01":
-                print "Requesting the technical_analysis for Query 01"
-                self.q1()
-                print "Waiting for response"
-                self.msg = self._receive(True)
-                print "Coordinator agent has received the response"
-                print str(self.msg.getContent())
-                print "Sending to profiler"
-                self.myAgent.sendToAgent("profiler", "inform", "Profiler", self.msg.getContent())
+            print "Requesting the technical_analysis for Query 01"
+            self.queryRequest(self.msg.getContent())
+            print "Waiting for response"
+            self.msg = self._receive(True)
+            print "Coordinator agent has received the response"
+            print str(self.msg.getContent())
+            print "Sending to profiler"
+            self.myAgent.sendToAgent("profiler", "inform", "Profiler", self.msg.getContent())
+
 
         #Query all share’s quotation on the current day
-        def q1(self):
+        def queryRequest(self, content):
             ''' Query all share's quotation on the current day '''
-
-            content = {
-                "Enterprise" : "Apple"
-            }
             self.myAgent.sendToAgent("technical_analysis", "request", "TechnicalAnalysis", content)
 
 
@@ -139,7 +135,7 @@ class Coordinator(spade.Agent.Agent):
             self.msg = self._receive(True)
             print str(self.msg.getContent())
             self.myAgent.sendToAgent("profiler", "inform", "Event", self.msg.getContent())
-            
+
 
 
 

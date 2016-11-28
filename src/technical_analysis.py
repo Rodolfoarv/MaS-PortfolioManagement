@@ -6,7 +6,7 @@ Coordinator Agent description, receiver to their agents
 import spade
 import sys
 import time
-from db.Queries import q01
+from db.Queries import q01,q02,q03,q04,q05,q06,q07
 
 HOST = "127.0.0.1"
 
@@ -43,10 +43,16 @@ class TechnicalAnalysis(spade.Agent.Agent):
         def _process(self):
             print "Waiting for query request"
             self.msg = self._receive(True)
-            print "technical_analysis has received a message:"
-            print str(self.msg.getContent())
-            print "Sending back the results to the Coordinator agent"
-            self.q1()
+            content = self.msg.getContent()
+            content = content.split()
+            if content[0] == "q01":
+                print "Sending back the results to the Coordinator agent"
+                self.q1()
+            if content[0] == "q02":
+                print "Sending back the results to the Coordinator agent"
+                enterprise = content[1]
+                print enterprise
+                self.q2(enterprise)
 
         def q1(self):
             content = q01()
@@ -55,7 +61,9 @@ class TechnicalAnalysis(spade.Agent.Agent):
         #Query a given share’s quotation on the current day
         def q2(self, enterprise):
             ''' Query a given share's quotation on the current day '''
+            print enterprise
             content = q02(enterprise)
+            print content
             self.myAgent.sendToCoordinator("request", "TechnicalAnalysis", content )
 
         # Query a given share’s real-time trading chart
