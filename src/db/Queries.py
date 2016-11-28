@@ -258,4 +258,49 @@ def q06(usuario):
 	jsonResult = json.loads(jsonResult)
 	return jsonResult
 
+#07: Actualiza el volumen de una accion.
+def q07(volumen, empresa):
+	try:
+	    #Conecta a la base de datos.
+	    conn = MySQLdb.Connect(host = db_host, port = db_port, user = db_usuario, passwd = db_password, db = base_de_datos)
+	    #Crea un cursor.
+	    cursor = conn.cursor()
+	    #Query 07: Actualiza el volumen de la accion.
+	    query = "UPDATE Accion AS a INNER JOIN Empresa AS e ON a.ID_Empresa = e.ID_EMPRESA SET a.Volumen = %d WHERE fecha = DATE(NOW()) AND e.nombre = '%s'" %(volumen, empresa)
+	    #Se ejecuta el query disenado.
+	    cursor.execute(query)
+	    #Escritura, modificacion o eliminacion de datos.
+	    conn.commit()
+
+	finally:
+	    #Cierra el cursor.
+	    cursor.close()
+	    #Cierra la conexion.
+	    conn.close()
+	    #Muestra lo obtenido.
+	    print "Actualizacion del volumen exitosa."
+
+#q08: Actualiza el valor actual de una accion. 
+def q08(valorActual, empresa):
+	try:
+	    #Conecta a la base de datos.
+	    conn = MySQLdb.Connect(host = db_host, port = db_port, user = db_usuario, passwd = db_password, db = base_de_datos)
+	    #Crea un cursor.
+	    cursor = conn.cursor()
+	    #Query 08: Actualiza el valor actual de la accion.
+	    query = "UPDATE Accion AS a INNER JOIN Empresa AS e ON a.ID_Empresa = e.ID_EMPRESA SET a.ValorActual = %d WHERE fecha = DATE(NOW()) AND e.nombre = '%s'" %(valorActual, empresa)
+	    #Se ejecuta el query disenado.
+	    cursor.execute(query)
+	    #Escritura, modificacion o eliminacion de datos.
+	    conn.commit()
+
+	finally:
+	    #Cierra el cursor.
+	    cursor.close()
+	    #Cierra la conexion.
+	    conn.close()
+	    #Muestra lo obtenido.
+	    print "Actualizacion del valor actual exitosa."
+
+
 # print q05("Apple", "2016-10-09", "2016-10-10")
