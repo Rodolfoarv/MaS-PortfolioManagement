@@ -84,7 +84,12 @@ class DecisionMaking(spade.Agent.Agent):
                 content = "You should buy the auction %s due to the Strategy #3: The volume of the auction has changed" %(enterprise)
                 self.myAgent.sendToCoordinator("inform", "Decision", content )
 
-
+        def strategy4(self,enterprise,historic_prices):
+            """If the value of an auction volume has an abnormal negative change, then sell"""
+            subArray = historic_prices[0:2]
+            if (subArray[0] - subArray[1]) < -1000:
+                content = "You should sell the auction %s due to the Strategy #4: The volume of the auction has changed" %(enterprise)
+                self.myAgent.sendToCoordinator("inform", "Decision", content )
 
 
 
