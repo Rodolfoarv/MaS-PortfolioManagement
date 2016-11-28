@@ -16,9 +16,9 @@ INSERT INTO Accion(Fecha, ID_Empresa, PrecioApertura, PrecioClausura,ValorActual
 INSERT INTO Accion(Fecha, ID_Empresa, PrecioApertura, PrecioClausura,ValorActual, Volumen, Volatilidad) VALUES ("2016-10-09", 02, 113.059998, 113.00, 114.309998, 29736800, 25);
 INSERT INTO Accion(Fecha, ID_Empresa, PrecioApertura, PrecioClausura,ValorActual, Volumen, Volatilidad) VALUES ("2016-10-09", 01, 112.709999, 112.519997, 	113.050003, 21701800, 35);
 INSERT INTO Accion(Fecha, ID_Empresa, PrecioApertura, PrecioClausura,ValorActual, Volumen, Volatilidad) VALUES ("2016-10-09", 03, 112.459999, 113.050003, 113.370003, 36379100, 40);
-INSERT INTO Accion(Fecha, ID_Empresa, PrecioApertura, PrecioClausura,ValorActual, Volumen, Volatilidad) VALUES ("2016-11-27", 01, 112.709999, 112.519997, 	113.050003, 21701800, 10);
-INSERT INTO Accion(Fecha, ID_Empresa, PrecioApertura, PrecioClausura,ValorActual, Volumen, Volatilidad) VALUES ("2016-11-27", 03, 112.459999, 113.050003, 113.370003, 36379100, 20);
-INSERT INTO Accion(Fecha, ID_Empresa, PrecioApertura, PrecioClausura,ValorActual, Volumen, Volatilidad) VALUES ("2016-11-27", 02, 114.309998, 114.059998, 114.559998, 	24329900, 25);
+INSERT INTO Accion(Fecha, ID_Empresa, PrecioApertura, PrecioClausura,ValorActual, Volumen, Volatilidad) VALUES ("2016-11-28", 01, 112.709999, 112.519997, 	113.050003, 21701800, 10);
+INSERT INTO Accion(Fecha, ID_Empresa, PrecioApertura, PrecioClausura,ValorActual, Volumen, Volatilidad) VALUES ("2016-11-28", 03, 112.459999, 113.050003, 113.370003, 36379100, 20);
+INSERT INTO Accion(Fecha, ID_Empresa, PrecioApertura, PrecioClausura,ValorActual, Volumen, Volatilidad) VALUES ("2016-11-28", 02, 114.309998, 114.059998, 114.559998, 	24329900, 25);
 
 INSERT INTO PreferenciaEmpresa(Correo, ID_Empresa) VALUES ("aers@gmail.com", 01);
 INSERT INTO PreferenciaEmpresa(Correo, ID_Empresa) VALUES ("aers@gmail.com", 02);
