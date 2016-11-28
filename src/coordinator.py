@@ -130,12 +130,18 @@ class Coordinator(spade.Agent.Agent):
             self.msg = self._receive(True)
             print "Coordinator agent has received the response"
             print str(self.msg.getContent())
+            self.myAgent.sendToAgent("profiler", "inform", "Event", self.msg.getContent())
+
 
     class DecisionBehav(spade.Behaviour.Behaviour):
         def _process(self):
             print "Waiting for decision from the Decision Making agent"
             self.msg = self._receive(True)
             print str(self.msg.getContent())
+            self.myAgent.sendToAgent("profiler", "inform", "Event", self.msg.getContent())
+            
+
+
 
 
 if __name__ == "__main__":
