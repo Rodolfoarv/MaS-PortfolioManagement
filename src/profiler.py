@@ -38,7 +38,6 @@ class Profiler(spade.Agent.Agent):
         msg.setConversationId(conversationID)
         msg.setContent(content)
         msg.addReceiver(spade.AID.aid("coordinator@"+HOST,["xmpp://coordinator@"+HOST]))
-        print "Sending....."
         self.send(msg)
 
     class ProfilerBehav(spade.Behaviour.Behaviour):
@@ -48,6 +47,7 @@ class Profiler(spade.Agent.Agent):
             if usuarioIngresado != 0:
             	self.menu(usuarioIngresado)
 
+#---------------------------------------------------> Ingreso preferencias <---------------------------------------------------------#
         def ingresarPreferenciaEmpresa(self,usuario):
         	correo = usuario
         	print "Empresa que te interesa: "
@@ -65,9 +65,24 @@ class Profiler(spade.Agent.Agent):
         	print " "
         	self.menu(usuario)
 
+        def ingresarPreferenciaGiro(self,usuario):
+        	correo = usuario
+        	print "Giro que te interesa: "
+        	print "1) Software"
+        	print "2) IT"
+        	giro = raw_input("Giro deseado [1,2]: ")
+        	giro = int(giro)
+        	preferencia = q05_User(correo, giro)
+        	if preferencia == 1:
+        		print "Preferencia por giro agregada exitosamente."
+        	else:
+        		print "Preferencia no se pudo agregar. "
+        	print " "
+        	self.menu(usuario)
 
 
-        #-------------------------------------------------------> Inversiones nuevas <--------------------------------------------------------#
+
+#-------------------------------------------------------> Inversiones nuevas <--------------------------------------------------------#
         def crearInversion(self,usuario):
         	correo = usuario
         	fecha = raw_input("Fecha de hoy[AAAA-MM-AA]: ")
@@ -97,7 +112,7 @@ class Profiler(spade.Agent.Agent):
         	print " "
         	self.menu(usuario)
 
-        #-----------------------------------------> Ingreso o registro <----------------------------------------------------------------#
+#-----------------------------------------> Ingreso o registro <----------------------------------------------------------------#
         def ingreso(self):
         	print "Bienvenido, por favor escoje una opcion para empezar: "
         	print "1) Entrar"
@@ -137,7 +152,7 @@ class Profiler(spade.Agent.Agent):
         			print " "
         	return usuario
 
-        #------------------------------------------------------------> Menu inicial <--------------------------------------------------------------#
+#------------------------------------------------------------> Menu inicial <--------------------------------------------------------------#
         def menu(self,usuario):
         	#Opciones
         	print "Menu:"
@@ -150,13 +165,19 @@ class Profiler(spade.Agent.Agent):
         	if(opcion == "1"):
         		self.crearInversion(usuario)
         	elif (opcion == "2"):
-        		print "2"
+        		self.query(usuario)
         	elif (opcion == "3"):
         		self.ingresarPreferenciaGiro(usuario)
         	elif (opcion == "4"):
         		self.ingresarPreferenciaEmpresa(usuario)
         	else:
         		print "Opcion invalida."
+
+        def query(self,usuario):
+            self.myAgent.sendToCoordinator("request", "TechnicalAnalysis", "q01" )
+            self.msg = self._receive(True)
+            print self.msg.getContent()
+            self.menu(usuario)
 
 
 
