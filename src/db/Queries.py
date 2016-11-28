@@ -340,6 +340,89 @@ def q09(empresa):
 	jsonResult = json.loads(jsonResult)
 	return jsonResult
 
+#Q02_User: Regresa todas las acciones del dia actual relacionadas con las inversiones del usuario.
+def q10(usuario):
+	#Conecta a la base de datos.
+	conn = MySQLdb.Connect(host = db_host, port = db_port, user = db_usuario, passwd = db_password, db = base_de_datos)
+	#Crea un cursor.
+	cursor = conn.cursor()
+	#Ingreso del nombre.
+	#Query 02_User: Regresa todas las acciones del dia actual relacionadas con cierto usuario.
+	query = "SELECT E.Nombre, A.PrecioApertura, A.PrecioClausura, A.ValorActual, A.Volumen, A.Volatilidad FROM Accion AS A INNER JOIN Empresa AS E ON A.ID_Empresa=E.ID_EMPRESA INNER JOIN Inversion AS I ON I.ID_Empresa=E.ID_Empresa WHERE fecha = DATE(NOW()) AND P.Correo = '%s'" %usuario
+	#Se ejecuta el query disenado.
+	cursor.execute(query)
+
+	#Crea una lista de objetos.
+	objects_list = []
+	if query.upper().startswith('SELECT'):
+		rows = cursor.fetchall()   # Lectura de datos.
+		#Crea un diccionario por cada registro devuelto del query.
+		for row in rows:
+			d = collections.OrderedDict()
+			d['Empresa'] = row[0]
+			d['PrecioApertura'] = float(row[1])
+			d['PrecioClausura'] = float(row[2])
+			d['ValorActual'] = float(row[3])
+			d['Volumen'] = int(row[4])
+			d['Volatilidad'] = int(row[5])
+			objects_list.append(d)
+		#Convierte a JSON los diccionarios.
+		jsonResult = json.dumps(objects_list)
+
+	else:
+		#Escritura, modificacion o eliminacion de datos.
+		conn.commit()
+		rows = None
+
+	#Cierra el cursor.
+	cursor.close()
+	#Cierra la conexion.
+	conn.close()
+	#Muestra lo obtenido.
+	jsonResult = json.loads(jsonResult)
+	return jsonResult
+
+#Q02_User: Regresa todas las acciones del dia actual relacionadas con las inversiones del usuario.
+def q11(usuario):
+	#Conecta a la base de datos.
+	conn = MySQLdb.Connect(host = db_host, port = db_port, user = db_usuario, passwd = db_password, db = base_de_datos)
+	#Crea un cursor.
+	cursor = conn.cursor()
+	#Ingreso del nombre.
+	#Query 02_User: Regresa todas las acciones del dia actual relacionadas con cierto usuario.
+	query = "SELECT E.nombre, I.fecha, I.capitalInvertido, I.ToleranciaRiesgo, I.EstrategiaInversion FROM Inversion AS I INNER JOIN Empresa AS E ON I.ID_Empresa=E.ID_EMPRESA WHERE I.Correo = '%s'" %usuario
+	#Se ejecuta el query disenado.
+	cursor.execute(query)
+
+	#Crea una lista de objetos.
+	objects_list = []
+	if query.upper().startswith('SELECT'):
+		rows = cursor.fetchall()   # Lectura de datos.
+		#Crea un diccionario por cada registro devuelto del query.
+		for row in rows:
+			d = collections.OrderedDict()
+			d['Empresa'] = row[0]
+			d['Fecha'] = row[1]
+			d['Capital Invertido'] = float(row[2])
+			d['Tolerancia Riesgo'] = float(row[3])
+			d['Estrategia'] = int(row[4])
+			objects_list.append(d)
+		#Convierte a JSON los diccionarios.
+		jsonResult = json.dumps(objects_list)
+
+	else:
+		#Escritura, modificacion o eliminacion de datos.
+		conn.commit()
+		rows = None
+
+	#Cierra el cursor.
+	cursor.close()
+	#Cierra la conexion.
+	conn.close()
+	#Muestra lo obtenido.
+	jsonResult = json.loads(jsonResult)
+	return jsonResult
+
 #Querys Usuario - Interfaz
 def q01_User(correo, passwd):
 	try:
@@ -451,7 +534,30 @@ def q05_User(correo, giro):
 		#Cierra la conexion.
 		conn.close()
 		return 1
+	
+def q06_User(empresa):
+	try:
+		#Conecta a la base de datos.
+		conn = MySQLdb.Connect(host = db_host, port = db_port, user = db_usuario, passwd = db_password, db = base_de_datos)
+		#Crea un cursor.
+		cursor = conn.cursor()
+		#Query 01: Regresa el nombre del usuario.
+		query = "SELECT e.Nombre FROM Empresa AS e WHERE ID_Empresa = '%d'" %(empresa)
+		#Se ejecuta el query disenado.
+		cursor.execute(query)
+		#Lectura y manipulacion de datos.
+		row = cursor.fetchone()
+		nombreEmpresa = ''.join(row[0])
+	except Exception, e:
+		print str(e)
+		return 0
+	else:
+		#Cierra el cursor.
+		cursor.close()
+		#Cierra la conexion.
+		conn.close()
+		return nombreEmpresa
 
 
 #print q05("Apple", "2016-10-09", "2016-10-10")
-print q09("Apple")
+#print q09("Apple")
